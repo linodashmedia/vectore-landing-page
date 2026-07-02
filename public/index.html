@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vectore | The community platform built for learning</title>
+<meta name="description" content="Bring courses, cohorts, coaching, workshops, and events into one platform, with community built into the experience from day one. Join the founding waitlist.">
+<meta name="theme-color" content="#FBF9F6">
+<!-- Open Graph -->
+<meta property="og:title" content="Vectore | The community platform built for learning">
+<meta property="og:description" content="Every way you teach, better with a community. Claim your founding spot.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/hero-dashboard-2.png">
+<meta property="og:url" content="https://vectore.app/">
+<meta property="og:site_name" content="Vectore">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vectore | The community platform built for learning">
+<meta name="twitter:description" content="Every way you teach, better with a community. Claim your founding spot.">
+<meta name="twitter:image" content="assets/hero-dashboard-2.png">
+<link rel="canonical" href="https://vectore.app/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Vectore","url":"https://vectore.app","logo":"https://vectore.app/assets/hero-dashboard-2.png","description":"The complete community platform built for learning. Bring courses, cohorts, coaching, workshops, and events into one platform with community built in.","contactPoint":{"@type":"ContactPoint","email":"hello@vectore.app","contactType":"customer support"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Vectore","url":"https://vectore.app"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Vectore","applicationCategory":"BusinessApplication","operatingSystem":"Web, iOS, Android","description":"All-in-one platform to run courses, cohorts, coaching, events, and community for your learning business, with 0% transaction fees.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Join the founding waitlist for early access and lifetime founding pricing."}}
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='6' width='20' height='20' rx='6' transform='rotate(45 16 16)' fill='%23E65100'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#FBF9F6;color:#1E293B;font-family:'Figtree',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:rgba(230,81,0,0.3);color:#fff}
+  a{color:inherit}
+  @keyframes vfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes vfloat2{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+  @keyframes vpulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.9;transform:scale(1.06)}}
+  @keyframes vrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1 !important;transform:none !important;transition:none}
+    [style*="animation:"]{animation:none !important}
+  }
+  /* nav shadow on scroll */
+  .vnav{transition:box-shadow .3s ease, background .3s ease}
+  .vnav.scrolled{box-shadow:0 10px 34px rgba(15,23,42,0.12);background:rgba(255,255,255,0.96)}
+  /* primary button hover: darken to near-black */
+  button[type="submit"],a[href="#waitlist"]{transition:background .25s ease,box-shadow .25s ease}
+  button[type="submit"]:hover,a[href="#waitlist"]:hover{background:#111827 !important;box-shadow:0 10px 30px rgba(17,24,39,0.3) !important}
+  /* hero signup: combined field on desktop, stacks on mobile */
+  .vhero-form{display:flex;align-items:center;gap:8px;width:100%;max-width:560px;padding:7px 7px 7px 8px;border-radius:15px;border:1px solid rgba(15,23,42,0.18);background:#FFFFFF;box-shadow:0 4px 16px rgba(15,23,42,0.07)}
+  .vhero-form input{flex:1;min-width:0;padding:13px 12px;border:none;background:transparent;color:#1E293B;font-size:16px;font-family:'Figtree',sans-serif;outline:none}
+  .vhero-form button{flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 22px;border:none;border-radius:11px;background:linear-gradient(135deg,#E65100,#C44400);color:#FFFFFF;font-size:15.5px;font-weight:700;font-family:'Figtree',sans-serif;cursor:pointer;box-shadow:0 6px 20px rgba(230,81,0,0.35);white-space:nowrap}
+  @media (max-width:540px){
+    .vhero-form{flex-direction:column;padding:0;border:none;background:transparent;box-shadow:none;gap:12px}
+    .vhero-form input{width:100%;padding:16px 18px;border:1px solid rgba(15,23,42,0.18);background:#FFFFFF;border-radius:13px;box-shadow:0 2px 10px rgba(15,23,42,0.05)}
+    .vhero-form button{width:100%;padding:16px;border-radius:13px}
+  }
+  /* responsive: tablet */
+  @media (max-width: 900px){
+    .vrow{grid-template-columns:1fr !important;gap:40px !important;background:none !important}
+    .vcta{grid-template-columns:1fr !important}
+    .vcta-form{border-left:none !important;border-top:1px solid rgba(15,23,42,0.08) !important}
+  }
+  /* responsive: phone */
+  @media (max-width: 600px){
+    .vnav{grid-template-columns:auto 1fr !important;padding:10px 12px 10px 16px !important}
+    .vnav .vnav-spacer{display:none !important}
+    .vstats{grid-template-columns:1fr 1fr !important}
+    .vrow{padding-left:20px !important;padding-right:20px !important}
+    .vmock{max-width:100% !important}
+  }
+  @media (max-width: 380px){
+    .vstats{grid-template-columns:1fr !important}
+  }
+</style>
+</head>
+<body>
+<div style="position:relative;width:100%;min-height:100vh;background:radial-gradient(1200px 700px at 70% -10%, rgba(230,81,0,0.10), transparent 60%), radial-gradient(900px 600px at 10% 8%, rgba(251,140,0,0.07), transparent 55%), #FBF9F6">
+
+  <!-- ===== NAV ===== -->
+  <nav style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;padding:16px clamp(16px,4vw,32px)">
+    <div class="vnav" style="width:100%;max-width:1180px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:11px 12px 11px 20px;border-radius:16px;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border:1px solid rgba(15,23,42,0.08);box-shadow:0 6px 24px rgba(15,23,42,0.07)">
+      <a href="#" style="display:flex;align-items:center;gap:11px;text-decoration:none">
+        <div style="width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#E65100,#FB8C00);box-shadow:0 0 22px rgba(230,81,0,0.55);transform:rotate(45deg)"></div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.02em">Vectore</span>
+      </a>
+      <div class="vnav-spacer" style="display:flex;align-items:center;justify-content:center;gap:30px"></div>
+      <div style="display:flex;align-items:center;justify-content:flex-end">
+        <a href="#waitlist" style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:11px;background:linear-gradient(135deg,#E65100,#C44400);color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:700;box-shadow:0 0 24px rgba(230,81,0,0.35)">Claim your spot</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(120px,16vh,180px) clamp(20px,5vw,40px) 40px;text-align:center">
+    <div style="position:absolute;top:6%;left:50%;transform:translateX(-50%);width:680px;height:520px;max-width:90vw;background:radial-gradient(circle,rgba(230,81,0,0.18),transparent 65%);filter:blur(30px);pointer-events:none;animation:vpulse 8s ease-in-out infinite"></div>
+    <div style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 10px;border-radius:999px;border:1px solid rgba(230,81,0,0.25);background:rgba(230,81,0,0.06);font-size:13px;font-weight:600;color:#E65100;margin-bottom:30px">
+      <span style="width:7px;height:7px;border-radius:50%;background:#E65100;box-shadow:0 0 10px #E65100"></span>
+      Founding spots now open · Private beta
+    </div>
+    <h1 style="position:relative;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,5vw,40px);line-height:1.12;letter-spacing:-0.02em;max-width:24ch;margin:0 auto 26px">Every way you teach, <span style="background:linear-gradient(120deg,#E65100,#FB8C00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">better with a community.</span></h1>
+    <p style="position:relative;font-size:clamp(17px,2vw,21px);line-height:1.55;color:#334155;max-width:60ch;margin:0 auto 38px">Bring courses, cohorts, coaching, workshops, and events into one platform, with community built into the experience from day one.</p>
+    <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:14px">
+      <form class="waitlist-form vhero-form" data-source="hero">
+        <input type="email" name="email" required autocomplete="email" placeholder="Enter your email">
+        <button type="submit">Claim your founding spot <span style="font-size:17px">→</span></button>
+      </form>
+      <div class="waitlist-success" hidden style="display:flex;align-items:center;gap:10px;padding:15px 22px;border-radius:13px;border:1px solid rgba(230,81,0,0.3);background:rgba(230,81,0,0.06);animation:vrise .5s ease both">
+        <span style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#E65100,#C44400);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px">✓</span>
+        <span style="font-size:15px;font-weight:600;color:#1E293B">You're on the list. We'll email you before launch.</span>
+      </div>
+      <p class="waitlist-error" hidden style="font-size:14px;color:#C44400;font-weight:600"></p>
+      <p style="font-size:14px;color:#64748B;max-width:44ch">Founding members get lifetime lowest pricing and early access when we launch.</p>
+    </div>
+
+    <!-- HERO DASHBOARD -->
+    <div class="reveal" style="position:relative;margin-top:70px;animation:vfloat 9s ease-in-out infinite">
+      <div style="position:absolute;inset:-40px;background:radial-gradient(circle at 50% 40%,rgba(230,81,0,0.16),transparent 65%);filter:blur(44px);pointer-events:none"></div>
+      <div style="position:relative;border-radius:20px;border:1px solid rgba(15,23,42,0.12);box-shadow:0 50px 140px rgba(15,23,42,0.16);overflow:hidden;line-height:0">
+        <img src="assets/hero-dashboard-2.png" alt="Vectore community dashboard" loading="eager" style="display:block;width:100%;height:auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROBLEM ===== -->
+  <section id="problem" style="position:relative;max-width:1080px;margin:0 auto;padding:clamp(80px,12vh,140px) clamp(20px,5vw,40px)">
+    <div class="reveal" style="text-align:center;max-width:62ch;margin:0 auto 60px">
+      <div style="font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#E65100;margin-bottom:18px">The problem</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,4.8vw,52px);line-height:1.08;letter-spacing:-0.025em;margin-bottom:22px">Learning shouldn't feel fragmented.</h2>
+      <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:#334155">People learn better together. But most learning businesses are built across disconnected tools, and every extra login for students is another chance to disengage.</p>
+    </div>
+
+    <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:34px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:760px">
+        <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:13px;border:1px dashed rgba(15,23,42,0.12);background:rgba(15,23,42,0.025);color:#64748B;font-size:14.5px;font-weight:500"><span style="width:9px;height:9px;border-radius:50%;background:#ff5f57"></span>Video platform</div>
+        <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:13px;border:1px dashed rgba(15,23,42,0.12);background:rgba(15,23,42,0.025);color:#64748B;font-size:14.5px;font-weight:500"><span style="width:9px;height:9px;border-radius:50%;background:#febc2e"></span>Email reminders</div>
+        <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:13px;border:1px dashed rgba(15,23,42,0.12);background:rgba(15,23,42,0.025);color:#64748B;font-size:14.5px;font-weight:500"><span style="width:9px;height:9px;border-radius:50%;background:#818CF8"></span>Community app</div>
+        <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:13px;border:1px dashed rgba(15,23,42,0.12);background:rgba(15,23,42,0.025);color:#64748B;font-size:14.5px;font-weight:500"><span style="width:9px;height:9px;border-radius:50%;background:#FB8C00"></span>Booking tool</div>
+        <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:13px;border:1px dashed rgba(15,23,42,0.12);background:rgba(15,23,42,0.025);color:#64748B;font-size:14.5px;font-weight:500"><span style="width:9px;height:9px;border-radius:50%;background:#ff9a6b"></span>Scheduling app</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;color:#475569">
+        <span style="font-size:13px">students fall through the gaps between them</span>
+        <span style="font-size:26px;color:#E65100">↓</span>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:12px;padding:18px 26px;border-radius:15px;border:1px solid rgba(230,81,0,0.3);background:linear-gradient(135deg,rgba(230,81,0,0.1),rgba(251,140,0,0.06));box-shadow:0 0 40px rgba(230,81,0,0.18)">
+        <div style="width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#E65100,#FB8C00);transform:rotate(45deg);box-shadow:0 0 18px rgba(230,81,0,0.5)"></div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px">One connected experience</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE GRID (bordered) ===== -->
+  <div style="max-width:1180px;margin:0 auto;border:1px solid rgba(15,23,42,0.13)">
+  <section id="features" class="reveal" style="position:relative;padding:clamp(40px,8vh,90px) clamp(20px,5vw,40px) clamp(36px,5vh,56px);text-align:center;border-bottom:1px solid rgba(15,23,42,0.13)">
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,4.8vw,54px);line-height:1.06;letter-spacing:-0.025em;max-width:18ch;margin:0 auto 20px">The complete platform for learning communities</h2>
+    <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:#334155;max-width:56ch;margin:0 auto">Vectore empowers you with all the tools you need to build a thriving community around your education business.</p>
+  </section>
+
+  <!-- ROW 1 -->
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">01 · Teach your way</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:18px">Bring learning and community together</h3>
+      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Choose how you want to teach: self-paced courses, group coaching, cohort-based programs, or online workshops. Then build a community experience around all of it.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:9px">
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Courses</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Cohorts</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Coaching</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Workshops</span>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 60% 40%,rgba(230,81,0,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
+      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
+          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
+        </div>
+        <img src="assets/program.png" alt="Create a program: courses, cohorts, and coaching" loading="lazy" style="display:block;width:100%;height:auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- ROW 2 -->
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+    <div style="position:relative;order:1">
+      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 40% 40%,rgba(251,140,0,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
+      <div style="position:relative;border-radius:16px;border:1px solid rgba(15,23,42,0.08);background:#FFFFFF;box-shadow:0 30px 80px rgba(15,23,42,0.12);overflow:hidden">
+        <div style="padding:16px 20px;border-bottom:1px solid rgba(15,23,42,0.07);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;color:#1E293B"># general</span>
+          <span style="font-size:11.5px;color:#64748B">142 online</span>
+        </div>
+        <div style="padding:18px 20px;display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;gap:12px"><div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#E65100,#FB8C00);flex-shrink:0"></div><div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:13px;font-weight:700;color:#1E293B">Jordan</span><span style="font-size:10.5px;color:#475569">2:14 PM</span></div><div style="font-size:13.5px;color:#475569;line-height:1.45">Just shipped my capstone project 🎉 huge thanks to everyone who gave feedback in the critique thread</div></div></div>
+          <div style="display:flex;gap:12px"><div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#ff9a6b,#FB7185);flex-shrink:0"></div><div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:13px;font-weight:700;color:#1E293B">Priya</span><span style="font-size:10.5px;color:#475569">2:16 PM</span></div><div style="font-size:13.5px;color:#475569;line-height:1.45">Congrats!! 🔥 this is exactly the kind of thing the weekly challenge was made for</div></div></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;padding-left:46px">
+            <span style="padding:5px 11px;border-radius:999px;background:rgba(230,81,0,0.1);border:1px solid rgba(230,81,0,0.2);font-size:12px;color:#E65100">🎉 24</span>
+            <span style="padding:5px 11px;border-radius:999px;background:#F4F5F7;border:1px solid rgba(15,23,42,0.07);font-size:12px;color:#475569">🔥 18</span>
+            <span style="padding:5px 11px;border-radius:999px;background:#F4F5F7;border:1px solid rgba(15,23,42,0.07);font-size:12px;color:#475569">👏 11</span>
+          </div>
+        </div>
+        <div style="padding:14px 20px;border-top:1px solid rgba(15,23,42,0.07);display:flex;align-items:center;gap:10px"><div style="flex:1;padding:10px 14px;border-radius:10px;background:#F4F5F7;border:1px solid rgba(15,23,42,0.08);font-size:13px;color:#475569">Share something with the community…</div><div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-weight:700">↑</div></div>
+      </div>
+    </div>
+    <div style="order:2">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">02 · Real participation</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:18px">Build a community that people actually participate in</h3>
+      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Keep members engaged with discussion posts, chats, challenges, gamification, and member matching: interactive experiences that give people more ways to connect, contribute, and learn from one another.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:9px">
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Discussions</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Challenges</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Gamification</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Member matching</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROW 3 -->
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">03 · No extra tools</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:18px">Run events and coaching in one place</h3>
+      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Host workshops, office hours, coaching sessions, live events, and cohort meetings from one platform, without juggling separate scheduling, booking, calendar, or event software.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:9px">
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Scheduling</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Booking</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Live events</span>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 50% 40%,rgba(129,140,248,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
+      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
+          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
+        </div>
+        <img src="assets/events.png" alt="Create an event" loading="lazy" style="display:block;width:100%;height:auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- ROW 4 -->
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+    <div style="position:relative;order:1">
+      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 40% 40%,rgba(230,81,0,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
+      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
+          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
+        </div>
+        <img src="assets/automation.png" alt="Welcome new members automation workflow" loading="lazy" style="display:block;width:100%;height:auto">
+      </div>
+    </div>
+    <div style="order:2">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">04 · Less busywork</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:18px">Automate the busywork</h3>
+      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Reduce manual work with workflows for onboarding, engagement, member management, access control, and recurring tasks. Spend less time managing systems and more time supporting members.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:9px">
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Onboarding</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Access control</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Recurring tasks</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROW 5 -->
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">05 · Full visibility</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:18px">Know exactly what's working</h3>
+      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Track participation, program performance, member activity, and revenue from a single dashboard. Get the insights you need to improve your programs and community.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:9px">
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Participation</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Performance</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Revenue</span>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 50% 40%,rgba(251,140,0,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
+      <div style="position:relative;border-radius:16px;border:1px solid rgba(15,23,42,0.08);background:#FFFFFF;box-shadow:0 30px 80px rgba(15,23,42,0.12);overflow:hidden;padding:24px">
+        <div class="vstats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px">
+          <div style="padding:14px;border-radius:12px;border:1px solid rgba(15,23,42,0.07);background:#F4F5F7"><div style="font-size:11px;color:#64748B;margin-bottom:6px">Participation</div><div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:600;color:#1E293B">74%</div><div style="font-size:11px;color:#16A34A;margin-top:4px">▲ 9.2%</div></div>
+          <div style="padding:14px;border-radius:12px;border:1px solid rgba(15,23,42,0.07);background:#F4F5F7"><div style="font-size:11px;color:#64748B;margin-bottom:6px">Active members</div><div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:600;color:#1E293B">2,418</div><div style="font-size:11px;color:#16A34A;margin-top:4px">▲ 12%</div></div>
+          <div style="padding:14px;border-radius:12px;border:1px solid rgba(15,23,42,0.07);background:#F4F5F7"><div style="font-size:11px;color:#64748B;margin-bottom:6px">Revenue</div><div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:600;color:#1E293B">$31.6k</div><div style="font-size:11px;color:#16A34A;margin-top:4px">▲ 8.9%</div></div>
+        </div>
+        <div style="padding:16px;border-radius:12px;border:1px solid rgba(15,23,42,0.07);background:#F4F5F7">
+          <div style="font-size:12.5px;color:#64748B;margin-bottom:14px;font-weight:600">Engagement · last 7 days</div>
+          <div style="display:flex;align-items:flex-end;gap:8px;height:90px">
+            <div style="flex:1;height:38%;border-radius:5px 5px 0 0;background:rgba(34,197,94,0.28)"></div>
+            <div style="flex:1;height:46%;border-radius:5px 5px 0 0;background:rgba(34,197,94,0.34)"></div>
+            <div style="flex:1;height:52%;border-radius:5px 5px 0 0;background:rgba(34,197,94,0.4)"></div>
+            <div style="flex:1;height:61%;border-radius:5px 5px 0 0;background:rgba(34,197,94,0.46)"></div>
+            <div style="flex:1;height:70%;border-radius:5px 5px 0 0;background:rgba(34,197,94,0.55)"></div>
+            <div style="flex:1;height:82%;border-radius:5px 5px 0 0;background:rgba(34,197,94,0.7)"></div>
+            <div style="flex:1;height:94%;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#22C55E,#16A34A)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROW 6 -->
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+    <div style="position:relative;order:1">
+      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 50% 40%,rgba(230,81,0,0.16),transparent 65%);filter:blur(26px);pointer-events:none"></div>
+      <div style="position:relative;border-radius:16px;border:1px solid rgba(34,197,94,0.28);background:#FFFFFF;box-shadow:0 30px 80px rgba(15,23,42,0.12);overflow:hidden;padding:28px">
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:22px"><span style="font-family:'Space Grotesk',sans-serif;font-size:52px;font-weight:700;background:linear-gradient(120deg,#16A34A,#22C55E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">0%</span><span style="font-size:15px;color:#64748B">transaction fees</span></div>
+        <div style="padding:18px;border-radius:13px;border:1px solid rgba(34,197,94,0.22);background:linear-gradient(180deg,rgba(34,197,94,0.07),rgba(34,197,94,0.02))">
+          <div style="font-size:12px;color:#64748B;margin-bottom:14px;font-weight:600">This month's payout</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:11px;border-bottom:1px solid rgba(15,23,42,0.08)"><span style="font-size:13.5px;color:#64748B">Gross sales</span><span style="font-size:13.5px;color:#1E293B">$8,420</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(15,23,42,0.08)"><span style="font-size:13.5px;color:#64748B">Platform fees</span><span style="font-size:13.5px;color:#16A34A">−$0.00</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:13px"><span style="font-size:14px;font-weight:700;color:#1E293B">You keep</span><span style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#16A34A">$8,420</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="order:2">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">06 · Your earnings</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:18px">Keep more of your revenue</h3>
+      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Zero transaction fees on your product sales. Keep 100% of your earnings. What you make is what you take home.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:9px">
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">0% fees</span>
+        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Instant payouts</span>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ===== WAITLIST CTA ===== -->
+  <section id="waitlist" style="position:relative;padding:clamp(60px,10vh,120px) clamp(20px,5vw,40px)">
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:600px;max-width:95vw;background:radial-gradient(circle,rgba(230,81,0,0.13),transparent 65%);filter:blur(40px);pointer-events:none;animation:vpulse 9s ease-in-out infinite"></div>
+    <div class="reveal" style="position:relative;max-width:1080px;margin:0 auto;border-radius:26px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 40px 120px rgba(15,23,42,0.12);overflow:hidden">
+      <div class="vcta" style="display:grid;grid-template-columns:1fr 1fr">
+        <div style="padding:clamp(34px,5vw,56px)">
+          <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.8vw,42px);line-height:1.08;letter-spacing:-0.02em;margin-bottom:20px">Get notified when we launch</h2>
+          <p style="font-size:16px;line-height:1.6;color:#334155;margin-bottom:28px">We're building this with creators, coaches, and educators who are tired of stitching their teaching across five tools and watching students fall through the gaps.</p>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:flex-start;gap:12px"><span style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;margin-top:1px;box-shadow:0 2px 6px rgba(230,81,0,0.3)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span style="font-size:15.5px;color:#1E293B">Founding-member pricing, locked in for life</span></div>
+            <div style="display:flex;align-items:flex-start;gap:12px"><span style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;margin-top:1px;box-shadow:0 2px 6px rgba(230,81,0,0.3)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span style="font-size:15.5px;color:#1E293B">Early access before we launch</span></div>
+            <div style="display:flex;align-items:flex-start;gap:12px"><span style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;margin-top:1px;box-shadow:0 2px 6px rgba(230,81,0,0.3)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span style="font-size:15.5px;color:#1E293B">A real say in what we build next</span></div>
+            <div style="display:flex;align-items:flex-start;gap:12px"><span style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;margin-top:1px;box-shadow:0 2px 6px rgba(230,81,0,0.3)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span style="font-size:15.5px;color:#1E293B">Priority support</span></div>
+          </div>
+        </div>
+        <div class="vcta-form" style="padding:clamp(34px,5vw,56px);border-left:1px solid rgba(15,23,42,0.07);background:rgba(230,81,0,0.03);display:flex;flex-direction:column;justify-content:center">
+          <div class="waitlist-success" hidden style="text-align:center;animation:vrise .5s ease both">
+            <div style="width:64px;height:64px;border-radius:50%;margin:0 auto 20px;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;color:#FFFFFF;box-shadow:0 0 40px rgba(230,81,0,0.5)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:24px;margin-bottom:12px">You're on the list</h3>
+            <p style="font-size:15px;line-height:1.55;color:#334155">Your founding spot is reserved. We'll email <span class="success-email" style="color:#E65100">you</span> with early access before launch.</p>
+          </div>
+          <div class="waitlist-formwrap">
+            <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:23px;margin-bottom:8px">Claim your founding spot</h3>
+            <p style="font-size:14.5px;color:#64748B;margin-bottom:24px">Join the waitlist. We won't spam you.</p>
+            <form class="waitlist-form" data-source="cta">
+              <label for="cta-email" style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:8px">Email address</label>
+              <input id="cta-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com" style="width:100%;padding:15px 16px;border-radius:12px;border:1px solid rgba(15,23,42,0.12);background:rgba(15,23,42,0.05);color:#1E293B;font-size:15.5px;font-family:'Figtree',sans-serif;outline:none;margin-bottom:6px">
+              <p class="waitlist-error" hidden style="font-size:13px;color:#C44400;font-weight:600;margin-bottom:8px"></p>
+              <button type="submit" style="width:100%;margin-top:8px;padding:16px;border:none;border-radius:12px;background:linear-gradient(135deg,#E65100,#C44400);color:#FFFFFF;font-size:16px;font-weight:700;font-family:'Figtree',sans-serif;cursor:pointer;box-shadow:0 10px 36px rgba(230,81,0,0.35)">Claim Your Founding Spot →</button>
+            </form>
+            <p style="font-size:12.5px;color:#475569;text-align:center;margin-top:14px">Lifetime lowest pricing · Early access · Priority support</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer style="max-width:1080px;margin:50px auto 0;padding-top:32px;border-top:1px solid rgba(15,23,42,0.08)">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:22px;margin-bottom:22px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#E65100,#FB8C00);transform:rotate(45deg)"></div>
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px">Vectore</span>
+        </div>
+        <nav aria-label="Footer" style="display:flex;flex-wrap:wrap;gap:28px">
+          <a href="/privacy" style="font-size:14px;font-weight:500;color:#475569;text-decoration:none">Privacy Policy</a>
+          <a href="/contact" style="font-size:14px;font-weight:500;color:#475569;text-decoration:none">Contact</a>
+          <a href="/terms" style="font-size:14px;font-weight:500;color:#475569;text-decoration:none">Terms of Service</a>
+        </nav>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:20px;border-top:1px solid rgba(15,23,42,0.06)">
+        <span style="font-size:13px;color:#94A3B8">© <span id="year">2026</span> Vectore. All rights reserved.</span>
+        <span style="font-size:13px;color:#94A3B8">The community platform built for learning</span>
+      </div>
+    </footer>
+  </section>
+
+</div>
+
+<!-- ===== THANK-YOU MODAL ===== -->
+<div id="waitlist-modal" hidden style="position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,0.55);backdrop-filter:blur(4px)">
+  <div role="dialog" aria-modal="true" aria-label="You're on the list" style="position:relative;max-width:440px;width:100%;background:#fff;border-radius:20px;padding:36px 32px;box-shadow:0 40px 120px rgba(15,23,42,0.3);text-align:center;animation:vrise .4s ease both">
+    <button id="waitlist-modal-close" aria-label="Close" style="position:absolute;top:12px;right:15px;border:none;background:transparent;font-size:24px;color:#94A3B8;cursor:pointer;line-height:1">×</button>
+    <div style="width:64px;height:64px;border-radius:50%;margin:0 auto 20px;background:linear-gradient(135deg,#16A34A,#15803D);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(22,163,74,0.4)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;margin-bottom:10px">You're on the list!</h3>
+    <p style="font-size:15px;line-height:1.6;color:#334155;margin-bottom:20px">Thanks for joining the Vectore founding waitlist. We'll email <strong id="modal-email" style="color:#E65100">you</strong> with early access before we launch.</p>
+    <div style="text-align:left;background:#FBFAF8;border:1px solid rgba(15,23,42,0.08);border-radius:14px;padding:16px 18px;margin-bottom:22px">
+      <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#94A3B8;margin-bottom:12px">Your founding perks</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#1E293B"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Founding-member pricing, locked in for life</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#1E293B"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Early access before we launch</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#1E293B"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>A real say in what we build next</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#1E293B"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Priority support</div>
+      </div>
+    </div>
+    <button id="waitlist-modal-done" style="width:100%;padding:15px;border:none;border-radius:12px;background:linear-gradient(135deg,#E65100,#C44400);color:#fff;font-size:16px;font-weight:700;font-family:'Figtree',sans-serif;cursor:pointer">Done</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ---- dynamic copyright year ----
+  var yEl = document.getElementById('year'); if(yEl){ yEl.textContent = new Date().getFullYear(); }
+  // ---- nav shadow on scroll ----
+  var nav = document.querySelector('.vnav');
+  function onScroll(){ if(nav) nav.classList.toggle('scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // ---- scroll reveal ----
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'}) : null;
+  document.querySelectorAll('.reveal').forEach(function(el){
+    if(io){ io.observe(el); } else { el.classList.add('in'); }
+  });
+
+  // ---- waitlist forms ----
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function show(el){ if(el) el.hidden = false; }
+  function hide(el){ if(el) el.hidden = true; }
+
+  // ---- thank-you modal ----
+  var modal = document.getElementById('waitlist-modal');
+  function openModal(email){
+    var em = document.getElementById('modal-email');
+    if(em) em.textContent = email;
+    if(modal) modal.hidden = false;
+  }
+  function closeModal(){ if(modal) modal.hidden = true; }
+  ['waitlist-modal-close','waitlist-modal-done'].forEach(function(id){
+    var b = document.getElementById(id); if(b) b.addEventListener('click', closeModal);
+  });
+  if(modal) modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  document.querySelectorAll('.waitlist-form').forEach(function(form){
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      var scope = form.closest('.vcta-form') || form.parentElement;
+      var input = form.querySelector('input[name="email"]');
+      var errEl = scope.querySelector('.waitlist-error');
+      var btn = form.querySelector('button[type="submit"]');
+      var email = (input && input.value || '').trim();
+
+      hide(errEl);
+      if(!EMAIL_RE.test(email)){
+        if(errEl){ errEl.textContent = 'Please enter a valid email address.'; show(errEl); }
+        if(input) input.focus();
+        return;
+      }
+      var original = btn ? btn.innerHTML : '';
+      if(btn){ btn.disabled = true; btn.style.opacity = '0.75'; btn.innerHTML = 'Joining…'; }
+
+      fetch('/api/waitlist', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ email: email, source: form.getAttribute('data-source') || 'web' })
+      }).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){ return {ok:r.ok, data:d}; }); })
+        .then(function(res){
+          if(!res.ok){ throw new Error((res.data && res.data.error) || 'Something went wrong. Please try again.'); }
+          // success: swap UI
+          var formwrap = scope.querySelector('.waitlist-formwrap');
+          var success = scope.querySelector('.waitlist-success');
+          var emailSpan = scope.querySelector('.success-email');
+          if(emailSpan){ emailSpan.textContent = email; }
+          if(formwrap){ hide(formwrap); } else { form.hidden = true; }
+          show(success);
+          openModal(email);
+        })
+        .catch(function(e){
+          if(errEl){ errEl.textContent = e.message || 'Something went wrong.'; show(errEl); }
+          if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = original; }
+        });
+    });
+  });
+})();
+</script>
+</body>
+</html>
