@@ -57,9 +57,10 @@
   /* nav shadow on scroll */
   .vnav{transition:box-shadow .3s ease, background .3s ease}
   .vnav.scrolled{box-shadow:0 10px 34px rgba(15,23,42,0.12);background:rgba(255,255,255,0.96)}
-  /* primary button hover: darken to near-black */
-  button[type="submit"],a[href="#waitlist"]{transition:background .25s ease,box-shadow .25s ease}
-  button[type="submit"]:hover,a[href="#waitlist"]:hover{background:#111827 !important;box-shadow:0 10px 30px rgba(17,24,39,0.3) !important}
+  /* primary button hover: smooth brighten + glow — no gradient-to-solid snap, no geometry shift */
+  button[type="submit"],a[href="#waitlist"]{transition:box-shadow .25s ease,filter .25s ease}
+  button[type="submit"]:hover,a[href="#waitlist"]:hover{filter:brightness(1.06);box-shadow:0 14px 34px rgba(230,81,0,0.45) !important}
+  button[type="submit"]:active,a[href="#waitlist"]:active{filter:brightness(0.97);transition-duration:.08s}
   /* hero signup: combined field on desktop, stacks on mobile */
   .vhero-form{display:flex;align-items:center;gap:8px;width:100%;max-width:560px;padding:7px 7px 7px 8px;border-radius:15px;border:1px solid rgba(15,23,42,0.18);background:#FFFFFF;box-shadow:0 4px 16px rgba(15,23,42,0.07)}
   .vhero-form input{flex:1;min-width:0;padding:13px 12px;border:none;background:transparent;color:#1E293B;font-size:16px;font-family:'Figtree',sans-serif;outline:none}
