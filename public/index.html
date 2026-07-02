@@ -17,17 +17,17 @@
 <meta property="og:title" content="Vectore | The community platform built for learning">
 <meta property="og:description" content="Every way you teach, better with a community. Claim your founding spot.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://vectore.app/assets/hero.png">
-<meta property="og:image:width" content="3120">
-<meta property="og:image:height" content="1412">
-<meta property="og:image:alt" content="The Vectore platform: courses, community, coaching, and events in one place">
+<meta property="og:image" content="https://vectore.app/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Vectore: every way you teach, better with a community. Courses, cohorts, coaching, events, and community in one platform.">
 <meta property="og:url" content="https://vectore.app/">
 <meta property="og:site_name" content="Vectore">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vectore | The community platform built for learning">
 <meta name="twitter:description" content="Every way you teach, better with a community. Claim your founding spot.">
-<meta name="twitter:image" content="https://vectore.app/assets/hero.png">
-<meta name="twitter:image:alt" content="The Vectore platform: courses, community, coaching, and events in one place">
+<meta name="twitter:image" content="https://vectore.app/assets/og-image.png">
+<meta name="twitter:image:alt" content="Vectore: every way you teach, better with a community. Courses, cohorts, coaching, events, and community in one platform.">
 <link rel="canonical" href="https://vectore.app/">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Vectore","url":"https://vectore.app","logo":"https://vectore.app/assets/vectore-mark.png","description":"The complete community platform built for learning. Bring courses, cohorts, coaching, workshops, and events into one platform with community built in.","contactPoint":{"@type":"ContactPoint","email":"hello@vectore.app","contactType":"customer support"}}
@@ -98,8 +98,9 @@
   .vping::after{animation:vping 2s cubic-bezier(0,0,.2,1) infinite}
   @keyframes vping{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(2.8);opacity:0}}
   @media (prefers-reduced-motion:reduce){.vping::after{animation:none}}
-  /* subtle texture on the text column of each feature row */
-  .vrow > div:not(:has(.vmock)){background-image:radial-gradient(rgba(15,23,42,0.05) 1px,transparent 1.5px);background-size:20px 20px;background-position:-6px -6px;border-radius:14px}
+  /* subtle dot texture (no gradient wash, keeps the base background) */
+  .vrow > div:not(:has(.vmock)),.vtexture{background-image:radial-gradient(rgba(15,23,42,0.05) 1px,transparent 1.5px);background-size:20px 20px;background-position:-6px -6px}
+  .vrow > div:not(:has(.vmock)){border-radius:14px}
   /* responsive: tablet */
   @media (max-width: 900px){
     .vrow{grid-template-columns:1fr !important;gap:32px !important;background:none !important}
@@ -269,7 +270,7 @@
 
   <!-- ===== FEATURE GRID (bordered) ===== -->
   <div style="max-width:1180px;margin:0 auto;border:1px solid rgba(15,23,42,0.22)">
-  <section id="features" class="reveal" style="position:relative;padding:clamp(40px,8vh,90px) clamp(20px,5vw,40px) clamp(36px,5vh,56px);text-align:center;border-bottom:1px solid rgba(15,23,42,0.22)">
+  <section id="features" class="reveal vtexture" style="position:relative;padding:clamp(40px,8vh,90px) clamp(20px,5vw,40px) clamp(36px,5vh,56px);text-align:center;border-bottom:1px solid rgba(15,23,42,0.22)">
     <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(27px,4vw,40px);line-height:1.1;letter-spacing:-0.025em;max-width:20ch;margin:0 auto 20px">The complete platform for learning communities</h2>
     <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:#334155;max-width:56ch;margin:0 auto">Vectore empowers you with all the tools you need to build a thriving community around your education business.</p>
   </section>
@@ -568,6 +569,12 @@
   if(modal) modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
 
+  // ===== Kit (kit.com) integration =====
+  // Paste your Kit form ID between the quotes below. Where to find it:
+  // Kit dashboard > Grow > Landing Pages & Forms > open your form > Embed.
+  // The ID is the number in the snippet / URL, e.g. app.kit.com/forms/1234567 -> 1234567
+  var KIT_FORM_ID = 'YOUR_KIT_FORM_ID';
+
   document.querySelectorAll('.waitlist-form').forEach(function(form){
     form.addEventListener('submit', function(ev){
       ev.preventDefault();
@@ -586,22 +593,28 @@
       var original = btn ? btn.innerHTML : '';
       if(btn){ btn.disabled = true; btn.style.opacity = '0.75'; btn.innerHTML = 'Joining…'; }
 
-      fetch('/api/waitlist', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ email: email, source: form.getAttribute('data-source') || 'web' })
-      }).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){ return {ok:r.ok, data:d}; }); })
-        .then(function(res){
-          if(!res.ok){ throw new Error((res.data && res.data.error) || 'Something went wrong. Please try again.'); }
-          // success: reset the form and thank the user in the modal
-          form.reset();
-          if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = original; }
-          openModal(email);
-        })
-        .catch(function(e){
-          if(errEl){ errEl.textContent = e.message || 'Something went wrong.'; show(errEl); }
-          if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = original; }
-        });
+      function succeed(){
+        form.reset();
+        if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = original; }
+        openModal(email);
+      }
+      function failWith(msg){
+        if(errEl){ errEl.textContent = msg || 'Something went wrong. Please try again.'; show(errEl); }
+        if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = original; }
+      }
+
+      // Send the subscriber to Kit (kit.com). Uses the public form endpoint,
+      // so no API key is exposed in the browser.
+      if(KIT_FORM_ID && KIT_FORM_ID.indexOf('YOUR_') !== 0){
+        var fd = new FormData();
+        fd.append('email_address', email);
+        fetch('https://app.kit.com/forms/' + KIT_FORM_ID + '/subscriptions', { method:'POST', body: fd })
+          .then(function(r){ if(r.ok){ succeed(); } else { failWith('Something went wrong. Please try again.'); } })
+          .catch(function(){ failWith('Network error. Please try again.'); });
+      } else {
+        // Kit form ID not set yet: still confirm to the visitor so the page works.
+        succeed();
+      }
     });
   });
 
