@@ -6,6 +6,8 @@
 <title>Vectore | The community platform built for learning</title>
 <meta name="description" content="Bring courses, cohorts, coaching, workshops, and events into one platform, with community built into the experience from day one. Join the founding waitlist.">
 <meta name="theme-color" content="#FBF9F6">
+<link rel="icon" type="image/png" href="assets/vectore-mark.png">
+<link rel="apple-touch-icon" href="assets/vectore-mark.png">
 <!-- Open Graph -->
 <meta property="og:title" content="Vectore | The community platform built for learning">
 <meta property="og:description" content="Every way you teach, better with a community. Claim your founding spot.">
@@ -88,8 +90,8 @@
   <!-- ===== NAV ===== -->
   <nav style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;padding:16px clamp(16px,4vw,32px)">
     <div class="vnav" style="width:100%;max-width:1180px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:11px 12px 11px 20px;border-radius:16px;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border:1px solid rgba(15,23,42,0.08);box-shadow:0 6px 24px rgba(15,23,42,0.07)">
-      <a href="#" style="display:flex;align-items:center;gap:11px;text-decoration:none">
-        <div style="width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#E65100,#FB8C00);box-shadow:0 0 22px rgba(230,81,0,0.55);transform:rotate(45deg)"></div>
+      <a href="#" style="display:flex;align-items:center;gap:9px;text-decoration:none">
+        <img src="assets/vectore-mark.png" alt="Vectore logo" style="width:28px;height:28px;display:block">
         <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.02em">Vectore</span>
       </a>
       <div class="vnav-spacer" style="display:flex;align-items:center;justify-content:center;gap:30px"></div>
@@ -368,8 +370,8 @@
 
     <footer style="max-width:1080px;margin:50px auto 0;padding-top:32px;border-top:1px solid rgba(15,23,42,0.08)">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:22px;margin-bottom:22px">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#E65100,#FB8C00);transform:rotate(45deg)"></div>
+        <div style="display:flex;align-items:center;gap:9px">
+          <img src="assets/vectore-mark.png" alt="Vectore logo" style="width:22px;height:22px;display:block">
           <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px">Vectore</span>
         </div>
         <nav aria-label="Footer" style="display:flex;flex-wrap:wrap;gap:28px">
@@ -388,7 +390,7 @@
 </div>
 
 <!-- ===== THANK-YOU MODAL ===== -->
-<div id="waitlist-modal" hidden style="position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,0.55);backdrop-filter:blur(4px)">
+<div id="waitlist-modal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,0.55);backdrop-filter:blur(4px)">
   <div role="dialog" aria-modal="true" aria-label="You're on the list" style="position:relative;max-width:440px;width:100%;background:#fff;border-radius:20px;padding:36px 32px;box-shadow:0 40px 120px rgba(15,23,42,0.3);text-align:center;animation:vrise .4s ease both">
     <button id="waitlist-modal-close" aria-label="Close" style="position:absolute;top:12px;right:15px;border:none;background:transparent;font-size:24px;color:#94A3B8;cursor:pointer;line-height:1">×</button>
     <div style="width:64px;height:64px;border-radius:50%;margin:0 auto 20px;background:linear-gradient(135deg,#16A34A,#15803D);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(22,163,74,0.4)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
@@ -434,9 +436,9 @@
   function openModal(email){
     var em = document.getElementById('modal-email');
     if(em) em.textContent = email;
-    if(modal) modal.hidden = false;
+    if(modal) modal.style.display = 'flex';
   }
-  function closeModal(){ if(modal) modal.hidden = true; }
+  function closeModal(){ if(modal) modal.style.display = 'none'; }
   ['waitlist-modal-close','waitlist-modal-done'].forEach(function(id){
     var b = document.getElementById(id); if(b) b.addEventListener('click', closeModal);
   });
