@@ -115,10 +115,6 @@
         <input type="email" name="email" required autocomplete="email" placeholder="Enter your email">
         <button type="submit">Claim your founding spot <span style="font-size:17px">→</span></button>
       </form>
-      <div class="waitlist-success" hidden style="display:flex;align-items:center;gap:10px;padding:15px 22px;border-radius:13px;border:1px solid rgba(230,81,0,0.3);background:rgba(230,81,0,0.06);animation:vrise .5s ease both">
-        <span style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#E65100,#C44400);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px">✓</span>
-        <span style="font-size:15px;font-weight:600;color:#1E293B">You're on the list. We'll email you before launch.</span>
-      </div>
       <p class="waitlist-error" hidden style="font-size:14px;color:#C44400;font-weight:600"></p>
       <p style="font-size:14px;color:#64748B;max-width:44ch">Founding members get lifetime lowest pricing and early access when we launch.</p>
     </div>
@@ -348,11 +344,6 @@
           </div>
         </div>
         <div class="vcta-form" style="padding:clamp(34px,5vw,56px);border-left:1px solid rgba(15,23,42,0.07);background:rgba(230,81,0,0.03);display:flex;flex-direction:column;justify-content:center">
-          <div class="waitlist-success" hidden style="text-align:center;animation:vrise .5s ease both">
-            <div style="width:64px;height:64px;border-radius:50%;margin:0 auto 20px;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;color:#FFFFFF;box-shadow:0 0 40px rgba(230,81,0,0.5)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:24px;margin-bottom:12px">You're on the list</h3>
-            <p style="font-size:15px;line-height:1.55;color:#334155">Your founding spot is reserved. We'll email <span class="success-email" style="color:#E65100">you</span> with early access before launch.</p>
-          </div>
           <div class="waitlist-formwrap">
             <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:23px;margin-bottom:8px">Claim your founding spot</h3>
             <p style="font-size:14.5px;color:#64748B;margin-bottom:24px">Join the waitlist. We won't spam you.</p>
@@ -470,13 +461,9 @@
       }).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){ return {ok:r.ok, data:d}; }); })
         .then(function(res){
           if(!res.ok){ throw new Error((res.data && res.data.error) || 'Something went wrong. Please try again.'); }
-          // success: swap UI
-          var formwrap = scope.querySelector('.waitlist-formwrap');
-          var success = scope.querySelector('.waitlist-success');
-          var emailSpan = scope.querySelector('.success-email');
-          if(emailSpan){ emailSpan.textContent = email; }
-          if(formwrap){ hide(formwrap); } else { form.hidden = true; }
-          show(success);
+          // success: reset the form and thank the user in the modal
+          form.reset();
+          if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = original; }
           openModal(email);
         })
         .catch(function(e){
