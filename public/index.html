@@ -67,6 +67,12 @@
     .vhero-form input{width:100%;padding:16px 18px;border:1px solid rgba(15,23,42,0.18);background:#FFFFFF;border-radius:13px;box-shadow:0 2px 10px rgba(15,23,42,0.05)}
     .vhero-form button{width:100%;padding:16px;border-radius:13px}
   }
+  /* hand-drawn underline under "community" — draws itself in on load */
+  .vunderline{position:relative;white-space:nowrap;background:linear-gradient(120deg,#E65100,#FB8C00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .vunderline .vul{position:absolute;left:-3%;bottom:-0.24em;width:106%;height:0.46em;overflow:visible;pointer-events:none}
+  .vunderline .vul path{fill:none;stroke:url(#vul-grad);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-dasharray:340;stroke-dashoffset:340;animation:vuldraw 1.05s cubic-bezier(.22,1,.3,1) .5s forwards}
+  @keyframes vuldraw{to{stroke-dashoffset:0}}
+  @media (prefers-reduced-motion:reduce){.vunderline .vul path{animation:none;stroke-dashoffset:0}}
   /* interactive feature tabs (community + events) */
   .vtabs{display:flex;flex-wrap:wrap;gap:10px}
   .vtab{display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:10px 15px;border-radius:12px;background:rgba(15,23,42,0.04);border:1px solid rgba(15,23,42,0.1);font-family:'Figtree',sans-serif;font-size:14px;font-weight:600;color:#475569;transition:color .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease}
@@ -124,7 +130,7 @@
       <span style="width:7px;height:7px;border-radius:50%;background:#E65100;box-shadow:0 0 10px #E65100"></span>
       Founding spots now open · Private beta
     </div>
-    <h1 style="position:relative;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,5vw,40px);line-height:1.12;letter-spacing:-0.02em;max-width:24ch;margin:0 auto 26px">Every way you teach, <span style="background:linear-gradient(120deg,#E65100,#FB8C00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">better with a community.</span></h1>
+    <h1 style="position:relative;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,5vw,40px);line-height:1.12;letter-spacing:-0.02em;max-width:24ch;margin:0 auto 26px">Every way you teach, <span style="background:linear-gradient(120deg,#E65100,#FB8C00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">better with a <span class="vunderline">community<svg class="vul" viewBox="0 0 240 24" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="vul-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E65100"/><stop offset="0.55" stop-color="#F97316"/><stop offset="1" stop-color="#FB8C00"/></linearGradient></defs><path d="M5,15.5 C46,22.5 82,10.5 122,13.5 C165,16.5 199,16 236,7.5"/></svg></span>.</span></h1>
     <p style="position:relative;font-size:clamp(17px,2vw,21px);line-height:1.55;color:#334155;max-width:60ch;margin:0 auto 38px">Bring courses, cohorts, coaching, workshops, and events into one platform, with community built into the experience from day one.</p>
     <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:14px">
       <form class="waitlist-form vhero-form" data-source="hero">
