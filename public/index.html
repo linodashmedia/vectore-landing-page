@@ -67,6 +67,16 @@
     .vhero-form input{width:100%;padding:16px 18px;border:1px solid rgba(15,23,42,0.18);background:#FFFFFF;border-radius:13px;box-shadow:0 2px 10px rgba(15,23,42,0.05)}
     .vhero-form button{width:100%;padding:16px;border-radius:13px}
   }
+  /* interactive feature tabs (community + events) */
+  .vtabs{display:flex;flex-wrap:wrap;gap:10px}
+  .vtab{display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:10px 15px;border-radius:12px;background:rgba(15,23,42,0.04);border:1px solid rgba(15,23,42,0.1);font-family:'Figtree',sans-serif;font-size:14px;font-weight:600;color:#475569;transition:color .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease}
+  .vtab svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+  .vtab:hover{border-color:rgba(230,81,0,0.4);color:#E65100}
+  .vtab.is-active{background:linear-gradient(135deg,#E65100,#C44400);border-color:transparent;color:#fff;box-shadow:0 10px 24px -8px rgba(230,81,0,0.6)}
+  .vtab-stack{position:relative}
+  .vtab-img{display:block;width:100%;height:auto;opacity:0;transition:opacity .35s ease}
+  .vtab-img:not(:first-child){position:absolute;inset:0}
+  .vtab-img.is-active{opacity:1}
   /* responsive: tablet */
   @media (max-width: 900px){
     .vrow{grid-template-columns:1fr !important;gap:32px !important;background:none !important}
@@ -200,18 +210,23 @@
         <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
           <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
         </div>
-        <img src="assets/community.png" alt="Community space: discussions, reactions, streaks, and level progress" loading="lazy" style="display:block;width:100%;height:auto">
+        <div class="vtab-stack" data-group="community">
+          <img class="vtab-img is-active" data-tab="discussions" src="assets/community-discussions.png" alt="A member's post with reactions and replies" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="challenges" src="assets/community-challenges.png" alt="A 30-day build challenge with streak and rank" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="gamification" src="assets/community-gamification.png" alt="Level, XP progress, and earned badges" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="matching" src="assets/community-matching.png" alt="A weekly member match with shared interests" style="display:block;width:100%;height:auto">
+        </div>
       </div>
     </div>
     <div style="order:2">
       <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">02 · Real participation</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:18px">Build a community that people actually participate in</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Keep members engaged with discussion posts, chats, challenges, gamification, and member matching: interactive experiences that give people more ways to connect, contribute, and learn from one another.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:9px">
-        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Discussions</span>
-        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Challenges</span>
-        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Gamification</span>
-        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Member matching</span>
+      <div class="vtabs" data-group="community" role="tablist">
+        <button type="button" class="vtab is-active" data-target="discussions"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Discussions</button>
+        <button type="button" class="vtab" data-target="challenges"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Challenges</button>
+        <button type="button" class="vtab" data-target="gamification"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>Gamification</button>
+        <button type="button" class="vtab" data-target="matching"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Member matching</button>
       </div>
     </div>
   </section>
@@ -222,10 +237,10 @@
       <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">03 · No extra tools</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:18px">Run events and coaching in one place</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Host workshops, office hours, coaching sessions, live events, and cohort meetings from one platform, without juggling separate scheduling, booking, calendar, or event software.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:9px">
-        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Scheduling</span>
-        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Booking</span>
-        <span style="padding:8px 14px;border-radius:9px;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.08);font-size:13.5px;color:#475569">Live events</span>
+      <div class="vtabs" data-group="events" role="tablist">
+        <button type="button" class="vtab is-active" data-target="live"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>Live event</button>
+        <button type="button" class="vtab" data-target="coaching"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Coaching</button>
+        <button type="button" class="vtab" data-target="scheduling"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>Scheduling</button>
       </div>
     </div>
     <div style="position:relative">
@@ -234,7 +249,11 @@
         <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
           <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
         </div>
-        <img src="assets/events.png" alt="Upcoming events: live workshops, coaching, and sessions in one calendar" loading="lazy" style="display:block;width:100%;height:auto">
+        <div class="vtab-stack" data-group="events">
+          <img class="vtab-img is-active" data-tab="live" src="assets/event-live.png" alt="Creating a live event with date, time, and platform" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="coaching" src="assets/event-coaching.png" alt="A coaching session with duration, price, and open time slots" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="scheduling" src="assets/event-scheduling.png" alt="Setting weekly availability for bookings" style="display:block;width:100%;height:auto">
+        </div>
       </div>
     </div>
   </section>
@@ -450,6 +469,22 @@
           if(errEl){ errEl.textContent = e.message || 'Something went wrong.'; show(errEl); }
           if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = original; }
         });
+    });
+  });
+
+  // ---- interactive feature tabs (community + events) ----
+  // Clicking a tab crossfades the framed mockup to that feature's view.
+  document.querySelectorAll('.vtabs').forEach(function(group){
+    var name = group.getAttribute('data-group');
+    var stack = document.querySelector('.vtab-stack[data-group="' + name + '"]');
+    if(!stack) return;
+    var imgs = stack.querySelectorAll('.vtab-img');
+    group.querySelectorAll('.vtab').forEach(function(tab){
+      tab.addEventListener('click', function(){
+        var target = tab.getAttribute('data-target');
+        group.querySelectorAll('.vtab').forEach(function(t){ t.classList.toggle('is-active', t === tab); });
+        imgs.forEach(function(img){ img.classList.toggle('is-active', img.getAttribute('data-tab') === target); });
+      });
     });
   });
 })();
