@@ -100,11 +100,23 @@ app.get('/api/waitlist', (req, res) => {
 app.get('/healthz', (_req, res) => res.json({ ok: true }));
 
 // --- Static site ---
-app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
+// Long-cache immutable assets (images, fonts) for faster repeat loads / better
+// Core Web Vitals; HTML stays uncached so content updates show immediately.
+app.use(express.static(path.join(__dirname, 'public'), {
+  extensions: ['html'],
+  setHeaders: (res, filePath) => {
+    if (/\.(png|jpe?g|webp|gif|svg|ico|woff2?)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=2592000'); // 30 days
+    }
+  },
+}));
 
-// SPA-style fallback to index for any unmatched GET
-app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Real 404 for unknown routes. This is a static multi-page site, NOT an SPA,
+// so we must not serve index.html with a 200 — that would create soft-404s
+// that Google indexes as duplicate homepages. Serve the 404 page with the
+// correct status so crawlers drop dead URLs.
+app.use((_req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
 app.listen(PORT, () => {
