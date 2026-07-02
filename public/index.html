@@ -288,6 +288,35 @@
     </div>
   </section>
 
+  <!-- ROW: Measure learning -->
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+    <div style="position:relative;order:1">
+      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 45% 45%,rgba(22,163,74,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
+      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
+          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
+        </div>
+        <div class="vtab-stack" data-group="assess">
+          <img class="vtab-img is-active" data-tab="quizzes" width="760" height="560" src="assets/assess-quizzes.webp" alt="An auto-graded quiz question with the correct answer highlighted" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="assessments" width="760" height="560" src="assets/assess-assessments.webp" alt="A graded assessment scored against a rubric with instructor feedback" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="surveys" width="760" height="560" src="assets/assess-surveys.webp" alt="A short course feedback survey with rating and recommendation questions" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="progress" width="760" height="560" src="assets/assess-progress.webp" alt="A program performance report showing completion, quiz scores, and each learner's progress" style="display:block;width:100%;height:auto">
+        </div>
+      </div>
+    </div>
+    <div style="order:2">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">02 · Measure learning</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">See who's actually learning, not just watching</h3>
+      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Test what's sticking with quizzes and graded assessments, then collect honest feedback with surveys. Every response rolls up into progress reports that show who's on track, who's stuck, and which lessons actually land. You stop guessing whether your program works and start seeing it.</p>
+      <div class="vtabs" data-group="assess" role="tablist">
+        <button type="button" class="vtab is-active" data-target="quizzes"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Quizzes</button>
+        <button type="button" class="vtab" data-target="assessments"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>Assessments</button>
+        <button type="button" class="vtab" data-target="surveys"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 3.3a.5.5 0 0 1 .9 0l2.2 4.5 4.9.7a.5.5 0 0 1 .3.9l-3.6 3.5.8 4.9a.5.5 0 0 1-.7.5L12 16.9l-4.4 2.3a.5.5 0 0 1-.7-.5l.8-4.9-3.5-3.5a.5.5 0 0 1 .3-.9l4.9-.7z"/></svg>Surveys</button>
+        <button type="button" class="vtab" data-target="progress"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Progress</button>
+      </div>
+    </div>
+  </section>
+
   <!-- ROW 2 -->
   <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
     <div style="position:relative;order:1">
@@ -305,7 +334,7 @@
       </div>
     </div>
     <div style="order:2">
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">02 · Real participation</div>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">03 · Real participation</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Build a community that people actually participate in</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Keep members engaged with discussion posts, chats, challenges, gamification, and member matching: interactive experiences that give people more ways to connect, contribute, and learn from one another.</p>
       <div class="vtabs" data-group="community" role="tablist">
@@ -320,7 +349,7 @@
   <!-- ROW 3 -->
   <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
     <div>
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">03 · No extra tools</div>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">04 · No extra tools</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Run events and coaching in one place</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Host workshops, office hours, coaching sessions, live events, and cohort meetings from one platform, without juggling separate scheduling, booking, calendar, or event software.</p>
       <div class="vtabs" data-group="events" role="tablist">
@@ -360,7 +389,7 @@
       </div>
     </div>
     <div style="order:2">
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">04 · Less busywork</div>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">05 · Less busywork</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Automate the busywork</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Reduce manual work with workflows for onboarding, engagement, member management, access control, and recurring tasks. Spend less time managing systems and more time supporting members.</p>
       <div class="vtabs" data-group="auto" role="tablist">
@@ -374,7 +403,7 @@
   <!-- ROW 5 -->
   <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
     <div>
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">05 · Full visibility</div>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">06 · Full visibility</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Know exactly what's working</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Track participation, program performance, member activity, and revenue from a single dashboard. Get the insights you need to improve your programs and community.</p>
       <div class="vtabs" data-group="insights" role="tablist">
@@ -413,7 +442,7 @@
       </div>
     </div>
     <div style="order:2">
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">06 · Your earnings</div>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">07 · Your earnings</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Keep more of your revenue</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Zero transaction fees on your product sales. Keep 100% of your earnings. What you make is what you take home.</p>
       <div class="vtabs" data-group="earnings" role="tablist">
