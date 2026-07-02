@@ -6,6 +6,7 @@
 <title>Vectore | The community platform built for learning</title>
 <meta name="description" content="Bring courses, cohorts, coaching, workshops, and events into one platform, with community built into the experience from day one. Join the founding waitlist.">
 <meta name="theme-color" content="#FBF9F6">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
 <link rel="icon" href="/favicon.ico?v=3" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=3">
@@ -16,13 +17,17 @@
 <meta property="og:title" content="Vectore | The community platform built for learning">
 <meta property="og:description" content="Every way you teach, better with a community. Claim your founding spot.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/hero.png">
+<meta property="og:image" content="https://vectore.app/assets/hero.png">
+<meta property="og:image:width" content="3120">
+<meta property="og:image:height" content="1412">
+<meta property="og:image:alt" content="The Vectore platform: courses, community, coaching, and events in one place">
 <meta property="og:url" content="https://vectore.app/">
 <meta property="og:site_name" content="Vectore">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vectore | The community platform built for learning">
 <meta name="twitter:description" content="Every way you teach, better with a community. Claim your founding spot.">
-<meta name="twitter:image" content="assets/hero.png">
+<meta name="twitter:image" content="https://vectore.app/assets/hero.png">
+<meta name="twitter:image:alt" content="The Vectore platform: courses, community, coaching, and events in one place">
 <link rel="canonical" href="https://vectore.app/">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Vectore","url":"https://vectore.app","logo":"https://vectore.app/assets/vectore-mark.png","description":"The complete community platform built for learning. Bring courses, cohorts, coaching, workshops, and events into one platform with community built in.","contactPoint":{"@type":"ContactPoint","email":"hello@vectore.app","contactType":"customer support"}}
@@ -86,6 +91,15 @@
   .vtab-img{display:block;width:100%;height:auto;opacity:0;transition:opacity .35s ease}
   .vtab-img:not(:first-child){position:absolute;inset:0}
   .vtab-img.is-active{opacity:1}
+  /* fancy hero badge: pulsing dot + soft ring */
+  .vping{position:relative;width:8px;height:8px;flex-shrink:0}
+  .vping::before,.vping::after{content:"";position:absolute;inset:0;border-radius:50%;background:#E65100}
+  .vping::before{box-shadow:0 0 8px rgba(230,81,0,0.9)}
+  .vping::after{animation:vping 2s cubic-bezier(0,0,.2,1) infinite}
+  @keyframes vping{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(2.8);opacity:0}}
+  @media (prefers-reduced-motion:reduce){.vping::after{animation:none}}
+  /* subtle texture on the text column of each feature row */
+  .vrow > div:not(:has(.vmock)){background-image:radial-gradient(rgba(15,23,42,0.05) 1px,transparent 1.5px);background-size:20px 20px;background-position:-6px -6px;border-radius:14px}
   /* responsive: tablet */
   @media (max-width: 900px){
     .vrow{grid-template-columns:1fr !important;gap:32px !important;background:none !important}
@@ -128,8 +142,8 @@
   <!-- ===== HERO ===== -->
   <section style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(120px,16vh,180px) clamp(20px,5vw,40px) 40px;text-align:center">
     <div style="position:absolute;top:6%;left:50%;transform:translateX(-50%);width:680px;height:520px;max-width:90vw;background:radial-gradient(circle,rgba(230,81,0,0.18),transparent 65%);filter:blur(30px);pointer-events:none;animation:vpulse 8s ease-in-out infinite"></div>
-    <div style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 10px;border-radius:999px;border:1px solid rgba(230,81,0,0.25);background:rgba(230,81,0,0.06);font-size:13px;font-weight:600;color:#E65100;margin-bottom:30px">
-      <span style="width:7px;height:7px;border-radius:50%;background:#E65100;box-shadow:0 0 10px #E65100"></span>
+    <div style="position:relative;display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 13px;border-radius:999px;border:1px solid rgba(230,81,0,0.28);background:linear-gradient(180deg,rgba(255,255,255,0.92),rgba(255,246,240,0.86));box-shadow:inset 0 1px 0 rgba(255,255,255,0.9),0 10px 26px -12px rgba(230,81,0,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:13px;font-weight:600;color:#E65100;margin-bottom:30px">
+      <span class="vping"></span>
       Founding spots now open · Private beta
     </div>
     <h1 style="position:relative;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(33px,5.4vw,52px);line-height:1.1;letter-spacing:-0.02em;max-width:22ch;margin:0 auto 26px">Every way you teach, <span style="background:linear-gradient(120deg,#E65100,#FB8C00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">better with a community.</span></h1>
@@ -254,16 +268,15 @@
   </section>
 
   <!-- ===== FEATURE GRID (bordered) ===== -->
-  <div style="max-width:1180px;margin:0 auto;border:1px solid rgba(15,23,42,0.13)">
-  <section id="features" class="reveal" style="position:relative;padding:clamp(40px,8vh,90px) clamp(20px,5vw,40px) clamp(36px,5vh,56px);text-align:center;border-bottom:1px solid rgba(15,23,42,0.13)">
+  <div style="max-width:1180px;margin:0 auto;border:1px solid rgba(15,23,42,0.22)">
+  <section id="features" class="reveal" style="position:relative;padding:clamp(40px,8vh,90px) clamp(20px,5vw,40px) clamp(36px,5vh,56px);text-align:center;border-bottom:1px solid rgba(15,23,42,0.22)">
     <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(27px,4vw,40px);line-height:1.1;letter-spacing:-0.025em;max-width:20ch;margin:0 auto 20px">The complete platform for learning communities</h2>
     <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:#334155;max-width:56ch;margin:0 auto">Vectore empowers you with all the tools you need to build a thriving community around your education business.</p>
   </section>
 
   <!-- ROW 1 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
     <div>
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">01 · Teach your way</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Bring learning and community together</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Choose how you want to teach: self-paced courses, group coaching, cohort-based programs, or online workshops. Then build a community experience around all of it.</p>
       <div class="vtabs" data-group="learn" role="tablist">
@@ -290,7 +303,7 @@
   </section>
 
   <!-- ROW: Measure learning -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
     <div style="position:relative;order:1">
       <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 45% 45%,rgba(22,163,74,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
       <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
@@ -298,15 +311,14 @@
           <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
         </div>
         <div class="vtab-stack" data-group="assess">
-          <img class="vtab-img is-active" data-tab="quizzes" width="760" height="560" src="assets/assess-quizzes.webp" alt="An auto-graded quiz question with the correct answer highlighted" style="display:block;width:100%;height:auto">
-          <img class="vtab-img" data-tab="assessments" width="760" height="560" src="assets/assess-assessments.webp" alt="A graded assessment scored against a rubric with instructor feedback" style="display:block;width:100%;height:auto">
-          <img class="vtab-img" data-tab="surveys" width="760" height="560" src="assets/assess-surveys.webp" alt="A short course feedback survey with rating and recommendation questions" style="display:block;width:100%;height:auto">
-          <img class="vtab-img" data-tab="progress" width="760" height="560" src="assets/assess-progress.webp" alt="A program performance report showing completion, quiz scores, and each learner's progress" style="display:block;width:100%;height:auto">
+          <img class="vtab-img is-active" data-tab="quizzes" width="760" height="560" src="assets/assess-quizzes.webp" alt="Vectore quiz tool: an auto-graded multiple-choice knowledge check with the correct answer marked and a live score" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="assessments" width="760" height="560" src="assets/assess-assessments.webp" loading="lazy" alt="Vectore assessment tool: a student assignment graded against a rubric with per-criterion scores and instructor feedback" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="surveys" width="760" height="560" src="assets/assess-surveys.webp" loading="lazy" alt="Vectore survey tool: a course feedback survey with a confidence rating, a recommendation score, and an open comment" style="display:block;width:100%;height:auto">
+          <img class="vtab-img" data-tab="progress" width="760" height="560" src="assets/assess-progress.webp" loading="lazy" alt="Vectore progress report: a program performance dashboard showing completion rate, average quiz score, and each learner tagged on track, stuck, at risk, or completed" style="display:block;width:100%;height:auto">
         </div>
       </div>
     </div>
     <div style="order:2">
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">02 · Measure learning</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">See who's actually learning</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Quiz your students, grade their assignments, and send surveys to hear what they think. See how they're consuming your materials and understand who's on track, and who's stuck.</p>
       <div class="vtabs" data-group="assess" role="tablist">
@@ -319,7 +331,7 @@
   </section>
 
   <!-- ROW 2 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
     <div style="position:relative;order:1">
       <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 40% 40%,rgba(251,140,0,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
       <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
@@ -335,7 +347,6 @@
       </div>
     </div>
     <div style="order:2">
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">03 · Real participation</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Build a community that people actually participate in</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Keep members engaged with discussion posts, chats, challenges, gamification, and member matching: interactive experiences that give people more ways to connect, contribute, and learn from one another.</p>
       <div class="vtabs" data-group="community" role="tablist">
@@ -348,9 +359,8 @@
   </section>
 
   <!-- ROW 3 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
     <div>
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">04 · No extra tools</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Run events and coaching in one place</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Host workshops, office hours, coaching sessions, live events, and cohort meetings from one platform, without juggling separate scheduling, booking, calendar, or event software.</p>
       <div class="vtabs" data-group="events" role="tablist">
@@ -375,7 +385,7 @@
   </section>
 
   <!-- ROW 4 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
     <div style="position:relative;order:1">
       <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 40% 40%,rgba(230,81,0,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
       <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
@@ -390,7 +400,6 @@
       </div>
     </div>
     <div style="order:2">
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">05 · Less busywork</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Automate the busywork</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Reduce manual work with workflows for onboarding, engagement, member management, access control, and recurring tasks. Spend less time managing systems and more time supporting members.</p>
       <div class="vtabs" data-group="auto" role="tablist">
@@ -402,9 +411,8 @@
   </section>
 
   <!-- ROW 5 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.13);background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
     <div>
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">06 · Full visibility</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Know exactly what's working</h3>
       <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Track participation, program performance, member activity, and revenue from a single dashboard. Get the insights you need to improve your programs and community.</p>
       <div class="vtabs" data-group="insights" role="tablist">
@@ -429,7 +437,7 @@
   </section>
 
   <!-- ROW 6 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;background:linear-gradient(rgba(15,23,42,0.13),rgba(15,23,42,0.13)) center/1px 100% no-repeat">
+  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
     <div style="position:relative;order:1">
       <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 50% 40%,rgba(230,81,0,0.16),transparent 65%);filter:blur(26px);pointer-events:none"></div>
       <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
@@ -443,9 +451,8 @@
       </div>
     </div>
     <div style="order:2">
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(230,81,0,0.08);border:1px solid rgba(230,81,0,0.2);font-size:12.5px;font-weight:600;color:#E65100;margin-bottom:20px">07 · Your earnings</div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Keep more of your revenue</h3>
-      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Zero transaction fees on your product sales. Keep 100% of your earnings. What you make is what you take home.</p>
+      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Vectore charges zero transaction fees on your product sales. You keep 100% of every payment, so what you make is what you take home.</p>
       <div class="vtabs" data-group="earnings" role="tablist">
         <button type="button" class="vtab is-active" data-target="fees"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>0% fees</button>
         <button type="button" class="vtab" data-target="payouts"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>Instant payouts</button>
