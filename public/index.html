@@ -73,6 +73,11 @@
   .vunderline .vul path{fill:url(#vul-grad)}
   @keyframes vuldraw{to{clip-path:inset(0 0 0 0)}}
   @media (prefers-reduced-motion:reduce){.vunderline .vul{clip-path:none;animation:none}}
+  /* problem-hub particle flow overlay */
+  .phub-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+  .phub-fx-m{display:none}
+  @media (max-width:640px){.phub-fx-d{display:none}.phub-fx-m{display:block}}
+  @media (prefers-reduced-motion:reduce){.phub-fx{display:none !important}}
   /* interactive feature tabs (community + events) */
   .vtabs{display:flex;flex-wrap:wrap;gap:10px}
   .vtab{display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:10px 15px;border-radius:12px;background:rgba(15,23,42,0.04);border:1px solid rgba(15,23,42,0.1);font-family:'Figtree',sans-serif;font-size:14px;font-weight:600;color:#475569;transition:color .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease}
@@ -164,6 +169,37 @@
           <source media="(max-width:640px)" srcset="assets/problem-hub-mobile.webp" width="560" height="920">
           <img src="assets/problem-hub.webp" alt="Vectore replaces a scattered stack of six disconnected tools with one system that natively powers courses, cohorts, coaching, community, events, challenges, payments, scheduling, automations, and detailed analytics" width="1120" height="560" loading="lazy" style="display:block;width:100%;height:auto">
         </picture>
+        <svg class="phub-fx phub-fx-d" viewBox="0 0 1120 560" preserveAspectRatio="none" aria-hidden="true">
+          <defs><filter id="pglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <g fill="#F26419" filter="url(#pglow)">
+            <circle r="3.9"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite" path="M180,214 C206,214 216,280 240,280 L456,280"/><animate attributeName="opacity" dur="2.4s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.14;0.82;1"/></circle>
+            <circle r="3.9"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" path="M180,214 C206,214 216,280 240,280 L456,280"/><animate attributeName="opacity" dur="2.4s" begin="1.2s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.14;0.82;1"/></circle>
+            <circle r="3.9"><animateMotion dur="2.4s" begin="0.5s" repeatCount="indefinite" path="M180,280 L456,280"/><animate attributeName="opacity" dur="2.4s" begin="0.5s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.14;0.82;1"/></circle>
+            <circle r="3.9"><animateMotion dur="2.4s" begin="1.7s" repeatCount="indefinite" path="M180,280 L456,280"/><animate attributeName="opacity" dur="2.4s" begin="1.7s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.14;0.82;1"/></circle>
+            <circle r="3.9"><animateMotion dur="2.4s" begin="0.9s" repeatCount="indefinite" path="M180,346 C206,346 216,280 240,280 L456,280"/><animate attributeName="opacity" dur="2.4s" begin="0.9s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.14;0.82;1"/></circle>
+            <circle r="3.9"><animateMotion dur="2.4s" begin="2.1s" repeatCount="indefinite" path="M180,346 C206,346 216,280 240,280 L456,280"/><animate attributeName="opacity" dur="2.4s" begin="2.1s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.14;0.82;1"/></circle>
+          </g>
+          <g fill="#F97316" filter="url(#pglow)">
+            <circle r="3.5"><animateMotion dur="2s" begin="0.2s" repeatCount="indefinite" path="M626,280 C678,280 702,142 726,142"/><animate attributeName="opacity" dur="2s" begin="0.2s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.16;0.8;1"/></circle>
+            <circle r="3.5"><animateMotion dur="2s" begin="0.7s" repeatCount="indefinite" path="M626,280 C678,280 706,210 726,210"/><animate attributeName="opacity" dur="2s" begin="0.7s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.16;0.8;1"/></circle>
+            <circle r="3.5"><animateMotion dur="2s" begin="1.1s" repeatCount="indefinite" path="M626,280 L726,280"/><animate attributeName="opacity" dur="2s" begin="1.1s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.16;0.8;1"/></circle>
+            <circle r="3.5"><animateMotion dur="2s" begin="1.5s" repeatCount="indefinite" path="M626,280 C678,280 706,346 726,346"/><animate attributeName="opacity" dur="2s" begin="1.5s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.16;0.8;1"/></circle>
+            <circle r="3.5"><animateMotion dur="2s" begin="0.4s" repeatCount="indefinite" path="M626,280 C678,280 702,414 726,414"/><animate attributeName="opacity" dur="2s" begin="0.4s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.16;0.8;1"/></circle>
+          </g>
+        </svg>
+        <svg class="phub-fx phub-fx-m" viewBox="0 0 560 920" preserveAspectRatio="none" aria-hidden="true">
+          <defs><filter id="pglowm" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <g fill="#F26419" filter="url(#pglowm)">
+            <circle r="4.4"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite" path="M158,118 C158,182 214,196 280,196 L280,236"/><animate attributeName="opacity" dur="2.4s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.14;0.82;1"/></circle>
+            <circle r="4.4"><animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite" path="M280,118 L280,236"/><animate attributeName="opacity" dur="2.4s" begin="0.8s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.14;0.82;1"/></circle>
+            <circle r="4.4"><animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite" path="M402,118 C402,182 346,196 280,196 L280,236"/><animate attributeName="opacity" dur="2.4s" begin="1.6s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.14;0.82;1"/></circle>
+            <circle r="4.4"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" path="M280,118 L280,236"/><animate attributeName="opacity" dur="2.4s" begin="1.2s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.14;0.82;1"/></circle>
+          </g>
+          <g fill="#F97316" filter="url(#pglowm)">
+            <circle r="4"><animateMotion dur="1.8s" begin="0.3s" repeatCount="indefinite" path="M280,356 L280,442"/><animate attributeName="opacity" dur="1.8s" begin="0.3s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.16;0.8;1"/></circle>
+            <circle r="4"><animateMotion dur="1.8s" begin="1.2s" repeatCount="indefinite" path="M280,356 L280,442"/><animate attributeName="opacity" dur="1.8s" begin="1.2s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.16;0.8;1"/></circle>
+          </g>
+        </svg>
       </div>
       <p style="text-align:center;font-size:15px;color:#475569;margin-top:26px">Your community platform gave you a room. <strong style="color:#1E293B;font-weight:600">Vectore gives you the whole building</strong>, one system for the tools you were stitching together.</p>
     </div>
