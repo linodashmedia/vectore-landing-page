@@ -19,35 +19,18 @@
   body{background:#FBF9F6;color:#1E293B;font-family:'Figtree',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
   a{color:#E65100}
   .wrap{min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(900px 560px at 82% -10%, rgba(230,81,0,0.10), transparent 60%),radial-gradient(rgba(15,23,42,0.045) 1px, transparent 1.5px) 0 0/22px 22px,#FBF9F6}
-  .badge{position:relative;width:78px;height:78px;margin:0 auto 26px;border-radius:22px;background:linear-gradient(150deg,#F26419,#E65100 45%,#C44400);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 44px -14px rgba(230,81,0,0.6);animation:pop .5s cubic-bezier(.2,.9,.3,1.3) both}
-  .badge svg{width:48px;height:48px}
-  .badge::after{content:"";position:absolute;inset:0;border-radius:22px;box-shadow:0 0 0 0 rgba(230,81,0,0.45);animation:ring 2.4s .8s ease-out infinite}
-  @keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
-  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(230,81,0,0.4)}100%{box-shadow:0 0 0 22px rgba(230,81,0,0)}}
-  .eyebrow{font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#E65100;text-align:center;margin-bottom:16px}
-  h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(34px,6vw,54px);font-weight:700;letter-spacing:-0.02em;line-height:1.05;text-align:center;margin-bottom:18px}
+  h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(34px,6vw,54px);font-weight:700;letter-spacing:-0.02em;line-height:1.08;text-align:center;margin:8px auto 22px;max-width:16ch}
   h1 .g{background:linear-gradient(120deg,#E65100,#FB8C00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .lede{font-size:clamp(17px,2.2vw,20px);line-height:1.6;color:#334155;text-align:center;max-width:52ch;margin:0 auto 40px}
-  .card{border:1px solid rgba(15,23,42,0.09);border-radius:20px;background:#FFFFFF;box-shadow:0 24px 60px -30px rgba(15,23,42,0.35);overflow:hidden}
-  .steps{display:flex;flex-direction:column}
-  .step{display:flex;gap:16px;padding:22px 24px}
-  .step + .step{border-top:1px solid rgba(15,23,42,0.07)}
-  .ic{width:44px;height:44px;flex-shrink:0;border-radius:12px;background:rgba(230,81,0,0.09);display:flex;align-items:center;justify-content:center}
-  .ic svg{width:22px;height:22px;stroke:#E65100;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .step h2{font-family:'Space Grotesk',sans-serif;font-size:16.5px;font-weight:600;margin-bottom:4px}
-  .step p{font-size:14.5px;line-height:1.55;color:#64748B}
-  .perks{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-  .perk{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;border:1px solid rgba(230,81,0,0.22);background:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;color:#C44400}
-  .perk svg{width:14px;height:14px;stroke:#E65100;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-  .cta{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center}
+  .lede{font-size:clamp(17px,2.2vw,20px);line-height:1.65;color:#334155;text-align:center;max-width:54ch;margin:0 auto 24px}
+  .fineprint{font-size:14.5px;line-height:1.6;color:#94A3B8;text-align:center;max-width:48ch;margin:0 auto}
+  .cta{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center}
   .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 24px;border-radius:12px;background:linear-gradient(135deg,#E65100,#C44400);color:#fff;text-decoration:none;font-size:15.5px;font-weight:700;box-shadow:0 12px 30px -10px rgba(230,81,0,0.55);transition:filter .25s ease,box-shadow .25s ease}
   .btn:hover{filter:brightness(1.06);box-shadow:0 16px 36px -10px rgba(230,81,0,0.6)}
   .ghost{font-size:14.5px;font-weight:600;color:#475569;text-decoration:none}
   .ghost:hover{color:#E65100}
   footer{margin-top:auto;text-align:center;padding:28px 20px 36px}
   footer .sig{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#94A3B8}
-  main{width:100%;max-width:600px;margin:0 auto;padding:clamp(48px,9vh,96px) clamp(20px,5vw,28px) 40px;flex:1}
-  @media (prefers-reduced-motion:reduce){.badge,.badge::after{animation:none}}
+  main{width:100%;max-width:640px;margin:0 auto;padding:40px clamp(20px,5vw,28px);flex:1;display:flex;flex-direction:column;justify-content:center}
 </style>
 </head>
 <body>
@@ -58,34 +41,9 @@
   </header>
 
   <main>
-    <!-- Squirrel icon by Delapouite via game-icons.net, CC BY 3.0 -->
-  <div class="badge"><svg viewBox="0 0 512 512" aria-hidden="true" role="img" aria-label="A squirrel"><path fill="#fff" d="M206.135 23.568c-61.993.106-133.212 38.319-173.762 85.328 0 0 94.532-8.388 109.732 35.477 24.55 70.846-103.768 62.832-105.619 173.623-1.394 83.471 89.36 169.758 176.1 169.812 4.214 1.405 181.953 0 181.953 0 19.783-.28 20.606-22.551-48.812-36.637 145.592-147.853-86.742-159.073-85.456-45.779-17.956-18.803.577-99.816 97.692-95.832 32.91 23.48 51.817 27.373 88.56 19.284 6.982-1.537 12.05-25.665-5.462-27.064l-31.78-2.54c-28.106-25.677-34.818-36.477-6.67-57.463 68.87 18.058 77.047 12.076 77.016-13.33-.03-24.855-9.527-90.633-65.832-93.815-7.701-10.311 9.79-42.042-3.953-42.957-19.014-1.266-50.482 28.417-46.266 43.787-18.335 7.755-38.728 31.156-59.15 59.614-69.316 25.43-119.49 142.639-120.15 170.632-.579-182.435 153.242-180.594 140.216-244.77-14.07-69.324-66.992-97.458-118.357-97.37z"/></svg></div>
-    <p class="eyebrow">Founding waitlist</p>
-    <h1>You're <span class="g">on the list.</span></h1>
-    <p class="lede">Thanks for adding your email. Your founding spot is saved, and you'll be among the first people inside Vectore.</p>
-
-    <div class="card">
-      <div class="steps">
-        <div class="step">
-          <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
-          <div><h2>Check your inbox</h2><p>Look for a note from us. If it asks you to confirm, one click locks in your spot.</p></div>
-        </div>
-        <div class="step">
-          <span class="ic"><svg viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z"/><path d="M5 20h14"/></svg></span>
-          <div><h2>You're a founding member</h2><p>That means the lowest pricing we'll ever offer, locked for life, plus access before we open the doors.</p></div>
-        </div>
-        <div class="step">
-          <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-          <div><h2>We'll respect your inbox</h2><p>No spam, no daily noise. We email when it counts, starting with your early invite.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="perks">
-      <span class="perk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Lifetime lowest pricing</span>
-      <span class="perk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Early access</span>
-      <span class="perk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>0% transaction fees</span>
-    </div>
+    <h1>You're in. <span class="g">I'm glad it's you.</span></h1>
+    <p class="lede">A real note from me is heading to your inbox right now. It's short, it's written by a person, and it ends with a question only you can answer. When early access opens, I'll be the one telling you the door's unlocked.</p>
+    <p class="fineprint">Nothing in ten minutes? Check Promotions and drag me to Primary. I'd hate to lose you to a tab.</p>
 
     <div class="cta">
       <a href="/" class="btn">Back to home <span style="font-size:17px">→</span></a>
