@@ -534,6 +534,18 @@
 
 <script>
 (function(){
+  // ============================================================
+  //  SITE SETTINGS  —  edit the values below
+  // ============================================================
+  var VECTORE_CONFIG = {
+    // Your Kit (kit.com) form ID. Find it in Kit:
+    //   Grow > Landing Pages & Forms > open your form > Embed.
+    //   It is the number in the URL, e.g. app.kit.com/forms/1234567  ->  '1234567'
+    // Leave as-is to keep the page working without Kit (shows the thank-you popup only).
+    KIT_FORM_ID: 'YOUR_KIT_FORM_ID'
+  };
+  // ============================================================
+
   // ---- dynamic copyright year ----
   var yEl = document.getElementById('year'); if(yEl){ yEl.textContent = new Date().getFullYear(); }
   // ---- nav shadow on scroll ----
@@ -568,11 +580,8 @@
   if(modal) modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
 
-  // ===== Kit (kit.com) integration =====
-  // Paste your Kit form ID between the quotes below. Where to find it:
-  // Kit dashboard > Grow > Landing Pages & Forms > open your form > Embed.
-  // The ID is the number in the snippet / URL, e.g. app.kit.com/forms/1234567 -> 1234567
-  var KIT_FORM_ID = 'YOUR_KIT_FORM_ID';
+  // ---- waitlist forms -> Kit (configured in VECTORE_CONFIG at the top) ----
+  var KIT_FORM_ID = VECTORE_CONFIG.KIT_FORM_ID;
 
   document.querySelectorAll('.waitlist-form').forEach(function(form){
     form.addEventListener('submit', function(ev){
