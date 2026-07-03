@@ -20,9 +20,7 @@
   a{color:#E65100}
   .wrap{min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(900px 560px at 82% -10%, rgba(230,81,0,0.10), transparent 60%),radial-gradient(rgba(15,23,42,0.045) 1px, transparent 1.5px) 0 0/22px 22px,#FBF9F6}
   .badge{position:relative;width:78px;height:78px;margin:0 auto 26px;border-radius:22px;background:linear-gradient(150deg,#F26419,#E65100 45%,#C44400);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 44px -14px rgba(230,81,0,0.6);animation:pop .5s cubic-bezier(.2,.9,.3,1.3) both}
-  .badge svg{width:48px;height:48px;overflow:visible}
-  .badge .tail{transform-box:fill-box;transform-origin:50% 90%;animation:swish 3s ease-in-out infinite}
-  @keyframes swish{0%,100%{transform:rotate(0)}50%{transform:rotate(5deg)}}
+  .badge svg{width:48px;height:48px}
   .badge::after{content:"";position:absolute;inset:0;border-radius:22px;box-shadow:0 0 0 0 rgba(230,81,0,0.45);animation:ring 2.4s .8s ease-out infinite}
   @keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
   @keyframes ring{0%{box-shadow:0 0 0 0 rgba(230,81,0,0.4)}100%{box-shadow:0 0 0 22px rgba(230,81,0,0)}}
@@ -49,7 +47,7 @@
   footer{margin-top:auto;text-align:center;padding:28px 20px 36px}
   footer .sig{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#94A3B8}
   main{width:100%;max-width:600px;margin:0 auto;padding:clamp(48px,9vh,96px) clamp(20px,5vw,28px) 40px;flex:1}
-  @media (prefers-reduced-motion:reduce){.badge,.badge::after,.badge .arm{animation:none}}
+  @media (prefers-reduced-motion:reduce){.badge,.badge::after{animation:none}}
 </style>
 </head>
 <body>
@@ -60,17 +58,8 @@
   </header>
 
   <main>
-    <div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true" role="img" aria-label="A friendly squirrel holding an acorn">
-    <path class="tail" d="M12.5 18.5c4 .6 7-2.4 7-6.2 0-3.6-2.6-6.6-5.7-6.6-2.3 0-4 1.6-4 3.6 0 1.6 1.2 2.8 2.7 2.8 1.1 0 2-.8 2-1.8 0-.7-.5-1.3-1.2-1.4 1.3-.5 2.8.5 2.8 2.4 0 2.4-2.1 4.2-5 3.9z" fill="#fff"/>
-    <path d="M6.2 20.4c-2.1 0-3.4-1.9-2.9-4.1.5-2.3 2-3.9 3-5.3.8-1.1 2.5-1.1 3.2.1.9 1.5 2.2 3.2 2.4 5.3.2 2.1-1.1 4-3.2 4z" fill="#fff"/>
-    <circle cx="7.3" cy="8.2" r="3.3" fill="#fff"/>
-    <path d="M5.4 5.7c-.4-1.2.3-2.2 1.1-2 .7.2 1 1.3.7 2.3z" fill="#fff"/>
-    <circle cx="6.6" cy="7.9" r="0.95" fill="#C44400"/>
-    <circle cx="4.3" cy="8.8" r="0.5" fill="#C44400"/>
-    <ellipse cx="8.3" cy="14.6" rx="1.7" ry="1.9" fill="#F4EDE7"/>
-    <path d="M6.6 13.5h3.4" stroke="#C44400" stroke-width="1.1" stroke-linecap="round"/>
-    <path d="M8.3 13.5v-1.1" stroke="#C44400" stroke-width="1.1" stroke-linecap="round"/>
-  </svg></div>
+    <!-- Squirrel icon by Delapouite via game-icons.net, CC BY 3.0 -->
+  <div class="badge"><svg viewBox="0 0 512 512" aria-hidden="true" role="img" aria-label="A squirrel"><path fill="#fff" d="M206.135 23.568c-61.993.106-133.212 38.319-173.762 85.328 0 0 94.532-8.388 109.732 35.477 24.55 70.846-103.768 62.832-105.619 173.623-1.394 83.471 89.36 169.758 176.1 169.812 4.214 1.405 181.953 0 181.953 0 19.783-.28 20.606-22.551-48.812-36.637 145.592-147.853-86.742-159.073-85.456-45.779-17.956-18.803.577-99.816 97.692-95.832 32.91 23.48 51.817 27.373 88.56 19.284 6.982-1.537 12.05-25.665-5.462-27.064l-31.78-2.54c-28.106-25.677-34.818-36.477-6.67-57.463 68.87 18.058 77.047 12.076 77.016-13.33-.03-24.855-9.527-90.633-65.832-93.815-7.701-10.311 9.79-42.042-3.953-42.957-19.014-1.266-50.482 28.417-46.266 43.787-18.335 7.755-38.728 31.156-59.15 59.614-69.316 25.43-119.49 142.639-120.15 170.632-.579-182.435 153.242-180.594 140.216-244.77-14.07-69.324-66.992-97.458-118.357-97.37z"/></svg></div>
     <p class="eyebrow">Founding waitlist</p>
     <h1>You're <span class="g">on the list.</span></h1>
     <p class="lede">Thanks for adding your email. Your founding spot is saved, and you'll be among the first people inside Vectore.</p>
