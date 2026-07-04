@@ -1,7 +1,7 @@
-# robots.txt for vectore.app
-# Policy: allow the major search engines, AI answer engines, and link-preview
-# bots. Everyone else (bulk scrapers like Common Crawl) is not allowed.
-# Sensitive pages are blocked for all crawlers.
+# robots.txt for vectore.app (marketing site)
+# Policy: allow major search engines, AI answer engines, and link-preview bots.
+# Everyone else (bulk scrapers like Common Crawl) is blocked.
+# Sensitive / non-public paths are blocked for every crawler.
 
 # --- Welcome: search engines, AI answer engines, and social link previews ---
 User-agent: Googlebot
@@ -28,11 +28,23 @@ User-agent: TelegramBot
 Disallow: /thank-you
 Disallow: /login
 Disallow: /signup
+Disallow: /create-account
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /auth/
 Disallow: /account
+Disallow: /profile
+Disallow: /settings
 Disallow: /dashboard
 Disallow: /admin
+Disallow: /members
+Disallow: /moderation
 Disallow: /checkout
-Disallow: /reset-password
+Disallow: /upgrade
+Disallow: /onboarding
+Disallow: /welcome
+Disallow: /join/
+Disallow: /preview/
 Disallow: /api/
 Allow: /blog
 Allow: /
