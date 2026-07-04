@@ -541,16 +541,24 @@
     if(io){ io.observe(el); } else { el.classList.add('in'); }
   });
 
-  // ---- waitlist forms ----
+  // ---- waitlist forms -> Kit, with duplicate + spam protection ----
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var KIT_FORM_ID = VECTORE_CONFIG.KIT_FORM_ID;
+  var LS_EMAILS = 'vec_wl_emails', LS_TIMES = 'vec_wl_times';
+  var RATE_MAX = 5, RATE_WINDOW = 10 * 60 * 1000; // at most 5 new signups per 10 min per device
   function show(el){ if(el) el.hidden = false; }
   function hide(el){ if(el) el.hidden = true; }
-
-
-  // ---- waitlist forms -> Kit (configured in VECTORE_CONFIG at the top) ----
-  var KIT_FORM_ID = VECTORE_CONFIG.KIT_FORM_ID;
+  function lsGet(k){ try{ return JSON.parse(localStorage.getItem(k) || '[]'); }catch(e){ return []; } }
+  function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 
   document.querySelectorAll('.waitlist-form').forEach(function(form){
+    // Honeypot: a hidden field real people never see or fill. Bots do.
+    var hp = document.createElement('input');
+    hp.type = 'text'; hp.name = 'company_url'; hp.tabIndex = -1;
+    hp.setAttribute('autocomplete', 'off'); hp.setAttribute('aria-hidden', 'true');
+    hp.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none';
+    form.appendChild(hp);
+
     form.addEventListener('submit', function(ev){
       ev.preventDefault();
       var scope = form.closest('.vcta-form') || form.parentElement;
@@ -558,27 +566,50 @@
       var errEl = scope.querySelector('.waitlist-error');
       var btn = form.querySelector('button[type="submit"]');
       var email = (input && input.value || '').trim();
+      var emailKey = email.toLowerCase();
 
       hide(errEl);
+
+      // 1) Bot trap: honeypot filled -> silently drop it, never touch Kit.
+      if(hp.value){ return; }
+
+      // 2) Valid email required.
       if(!EMAIL_RE.test(email)){
         if(errEl){ errEl.textContent = 'Please enter a valid email address.'; show(errEl); }
         if(input) input.focus();
         return;
       }
+
+      var emails = lsGet(LS_EMAILS);
+      var now = Date.now();
+      var times = lsGet(LS_TIMES).filter(function(t){ return now - t < RATE_WINDOW; });
+
+      // 3) Already signed up from this device -> no resubmit, no thank-you page.
+      if(emails.indexOf(emailKey) !== -1){
+        if(errEl){ errEl.textContent = "You're already on the list. Check your inbox for our note."; show(errEl); }
+        return;
+      }
+
+      // 4) Rate limit: too many different signups in a short window -> block.
+      if(times.length >= RATE_MAX){
+        if(errEl){ errEl.textContent = "That's a lot of signups from one device. If something isn't working, email hello@vectore.app."; show(errEl); }
+        return;
+      }
+
       var original = btn ? btn.innerHTML : '';
       if(btn){ btn.disabled = true; btn.style.opacity = '0.75'; btn.innerHTML = 'Joining…'; }
 
-      function succeed(){
-        // Redirect to the hosted thank-you page (no popup).
-        window.location.href = '/thank-you';
+      function remember(){
+        emails.push(emailKey); lsSet(LS_EMAILS, emails);
+        times.push(now); lsSet(LS_TIMES, times);
       }
+      function succeed(){ remember(); window.location.href = '/thank-you'; }
       function failWith(msg){
         if(errEl){ errEl.textContent = msg || 'Something went wrong. Please try again.'; show(errEl); }
         if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = original; }
       }
 
-      // Send the subscriber to Kit (kit.com). Uses the public form endpoint,
-      // so no API key is exposed in the browser.
+      // Send the subscriber to Kit (kit.com) via the public form endpoint.
       if(KIT_FORM_ID && KIT_FORM_ID.indexOf('YOUR_') !== 0){
         var fd = new FormData();
         fd.append('email_address', email);
@@ -586,7 +617,6 @@
           .then(function(r){ if(r.ok){ succeed(); } else { failWith('Something went wrong. Please try again.'); } })
           .catch(function(){ failWith('Network error. Please try again.'); });
       } else {
-        // Kit form ID not set yet: still confirm to the visitor so the page works.
         succeed();
       }
     });
