@@ -640,17 +640,38 @@
     var stack = document.querySelector('.vtab-stack[data-group="' + name + '"]');
     if(!stack) return;
     var imgs = stack.querySelectorAll('.vtab-img');
+    var tabs = group.querySelectorAll('.vtab');
     function imgFor(target){ for(var i=0;i<imgs.length;i++){ if(imgs[i].getAttribute('data-tab') === target) return imgs[i]; } return null; }
-    group.querySelectorAll('.vtab').forEach(function(tab){
+
+    // ---- ARIA tabs: tablist -> tab -> tabpanel, kept well-formed for AT + AI agents ----
+    var panelId = 'vpanel-' + name;
+    var heading = group.closest('section') && group.closest('section').querySelector('h3');
+    if(heading){ group.setAttribute('aria-label', heading.textContent.trim()); }
+    stack.setAttribute('role', 'tabpanel');
+    stack.setAttribute('id', panelId);
+    stack.setAttribute('tabindex', '0');
+    tabs.forEach(function(tab){
+      var active = tab.classList.contains('is-active');
+      tab.setAttribute('role', 'tab');
+      tab.id = 'vtab-' + name + '-' + tab.getAttribute('data-target');
+      tab.setAttribute('aria-controls', panelId);
+      tab.setAttribute('aria-selected', active ? 'true' : 'false');
+      var svg = tab.querySelector('svg'); if(svg){ svg.setAttribute('aria-hidden', 'true'); }
+      if(active){ stack.setAttribute('aria-labelledby', tab.id); }
+    });
+
+    function activate(tab){
       var target = tab.getAttribute('data-target');
-      var preload = function(){ loadTabImg(imgFor(target)); };
+      loadTabImg(imgFor(target));
+      tabs.forEach(function(t){ var on = (t === tab); t.classList.toggle('is-active', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); });
+      imgs.forEach(function(img){ img.classList.toggle('is-active', img.getAttribute('data-tab') === target); });
+      stack.setAttribute('aria-labelledby', tab.id);
+    }
+    tabs.forEach(function(tab){
+      var preload = function(){ loadTabImg(imgFor(tab.getAttribute('data-target'))); };
       tab.addEventListener('mouseenter', preload);
       tab.addEventListener('focus', preload);
-      tab.addEventListener('click', function(){
-        loadTabImg(imgFor(target));
-        group.querySelectorAll('.vtab').forEach(function(t){ t.classList.toggle('is-active', t === tab); });
-        imgs.forEach(function(img){ img.classList.toggle('is-active', img.getAttribute('data-tab') === target); });
-      });
+      tab.addEventListener('click', function(){ activate(tab); });
     });
   });
 })();
