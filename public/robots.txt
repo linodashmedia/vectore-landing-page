@@ -7,7 +7,9 @@
 User-agent: Googlebot
 User-agent: Google-Extended
 User-agent: Google-InspectionTool
+User-agent: Google-CloudVertexBot
 User-agent: Bingbot
+User-agent: DuckAssistBot
 User-agent: Applebot
 User-agent: Applebot-Extended
 User-agent: OAI-SearchBot

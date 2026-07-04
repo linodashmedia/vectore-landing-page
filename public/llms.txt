@@ -1,0 +1,26 @@
+# Vectore
+
+> Vectore is an all-in-one platform for creators and educators to run courses, cohorts, coaching, live events, and community in one place, with community as the core engine and 0% transaction fees on sales.
+
+Vectore brings courses, cohorts, coaching, workshops, events, quizzes, assessments, surveys, gamification, automation, analytics, and payments together, so learning businesses stop stitching separate tools together. It is currently in a founding-member private beta.
+
+## Key pages
+- [Home](https://vectore.app/): product overview, features, and the founding waitlist.
+- [Contact](https://vectore.app/contact): reach the Vectore team about the product, waitlist, support, or partnerships.
+- [Privacy Policy](https://vectore.app/privacy): how Vectore handles data.
+- [Terms of Service](https://vectore.app/terms): terms for using Vectore.
+
+## What Vectore does
+- Teach your way: self-paced courses, cohort-based programs, group coaching, and live workshops.
+- Measure learning: auto-graded quizzes, rubric-based assessments, feedback surveys, and per-learner progress reports.
+- Build community: discussion posts, chats, challenges, gamification (XP, levels, leaderboards), and member matching.
+- Events and coaching: scheduling, booking, and live events run from one platform.
+- Automate the busywork: a visual workflow builder for onboarding, access control, and recurring tasks.
+- Know what's working: participation, performance, and revenue analytics.
+- Get paid: sell courses, cohorts, and coaching with 0% transaction fees.
+
+## Key facts
+- Transaction fees: 0% on product sales. Creators keep 100% of their earnings.
+- Founding members: lifetime lowest pricing and early access before public launch.
+- Status: founding-member private beta. Join the waitlist at https://vectore.app/.
+- Category: community and learning platform (SaaS) for coaches, creators, and educators.
