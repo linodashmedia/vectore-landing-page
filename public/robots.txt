@@ -1,4 +1,57 @@
+# Vectore welcomes search engines and AI answer engines to read, index, and cite this site.
+# Content signals: we grant search indexing, AI grounding/retrieval, and training.
 User-agent: *
+Content-Signal: search=yes,ai-input=yes,ai-train=yes
+Allow: /
+
+# --- AI answer engines / assistants that cite sources (explicitly welcome) ---
+# OpenAI / ChatGPT
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Anthropic / Claude
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google (Search + Gemini / AI Overviews grounding & training)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft / Bing + Copilot
+User-agent: Bingbot
+Allow: /
+
+# Common Crawl (feeds many open models)
+User-agent: CCBot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://vectore.app/sitemap.xml
