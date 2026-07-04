@@ -40,6 +40,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Vectore","applicationCategory":"BusinessApplication","operatingSystem":"Web, iOS, Android","description":"All-in-one platform to run courses, cohorts, coaching, events, and community for your learning business, with 0% transaction fees.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Join the founding waitlist for early access and lifetime founding pricing."}}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Vectore?","acceptedAnswer":{"@type":"Answer","text":"Vectore is one platform for running courses, cohorts, coaching, live events, and community together. Instead of bolting a chat box onto a course tool, it makes community the engine behind everything you teach."}},{"@type":"Question","name":"Does Vectore charge transaction fees?","acceptedAnswer":{"@type":"Answer","text":"No. Vectore takes 0% on your product sales. You keep 100% of every payment, so what you make is what you take home."}},{"@type":"Question","name":"How much does Vectore cost?","acceptedAnswer":{"@type":"Answer","text":"Founding members lock in the lowest pricing we'll ever offer, for life. Full pricing goes public at launch. Joining the waitlist is free and takes only an email, no card required."}},{"@type":"Question","name":"What can I teach and sell on Vectore?","acceptedAnswer":{"@type":"Answer","text":"Self-paced courses, cohort-based programs, group and one-on-one coaching, live workshops, and events. You can also run quizzes, graded assessments, and surveys to see who's actually learning."}},{"@type":"Question","name":"Do I still need other tools?","acceptedAnswer":{"@type":"Answer","text":"No. Courses, community, payments, scheduling, automation, and analytics are built in. Vectore replaces the stack of separate tools most creators stitch together."}},{"@type":"Question","name":"When does Vectore launch, and what do founding members get?","acceptedAnswer":{"@type":"Answer","text":"Vectore is in a founding-member private beta. Join the waitlist and you'll be among the first inside, with early access before public launch, lifetime lowest pricing, and a real say in what we build next."}},{"@type":"Question","name":"Who owns my content, members, and revenue?","acceptedAnswer":{"@type":"Answer","text":"You do. Your courses and members are yours, and with 0% transaction fees you keep 100% of what you earn."}}]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..700&family=Space+Grotesk:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..700&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
@@ -93,6 +96,15 @@
   .vtab-img{display:block;width:100%;height:auto;opacity:0;transition:opacity .35s ease}
   .vtab-img:not(:first-child){position:absolute;inset:0}
   .vtab-img.is-active{opacity:1}
+  /* FAQ accordion */
+  .vfaq{display:flex;flex-direction:column;gap:12px}
+  .vfaq details{background:#FFFFFF;border:1px solid rgba(15,23,42,0.1);border-radius:14px;box-shadow:0 2px 12px rgba(15,23,42,0.04)}
+  .vfaq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(15.5px,2vw,17.5px);color:#0F172A}
+  .vfaq summary::-webkit-details-marker{display:none}
+  .vfaq summary:hover,.vfaq details[open] summary{color:#E65100}
+  .vfaq-chev{flex-shrink:0;width:20px;height:20px;stroke:#E65100;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s ease}
+  .vfaq details[open] .vfaq-chev{transform:rotate(180deg)}
+  .vfaq-a{padding:0 22px 20px;font-size:15.5px;line-height:1.65;color:#334155}
   /* fancy hero badge: pulsing dot + soft ring */
   .vping{position:relative;width:8px;height:8px;flex-shrink:0}
   .vping::before,.vping::after{content:"";position:absolute;inset:0;border-radius:50%;background:#E65100}
@@ -468,6 +480,44 @@
     </div>
   </section>
   </div>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq" class="reveal" style="position:relative;padding:clamp(48px,8vh,96px) clamp(20px,5vw,40px);border-top:1px solid rgba(15,23,42,0.08)">
+    <div style="max-width:760px;margin:0 auto">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(27px,4vw,40px);line-height:1.1;letter-spacing:-0.025em;text-align:center;margin-bottom:14px">Questions, answered</h2>
+      <p style="font-size:clamp(16px,1.8vw,18px);line-height:1.6;color:#334155;text-align:center;max-width:50ch;margin:0 auto 40px">Everything you're probably wondering before you join.</p>
+      <div class="vfaq">
+        <details open>
+          <summary>What is Vectore?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="vfaq-a">Vectore is one platform for running courses, cohorts, coaching, live events, and community together. Instead of bolting a chat box onto a course tool, it makes community the engine behind everything you teach.</div>
+        </details>
+        <details>
+          <summary>Does Vectore charge transaction fees?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="vfaq-a">No. Vectore takes 0% on your product sales. You keep 100% of every payment, so what you make is what you take home.</div>
+        </details>
+        <details>
+          <summary>How much does Vectore cost?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="vfaq-a">Founding members lock in the lowest pricing we'll ever offer, for life. Full pricing goes public at launch. Joining the waitlist is free and takes only an email, no card required.</div>
+        </details>
+        <details>
+          <summary>What can I teach and sell on Vectore?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="vfaq-a">Self-paced courses, cohort-based programs, group and one-on-one coaching, live workshops, and events. You can also run quizzes, graded assessments, and surveys to see who's actually learning.</div>
+        </details>
+        <details>
+          <summary>Do I still need other tools?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="vfaq-a">No. Courses, community, payments, scheduling, automation, and analytics are built in. Vectore replaces the stack of separate tools most creators stitch together.</div>
+        </details>
+        <details>
+          <summary>When does Vectore launch, and what do founding members get?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="vfaq-a">Vectore is in a founding-member private beta. Join the waitlist and you'll be among the first inside, with early access before public launch, lifetime lowest pricing, and a real say in what we build next.</div>
+        </details>
+        <details>
+          <summary>Who owns my content, members, and revenue?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="vfaq-a">You do. Your courses and members are yours, and with 0% transaction fees you keep 100% of what you earn.</div>
+        </details>
+      </div>
+    </div>
+  </section>
 
   <!-- ===== WAITLIST CTA ===== -->
   <section id="waitlist" style="position:relative;padding:clamp(60px,10vh,120px) clamp(20px,5vw,40px)">
