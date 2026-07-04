@@ -19,6 +19,9 @@
   body{background:#FBF9F6;color:#1E293B;font-family:'Figtree',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
   a{color:#E65100}
   .wrap{min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(900px 560px at 82% -10%, rgba(230,81,0,0.10), transparent 60%),radial-gradient(rgba(15,23,42,0.045) 1px, transparent 1.5px) 0 0/22px 22px,#FBF9F6}
+  .celebrate{font-size:clamp(52px,11vw,76px);line-height:1;text-align:center;margin:0 auto 14px;filter:drop-shadow(0 10px 16px rgba(230,81,0,0.28));transform-origin:70% 90%;animation:dance 1.15s ease-in-out infinite}
+  @keyframes dance{0%{transform:rotate(-9deg) translateY(0)}25%{transform:rotate(7deg) translateY(-8px)}50%{transform:rotate(-7deg) translateY(0)}75%{transform:rotate(9deg) translateY(-8px)}100%{transform:rotate(-9deg) translateY(0)}}
+  @media (prefers-reduced-motion:reduce){.celebrate{animation:none}}
   h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(34px,6vw,54px);font-weight:700;letter-spacing:-0.02em;line-height:1.08;text-align:center;margin:8px auto 22px;max-width:16ch}
   h1 .g{background:linear-gradient(120deg,#E65100,#FB8C00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .lede{font-size:clamp(17px,2.2vw,20px);line-height:1.65;color:#334155;text-align:center;max-width:54ch;margin:0 auto 24px}
@@ -43,12 +46,13 @@
   </header>
 
   <main>
+    <div class="celebrate" role="img" aria-label="Squirrel celebrating">🐿️</div>
     <h1>You're <span class="g">in.</span></h1>
     <p class="lede">Hello friend. I'm over the moon right now, and I can't tell you how glad I am that you're trusting me and my project. A real note from me is heading to your inbox right now, and it ends with a question only you can answer. When early access opens, I'll be the one telling you the door's unlocked.</p>
     <p class="fineprint">Nothing in ten minutes? Check Promotions and drag me to Primary. I'd hate to lose you to a tab.</p>
 
     <div class="cta">
-      <a href="https://mail.google.com/mail/u/0/#search/Vectore" target="_blank" rel="noopener" class="btn" aria-label="Open in Gmail">Open in <span class="gchip"><svg viewBox="52 42 88 66" aria-hidden="true" focusable="false"><path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/><path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/><path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/><path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/><path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/></svg></span></a>
+      <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener" class="btn" aria-label="Open in Gmail">Open in <span class="gchip"><svg viewBox="52 42 88 66" aria-hidden="true" focusable="false"><path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/><path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/><path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/><path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/><path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/></svg></span></a>
       <a href="/" class="ghost">Back to home</a>
     </div>
   </main>
