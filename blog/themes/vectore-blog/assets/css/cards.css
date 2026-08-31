@@ -1,0 +1,322 @@
+/*!
+ * Page heads, the category row, the post-card grid, pagination and search.
+ *
+ * Loaded on EVERY view, deliberately. The obvious split would be to call this
+ * "archive" styling and skip it on a post, but a single post renders the card
+ * grid too (the related-posts section), and so does the 404. Loading it
+ * conditionally would leave those two views with unstyled cards, which is
+ * exactly the bug this note exists to stop someone reintroducing.
+ * ================================================================== */
+
+/* ---- page head ------------------------------------------------------- */
+.v-head {
+	max-width: var(--v-hero);
+	margin-inline: auto;
+	padding: clamp(2.5rem, 6vw, 4.5rem) 1.5rem clamp(1.75rem, 4vw, 2.75rem);
+	text-align: center;
+}
+.v-head__eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: .5rem;
+	margin-bottom: 1rem;
+	padding: .34rem .8rem .34rem .55rem;
+	border: 1px solid color-mix(in srgb, var(--v-brand) 30%, transparent);
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--v-white) 72%, transparent);
+	font-size: .74rem;
+	font-weight: 700;
+	letter-spacing: .12em;
+	text-transform: uppercase;
+	/* --v-accent, not the brand teal: at 0.74rem this is small text and needs
+	   4.5:1. The brand teal manages 3.74:1 on white and less on the mint. */
+	color: var(--v-accent);
+}
+.v-head__eyebrow::before {
+	content: "";
+	width: 7px; height: 7px;
+	border-radius: 50%;
+	background: var(--v-brand);
+	flex: 0 0 auto;
+}
+.v-head__title {
+	font-size: clamp(2.1rem, 5.6vw, 3.4rem);
+	margin: 0;
+}
+.v-head__sub {
+	max-width: 34rem;
+	margin: 1rem auto 0;
+	font-size: clamp(1rem, 2vw, 1.12rem);
+	line-height: 1.6;
+	color: var(--v-muted);
+}
+
+/* ---- category filter row --------------------------------------------- */
+.v-terms {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: .5rem;
+	max-width: var(--v-wide);
+	margin: 1.75rem auto 0;
+	padding-inline: 1.5rem;
+	list-style: none;
+}
+.v-terms a {
+	display: inline-block;
+	padding: .42rem .9rem;
+	border: 1px solid var(--v-hair);
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--v-white) 80%, transparent);
+	color: var(--v-text);
+	font-size: .875rem;
+	font-weight: 600;
+	text-decoration: none;
+	transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.v-terms a:hover {
+	color: var(--v-accent);
+	border-color: color-mix(in srgb, var(--v-brand) 45%, var(--v-hair));
+	background: var(--v-white);
+}
+.v-terms .is-current a,
+.v-terms a[aria-current="page"] {
+	background: var(--v-ink);
+	border-color: var(--v-ink);
+	color: var(--v-white);
+}
+
+/* ---- the grid --------------------------------------------------------- */
+.v-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+	gap: clamp(1.5rem, 3vw, 2.25rem);
+	max-width: var(--v-wide);
+	margin: clamp(2rem, 4.5vw, 3.25rem) auto 0;
+	padding-inline: 1.5rem;
+}
+
+/* ---- a post card ------------------------------------------------------
+ * Flat, hairlined, white. It lifts on hover and the thumbnail zooms slightly
+ * inside its own frame. The whole card is clickable through the title's
+ * stretched pseudo-element, which keeps ONE link in the accessibility tree
+ * (a card wrapped in a second <a> would announce the title twice). */
+.v-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background: var(--v-white);
+	border: 1px solid var(--v-hair);
+	border-radius: 18px;
+	overflow: hidden;
+	transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.v-card:hover {
+	transform: translateY(-3px);
+	border-color: color-mix(in srgb, var(--v-brand) 35%, var(--v-hair));
+	box-shadow: 0 22px 40px -28px rgba(7, 33, 31, .55);
+}
+.v-card:focus-within {
+	border-color: var(--v-accent);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--v-accent) 22%, transparent);
+}
+
+.v-card__media {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: var(--v-surface);
+	border-bottom: 1px solid var(--v-hair);
+}
+.v-card__media img {
+	width: 100%; height: 100%;
+	object-fit: cover;
+	transition: transform .4s cubic-bezier(.2, .7, .2, 1);
+}
+.v-card:hover .v-card__media img { transform: scale(1.04); }
+
+/* Placeholder for a post with no featured image: the mint wash plus the shared
+   grid tile, so an image-less card still belongs to the same world. */
+.v-card__media--empty {
+	background:
+		var(--v-grid-tile),
+		linear-gradient(135deg, var(--v-mint) 0%, var(--v-mint-2) 100%);
+	background-size: 76px 76px, cover;
+}
+
+.v-card__body {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	gap: .6rem;
+	padding: 1.25rem 1.35rem 1.4rem;
+}
+.v-card__term {
+	align-self: flex-start;
+	padding: .22rem .6rem;
+	border-radius: 6px;
+	/* The rationed warm complement. INK on coral is 5.81:1; white on it is
+	   2.9:1, so this chip is dark-on-warm and must stay that way. */
+	background: color-mix(in srgb, var(--v-coral) 20%, var(--v-white));
+	color: var(--v-ink);
+	font-size: .7rem;
+	font-weight: 700;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	text-decoration: none;
+	position: relative;
+	z-index: 2;              /* stays clickable above the stretched title link */
+}
+.v-card__title {
+	font-size: 1.22rem;
+	line-height: 1.3;
+	letter-spacing: -.015em;
+}
+.v-card__title a {
+	color: inherit;
+	text-decoration: none;
+}
+/* The stretched hit area. z-index 1 keeps it under the term chip above. */
+.v-card__title a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+}
+.v-card:hover .v-card__title a { color: var(--v-accent); }
+.v-card__excerpt {
+	margin: 0;
+	font-size: .95rem;
+	line-height: 1.6;
+	color: var(--v-muted);
+}
+.v-card__meta {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+	margin-top: auto;
+	padding-top: .9rem;
+	font-size: .8rem;
+	color: var(--v-muted);
+}
+.v-card__meta time { font-variant-numeric: tabular-nums; }
+.v-card__dot {
+	width: 4px; height: 4px;
+	border-radius: 50%;
+	background: color-mix(in srgb, var(--v-brand) 55%, transparent);
+}
+
+/* ---- the featured (first) card ---------------------------------------
+ * On the blog index only, the newest post spans the full grid width and lays
+ * out side by side above 900px. Below that it is an ordinary card again, so
+ * there is no second mobile layout to maintain. */
+@media (min-width: 900px) {
+	.v-grid--home .v-card--lead {
+		grid-column: 1 / -1;
+		flex-direction: row;
+		align-items: stretch;
+	}
+	.v-grid--home .v-card--lead .v-card__media {
+		flex: 0 0 52%;
+		aspect-ratio: auto;
+		border-bottom: 0;
+		border-right: 1px solid var(--v-hair);
+	}
+	.v-grid--home .v-card--lead .v-card__body {
+		justify-content: center;
+		padding: clamp(1.6rem, 3vw, 2.4rem);
+		gap: .75rem;
+	}
+	.v-grid--home .v-card--lead .v-card__title { font-size: clamp(1.6rem, 2.7vw, 2.1rem); }
+	.v-grid--home .v-card--lead .v-card__excerpt { font-size: 1.02rem; }
+}
+
+/* ---- pagination -------------------------------------------------------- */
+.v-pagination {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: .5rem;
+	max-width: var(--v-wide);
+	margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
+	padding-inline: 1.5rem;
+}
+.v-pagination .page-numbers {
+	display: inline-grid;
+	place-items: center;
+	min-width: 42px;
+	height: 42px;
+	padding-inline: .7rem;
+	border: 1px solid var(--v-hair);
+	border-radius: 11px;
+	background: var(--v-white);
+	color: var(--v-text);
+	font-size: .92rem;
+	font-weight: 600;
+	text-decoration: none;
+	transition: color .15s ease, border-color .15s ease;
+}
+.v-pagination .page-numbers:hover {
+	color: var(--v-accent);
+	border-color: color-mix(in srgb, var(--v-brand) 45%, var(--v-hair));
+}
+.v-pagination .page-numbers.current {
+	background: var(--v-ink);
+	border-color: var(--v-ink);
+	color: var(--v-white);
+}
+.v-pagination .page-numbers.dots { border-color: transparent; background: none; }
+
+/* ---- empty state ------------------------------------------------------- */
+.v-empty {
+	max-width: var(--v-read);
+	margin: clamp(2rem, 5vw, 3.5rem) auto 0;
+	padding: 2.5rem 1.5rem;
+	text-align: center;
+	color: var(--v-muted);
+}
+.v-empty h2 { margin-bottom: .6rem; }
+
+/* ---- search form ------------------------------------------------------- */
+.v-search {
+	display: flex;
+	gap: .5rem;
+	max-width: 30rem;
+	margin: 1.5rem auto 0;
+	padding-inline: 1.5rem;
+}
+.v-search__input {
+	flex: 1;
+	min-width: 0;
+	height: 46px;
+	padding: 0 14px;
+	border: 1px solid var(--v-hair);
+	border-radius: 11px;
+	background: var(--v-white);
+	color: var(--v-ink);
+	font-size: .95rem;
+	outline: none;
+}
+.v-search__input:focus {
+	border-color: var(--v-accent);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--v-accent) 20%, transparent);
+}
+.v-search__btn {
+	flex: 0 0 auto;
+	height: 46px;
+	padding-inline: 1.1rem;
+	border: 0;
+	border-radius: 11px;
+	background: var(--v-accent);
+	color: var(--v-white);
+	font-size: .92rem;
+	font-weight: 700;
+	cursor: pointer;
+}
+.v-search__btn:hover { background: var(--v-accent-deep); }
+
+@media (prefers-reduced-motion: reduce) {
+	.v-card, .v-card__media img { transition: none; }
+	.v-card:hover { transform: none; }
+	.v-card:hover .v-card__media img { transform: none; }
+}

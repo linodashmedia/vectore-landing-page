@@ -4,8 +4,13 @@ A fast, self-contained landing page for the Vectore waitlist. No build step, no
 framework runtime — plain HTML/CSS/JS served by a tiny Express server with a
 working signup API.
 
+This repository holds two deployables: the landing page (Node/Express, below)
+and the blog (WordPress, in `blog/`). They run as separate Railway services on
+one domain, with the landing page proxying `/blog` through to WordPress so the
+blog lives at `vectore.io/blog` rather than on a subdomain.
+
 ```
-deploy/
+.
 ├── public/
 │   ├── index.html        ← landing page (styles + JS inline)
 │   ├── privacy.html      ← Privacy Policy   (served at /privacy)
@@ -14,11 +19,27 @@ deploy/
 │   ├── robots.txt        ← crawler rules + sitemap pointer
 │   ├── sitemap.xml       ← XML sitemap for search engines
 │   └── assets/           ← product screenshots used on the page
-├── server.js             ← Express: serves /public + POST /api/waitlist
+├── server.js             ← Express: /public, POST /api/waitlist, /blog proxy
 ├── package.json
 ├── railway.json          ← Railway build/deploy config + health check
-└── .gitignore
+├── blog/                 ← the WordPress blog (its own Railway service)
+│   ├── README.md         ← deploy runbook for it
+│   ├── Dockerfile
+│   ├── config/
+│   └── themes/vectore-blog/
+└── test/                 ← `npm test`
 ```
+
+## The blog
+
+`vectore.io/blog` is WordPress, running as its own Railway service, with a
+standalone theme (`blog/themes/vectore-blog`). Its design system is documented in
+`blog/themes/vectore-blog/PALETTE.md`, and the setup, the environment variables
+and the reasoning behind serving it from a subpath are in **`blog/README.md`**.
+
+The landing page reverse-proxies `/blog` to it when `BLOG_ORIGIN` is set. Leave
+that unset and `/blog` 404s like any other unknown path, so this service still
+deploys and runs entirely on its own.
 
 ## Run locally
 
@@ -61,6 +82,7 @@ Railway sets the `PORT` environment variable automatically; the server reads it.
 | `ADMIN_TOKEN` | If set, fetch all signups at `GET /api/waitlist?token=YOUR_TOKEN`.      |
 | `KIT_API_KEY` | Your Kit (kit.com / ConvertKit) API key. Set together with `KIT_FORM_ID` to auto-subscribe every signup to your email list. |
 | `KIT_FORM_ID` | Numeric ID of the Kit form/list new signups are added to.              |
+| `BLOG_ORIGIN` | The WordPress service's address, e.g. `http://blog.railway.internal:8080`. Set it and `/blog` is proxied to WordPress; unset, `/blog` 404s. |
 
 ### Connect your Kit (kit.com) email list
 Signups are always saved locally; to also push them to Kit:
@@ -92,6 +114,18 @@ The page ships SEO-ready:
 **Domain:** the SEO files (canonical, og:url, `robots.txt` `Sitemap:`, and every
 `<loc>` in `sitemap.xml`) point to `https://vectore.app`. If your live domain
 differs, search `vectore.app` across `public/` and update it.
+
+## Testing
+
+```bash
+npm test
+```
+
+Runs everything that needs only PHP and Node: PHP syntax across the blog theme,
+the theme's templates rendered against a WordPress stub, stylesheet and
+design-token integrity, palette contrast measured from the CSS, and the `/blog`
+proxy end to end. The browser-based layout checks are described in
+`blog/README.md`.
 
 ## Editing content
 Everything is in `public/index.html`. Copy, colors (`#E65100` orange / `#1E293B`

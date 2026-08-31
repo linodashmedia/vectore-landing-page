@@ -99,6 +99,56 @@ app.get('/api/waitlist', (req, res) => {
 // --- Health check (Railway pings this) ---
 app.get('/healthz', (_req, res) => res.json({ ok: true }));
 
+// --- Blog: reverse proxy /blog -> the WordPress service ---------------------
+// The blog answers at vectore.io/blog so it shares this domain's authority
+// rather than starting a subdomain from zero. WordPress genuinely lives at
+// /blog inside its own container (see blog/Dockerfile), so the prefix is
+// PASSED THROUGH untouched. Do not strip it here: WordPress would then generate
+// /blog links while receiving unprefixed requests, and its rewrite matching
+// would run against a path that does not match the home URL it was configured
+// with. Permalinks and pagination break in ways that look random.
+//
+// Set BLOG_ORIGIN to the WordPress service's address. On Railway use the
+// service's PRIVATE domain (http://blog.railway.internal:8080), which keeps the
+// hop off the public internet and out of egress billing. Leave it unset and
+// /blog simply 404s like any other unknown path, so the landing page still
+// deploys and runs on its own.
+const BLOG_ORIGIN = process.env.BLOG_ORIGIN || '';
+
+if (BLOG_ORIGIN) {
+  const { createProxyMiddleware } = require('http-proxy-middleware');
+
+  app.use(
+    '/blog',
+    createProxyMiddleware({
+      target: BLOG_ORIGIN,
+      changeOrigin: false, // keep the Host header: WordPress builds absolute
+                           // URLs from it, and rewriting it makes every link
+                           // point at the internal service name.
+      xfwd: true,          // X-Forwarded-For/Proto/Host. The Proto header is
+                           // what stops WordPress redirect-looping on HTTPS;
+                           // see the note in blog/config/wp-config-extra.php.
+      proxyTimeout: 30000,
+      timeout: 30000,
+      // The path is forwarded verbatim, including the /blog prefix. Express
+      // strips the mount path before the middleware sees it, so it is put back.
+      pathRewrite: (path) => '/blog' + path,
+      on: {
+        error: (err, _req, res) => {
+          console.error('[blog] proxy error:', err.message);
+          if (!res.headersSent && res.status) {
+            res.status(502).type('text/plain').send('The blog is temporarily unavailable.');
+          }
+        },
+      },
+    })
+  );
+
+  console.log(`[blog] proxying /blog -> ${BLOG_ORIGIN}`);
+} else {
+  console.log('[blog] BLOG_ORIGIN not set; /blog is not served by this instance');
+}
+
 // --- Static site ---
 // Long-cache immutable assets (images, fonts) for faster repeat loads / better
 // Core Web Vitals; HTML stays uncached so content updates show immediately.

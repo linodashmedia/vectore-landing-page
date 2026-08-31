@@ -5,12 +5,15 @@
   "description": "Vectore founding-member waitlist landing page",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "bash test/run.sh",
+    "preview": "php test/preview.php"
   },
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "http-proxy-middleware": "^3.0.7"
   }
 }
