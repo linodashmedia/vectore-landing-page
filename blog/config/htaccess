@@ -1,0 +1,22 @@
+# WordPress permalinks, for an install that lives at /blog.
+#
+# 🔴 RewriteBase and the fallback path BOTH carry the /blog prefix. This is the
+# one file where the prefix has to be written out literally, because Apache
+# resolves these against the URL space the browser asked for, not against the
+# document root. Drop the prefix from either line and the homepage keeps
+# working while every post URL 404s.
+#
+# Baked into the image so a fresh container has working permalinks before anyone
+# opens wp-admin. WordPress will rewrite this file if permalinks are re-saved;
+# it regenerates exactly these lines, so that is harmless.
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /blog/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /blog/index.php [L]
+</IfModule>
+# END WordPress

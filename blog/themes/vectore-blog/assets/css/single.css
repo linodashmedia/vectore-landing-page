@@ -1,0 +1,651 @@
+/*!
+ * Single post — the reading experience.
+ * Loaded on single posts and pages only (see inc/assets.php).
+ * ================================================================== */
+
+.v-single {
+	--sp-read: var(--v-read);
+	--sp-hero: var(--v-hero);
+	/* Body-image treatment. The outline and the shadow are ONE treatment: a
+	   solid ink silhouette offset down and right with no blur, so a screenshot
+	   reads as a cut-out card sitting on the page rather than floating over a
+	   haze. Do not soften one without the other. Four knobs so the weight can
+	   be tuned without hunting for the rule. */
+	--sp-img-shadow-x: 6px;
+	--sp-img-shadow-y: 6px;   /* equal to x: the offset sits on the diagonal */
+	--sp-img-shadow-blur: 0px;
+	--sp-img-shadow-alpha: 1;
+	--sp-img-border-w: 1px;
+}
+
+/* ---- hero band — transparent; the mint comes from .v-canvas behind it --- */
+.v-single__hero {
+	max-width: var(--sp-hero);
+	margin-inline: auto;
+	padding: clamp(1.5rem, 3.5vw, 2.75rem) 1.25rem clamp(2rem, 4.5vw, 3.25rem);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.1rem;
+	text-align: center;
+}
+.v-single__title { font-size: clamp(2rem, 5vw, 3.15rem); margin: 0; }
+.v-single__lede {
+	max-width: 36rem;
+	margin: 0;
+	font-size: clamp(1.02rem, 2vw, 1.15rem);
+	line-height: 1.6;
+	color: var(--v-muted);
+}
+
+/* ---- breadcrumbs — small, muted, accent-dot separators ----------------- */
+.v-crumbs {
+	max-width: var(--sp-read);
+	margin: 0 auto;
+	font-size: .8rem;
+	font-weight: 600;
+	letter-spacing: .01em;
+	color: var(--v-muted);
+}
+.v-crumbs ol {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: .35rem .55rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.v-crumbs li { display: inline-flex; align-items: center; gap: .55rem; }
+.v-crumbs li:not(:first-child)::before {
+	content: "";
+	width: 5px; height: 5px;
+	border-radius: 50%;
+	background: color-mix(in srgb, var(--v-brand) 60%, transparent);
+}
+.v-crumbs a { color: var(--v-muted); text-decoration: none; }
+.v-crumbs a:hover { color: var(--v-accent); }
+.v-crumbs [aria-current="page"] { color: var(--v-ink); }
+
+/* Keep the current-page crumb on one line on small screens. */
+@media (max-width: 600px) {
+	.v-crumbs [aria-current="page"] {
+		max-width: 16rem;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+}
+
+/* ---- byline ------------------------------------------------------------
+ * avatar · "Written by <author>" · divider · "Last updated <date>", one centred
+ * row under the title. This is the SINGLE source of the date on a post: it is
+ * visible, it is machine-readable via <time datetime>, and it is always the
+ * MODIFIED date. Do not add a second date element anywhere on this view. */
+.v-byline {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: .6rem;
+}
+.v-byline__avatar { flex: 0 0 auto; line-height: 0; }
+.v-byline__avatar img {
+	width: 40px; height: 40px;
+	border-radius: 50%;
+	border: 2px solid var(--v-white);
+	box-shadow: 0 2px 8px rgba(7, 33, 31, .16);
+}
+.v-byline__text {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: .3rem .7rem;
+	font-size: .9rem;
+	line-height: 1.35;
+	color: var(--v-muted);
+}
+.v-byline__text a { color: var(--v-ink); font-weight: 600; text-decoration: none; }
+.v-byline__text a:hover { color: var(--v-accent); text-decoration: underline; text-underline-offset: 2px; }
+.v-byline__sep {
+	width: 1px;
+	height: 1.1em;
+	background: color-mix(in srgb, var(--v-ink) 26%, transparent);
+}
+@media (max-width: 520px) {
+	.v-byline__text { flex-direction: column; align-items: flex-start; gap: .12rem; }
+	.v-byline__sep { display: none; }
+}
+
+/* ---- featured image ---------------------------------------------------- */
+.v-single__cover {
+	max-width: 58rem;
+	margin: 0 auto clamp(1rem, 3vw, 2rem);
+	padding-inline: 1.25rem;
+}
+/* Spanning all three columns above the rails, the cover is free to be wider
+   than the reading measure. That is the point of putting it there: a cover
+   constrained to the text column reads as just another body image. */
+@media (min-width: 1180px) {
+	.v-single__cover { width: 100%; padding-inline: 0; }
+}
+.v-single__cover img {
+	width: 100%;
+	border-radius: 18px;
+	border: 1px solid var(--v-ink);
+	box-shadow: 8px 8px 0 0 var(--v-ink);
+}
+
+/* ==========================================================================
+   THREE-COLUMN READING LAYOUT
+   --------------------------------------------------------------------------
+   Above 1180px: a sticky TOC + share rail on the left, the reading column in
+   the middle, a sticky newsletter card on the right. The hero and breadcrumbs
+   span all three. Below the breakpoint the rails are dropped entirely and the
+   newsletter reappears as a full-width CTA at the foot of the article. That is
+   a deliberate content-first decision, not an oversight: a 16rem rail on a
+   tablet steals from the measure without earning it back.
+   ========================================================================== */
+.v-article {
+	max-width: 44rem;            /* single-column default; widened by the grid */
+	margin-inline: auto;
+	padding-inline: 1.25rem;
+}
+.v-rail { font-family: var(--v-body); }
+.v-rail--left  { margin-bottom: 2.25rem; }
+.v-rail--right { margin-top: 2.75rem; }
+
+@media (min-width: 1180px) {
+	.v-article {
+		display: grid;
+		grid-template-columns:
+			minmax(0, 16rem)
+			minmax(0, var(--sp-read))
+			minmax(0, 16rem);
+		justify-content: center;
+		align-items: start;
+		column-gap: clamp(2rem, 3.5vw, 3.5rem);
+		/* 16 + 42 + 16 rem of tracks and 2 x 3.5rem of gap is 81rem of GRID.
+		   box-sizing is border-box, so the 1.5rem of padding on each side comes
+		   out of that budget rather than sitting outside it: at max-width 81rem
+		   the tracks only get 78rem, and because the middle track is
+		   minmax(0, 42rem) it silently absorbs the shortfall. The reading column
+		   measured 635px instead of 672. The cap is the grid plus its padding. */
+		max-width: 84rem;
+		padding-inline: 1.5rem;
+	}
+	.v-article > * { grid-column: 2; min-width: 0; }   /* default: the centre */
+
+	/* 🔴 The rows are assigned EXPLICITLY, and they have to be.
+	   .v-rail--right comes after .v-content in the markup, because that is the
+	   order it must appear in when the grid is off (the newsletter belongs at
+	   the foot of the article on a phone, not above it). Left to auto-placement
+	   the grid honours that source order and drops the rail into a row BELOW
+	   the article, so the sticky card lands at the very bottom of the page
+	   instead of beside the text it is meant to sit next to.
+	   Pinning the three columns to one row is what decouples the visual order
+	   from the source order. Anything added to the article after this band
+	   auto-places into column 2 underneath, which is what tags, prev/next and
+	   the mobile CTA rely on. */
+	.v-crumbs        { grid-column: 1 / -1; grid-row: 1; }
+	.v-single__hero  { grid-column: 1 / -1; grid-row: 2; }
+	.v-single__cover { grid-column: 1 / -1; grid-row: 3; }
+
+	.v-rail--left    { grid-column: 1; grid-row: 4; }
+	.v-content       { grid-column: 2; grid-row: 4; }
+	.v-rail--right   { grid-column: 3; grid-row: 4; }
+
+	/* The rails stick UNDER the floating header, never behind it. The offset is
+	   the one shared clearance token from style.css, plus a little air. */
+	.v-rail {
+		position: sticky;
+		top: calc(var(--v-header-clear) + .5rem);
+		align-self: start;
+		margin: 0;
+	}
+
+	/* At this breakpoint the TOC's mobile card is stripped to a hairline rule.
+	   Only the CONTAINER is set here; the look is the shared component in
+	   style.css. */
+	.v-toc {
+		margin: 0;
+		padding: .25rem 0 .25rem 1.25rem;
+		background: none;
+		border: 0;
+		border-left: 1px solid var(--v-hair);
+		border-radius: 0;
+		/* A long post must not push its last entries past the viewport while the
+		   rail is stuck; single-post.js keeps the active item in view. */
+		max-height: calc(100vh - 12rem);
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		scrollbar-width: thin;
+	}
+}
+
+/* ---- share links (left rail, under the TOC) ---------------------------- */
+.v-share { margin-top: 1.4rem; padding-left: .15rem; }
+.v-share__label {
+	margin: 0 0 .6rem;
+	font-size: .7rem;
+	font-weight: 700;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--v-muted);
+}
+.v-share__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.v-share__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 38px; height: 38px;
+	border-radius: 10px;
+	border: 1px solid var(--v-hair);
+	background: var(--v-white);
+	color: var(--v-muted);
+	transition: color .15s ease, border-color .15s ease, transform .12s ease, box-shadow .15s ease;
+}
+.v-share__link svg { width: 17px; height: 17px; }
+.v-share__link:hover {
+	color: var(--v-accent);
+	border-color: color-mix(in srgb, var(--v-brand) 45%, var(--v-hair));
+	transform: translateY(-2px);
+	box-shadow: 0 8px 18px -8px rgba(7, 33, 31, .28);
+}
+
+/* ==========================================================================
+   NEWSLETTER CARD (right rail) — the footer's dark halftone treatment.
+   ========================================================================== */
+.v-nlcard {
+	position: relative;
+	overflow: hidden;
+	/* Lets the wordmark size itself from the CARD's width, so the same card
+	   works in the narrow right rail and as the full-width mobile CTA. */
+	container-type: inline-size;
+	border-radius: 18px;
+	/* The deep bottom padding is the wordmark's strip: without it the watermark
+	   runs under the note line and the two fight each other. */
+	padding: 1.5rem 1.4rem 3rem;
+	background: var(--v-ink);
+	color: #EAF3F1;
+	border: 1px solid rgba(255, 255, 255, .08);
+	box-shadow: 0 20px 44px -26px rgba(7, 33, 31, .55);
+}
+/* Texture layer: the footer's dot grid plus its soft top wash, same values. */
+.v-nlcard::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	border-radius: inherit;
+	pointer-events: none;
+	background-image:
+		radial-gradient(circle at center, rgba(255, 255, 255, .04) 1px, transparent 1.15px),
+		linear-gradient(to bottom, rgba(255, 255, 255, .05), transparent 22%);
+	background-size: 6px 6px, 100% 100%;
+}
+/* The wordmark watermark, built exactly like the footer's: real text filled
+   through a halftone grid, sized in cqw so the whole word spans the card at any
+   width, and cropped at the bottom edge by the card's overflow. */
+.v-nlcard::after {
+	content: "VECTORE";
+	position: absolute;
+	left: 0; right: 0;
+	bottom: -.12em;
+	z-index: 0;
+	pointer-events: none;
+	text-align: center;
+	font-family: var(--v-display);
+	font-weight: 700;
+	font-size: 3rem;        /* fallback where container units are unsupported */
+	font-size: 21cqw;
+	line-height: 1;
+	letter-spacing: -.012em;
+	white-space: nowrap;
+	color: rgba(96, 233, 196, .10);
+	background-image: radial-gradient(
+		circle at center,
+		rgba(96, 233, 196, .33) max(1px, .0088em),
+		transparent max(1.15px, .0101em)
+	);
+	background-size: max(5px, .05em) max(5px, .05em);
+	background-size: max(5px, round(nearest, .05em, 1px)) max(5px, round(nearest, .05em, 1px));
+}
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+	.v-nlcard::after {
+		-webkit-background-clip: text;
+		        background-clip: text;
+		color: transparent;
+		-webkit-text-fill-color: transparent;
+	}
+}
+.v-nlcard > * { position: relative; z-index: 1; }
+.v-nlcard__title {
+	font-family: var(--v-display);
+	margin: 0 0 .55rem;
+	font-size: 1.22rem;
+	line-height: 1.2;
+	letter-spacing: -.01em;
+	color: var(--v-white);
+}
+.v-nlcard__desc {
+	margin: 0 0 1.1rem;
+	font-size: .9rem;
+	line-height: 1.55;
+	color: color-mix(in srgb, #EAF3F1 78%, transparent);   /* ~11:1 on ink */
+}
+
+/* The DARK skin for the shared newsletter form. The light skin is in
+   style.css; only what actually differs is restated here. */
+.v-nlcard .v-nl__input {
+	border-color: rgba(255, 255, 255, .14);
+	background: var(--v-white);
+}
+.v-nlcard .v-nl__input:focus {
+	border-color: var(--v-glow);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--v-glow) 25%, transparent);
+}
+/* Ink on the glow teal is 8.82:1. The accent teal used on white would be a
+   muddy 2.4:1 against this card, so the button inverts here on purpose. */
+.v-nlcard .v-nl__btn { background: var(--v-glow); color: var(--v-ink); }
+.v-nlcard .v-nl__btn:hover { background: color-mix(in srgb, var(--v-glow) 82%, #fff); }
+.v-nlcard .v-nl__note { color: color-mix(in srgb, #EAF3F1 62%, transparent); }
+/* The light-page greens and reds are unreadable on ink (about 2:1), so the card
+   uses lifted tints instead. */
+.v-nlcard .v-nl__status[data-state="success"] { color: #7FE3A5; }
+.v-nlcard .v-nl__status[data-state="error"]   { color: #FFA79C; }
+
+/* The mobile bottom CTA is hidden on desktop, where the sticky rail serves it. */
+.v-nlcta { display: none; }
+@media (max-width: 1179.98px) {
+	.v-rail { display: none !important; }
+	.v-nlcta {
+		display: block;
+		max-width: var(--sp-read);
+		margin: 2.75rem auto 0;
+		padding-top: 2.25rem;
+		border-top: 1px solid var(--v-hair);
+	}
+}
+
+/* ==========================================================================
+   THE READING AREA
+   ========================================================================== */
+.v-content {
+	position: relative;
+	padding-block: clamp(2rem, 3.5vw, 3rem);
+	font-size: 1.0625rem;
+	line-height: 1.75;
+	color: var(--v-text);
+}
+/* Narrow, centred reading column with breathing room between blocks. */
+.v-content > * { max-width: var(--sp-read); margin-inline: auto; margin-block: 0; }
+.v-content > * + * { margin-top: 1.5rem; }
+@media (min-width: 1180px) { .v-content { padding-inline: 0; } }
+
+/* Links — the accent (5.10:1) with an underline that thickens on hover. */
+.v-content a {
+	color: var(--v-accent);
+	font-weight: 600;
+	text-decoration: underline;
+	text-decoration-color: color-mix(in srgb, var(--v-accent) 45%, transparent);
+	text-underline-offset: 3px;
+	text-decoration-thickness: 1.5px;
+	transition: text-decoration-color .15s ease;
+}
+.v-content a:hover { text-decoration-color: var(--v-accent); }
+
+/* Headings — generous top space before each, for reading rhythm. */
+.v-content h2 { margin-top: 2.75rem; font-size: clamp(1.5rem, 3vw, 1.95rem); }
+.v-content h3 { margin-top: 2.25rem; font-size: clamp(1.24rem, 2.4vw, 1.45rem); }
+.v-content h4 { margin-top: 1.75rem; font-size: 1.12rem; }
+
+/* Lists */
+.v-content :where(ul, ol) { padding-left: 1.4rem; }
+.v-content li + li { margin-top: .5rem; }
+.v-content li { padding-left: .2rem; }
+
+/* ---- images in the post body -------------------------------------------
+ * SCOPE, deliberately narrow: `.v-content` only. That is the article body and
+ * nothing else, so the header, the footer, the byline avatar, the share icons
+ * and both rails are untouched. Do not widen this to `.v-single img`.
+ *
+ * Table cells are excluded below: those images are product logos sitting inline
+ * with text, where a drop shadow reads as a mistake rather than as depth. */
+.v-content .wp-block-image img,
+.v-content figure.wp-block-image img {
+	border-radius: 14px;
+	border: var(--sp-img-border-w) solid var(--v-ink);
+	box-shadow:
+		var(--sp-img-shadow-x) var(--sp-img-shadow-y) var(--sp-img-shadow-blur)
+		calc(var(--sp-img-shadow-blur) * -.38) rgba(7, 33, 31, var(--sp-img-shadow-alpha));
+}
+/* Inline furniture keeps its flat treatment. */
+.v-content table img,
+.v-content img.wp-smiley,
+.v-content .wp-block-image.is-style-flat img {
+	border-radius: 0; border: 0; box-shadow: none;
+}
+.v-content figure.wp-block-image { max-width: var(--sp-read); }
+.v-content :where(td, th) img { border-radius: 0; max-width: 100%; box-shadow: none; }
+.v-content figcaption {
+	font-size: .85rem;
+	color: var(--v-muted);
+	text-align: center;
+	margin-top: .6rem;
+}
+
+/* Blockquotes — quiet accent-bordered block. */
+.v-content blockquote {
+	border-left: 3px solid var(--v-brand);
+	background: color-mix(in srgb, var(--v-brand) 6%, var(--v-white));
+	margin: 2rem auto;
+	padding: 1rem 1.4rem;
+	border-radius: 0 12px 12px 0;
+	color: var(--v-ink);
+	font-size: 1.05em;
+}
+.v-content blockquote p:last-child { margin-bottom: 0; }
+
+/* ---- tables ------------------------------------------------------------
+ * The theme ONLY frames a table. It does not restructure one: no forced
+ * <thead>, no data-labels, no mobile card view. Tables render exactly as
+ * authored in the block editor, so the theme can never misread or break one.
+ * Wide tables scroll inside their figure rather than being rebuilt. */
+.v-content :where(figure.wp-block-table, .wp-block-table) {
+	max-width: var(--sp-read);
+	margin-inline: auto;
+	overflow-x: auto;
+}
+.v-content table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	/* !important overrides any per-block colour (e.g. has-black-border-color)
+	   so the frame stays a light hairline. */
+	border: 1px solid var(--v-hair) !important;
+	border-radius: 14px;
+	overflow: hidden;
+	font-size: .95rem;
+}
+.v-content :where(th, td) {
+	padding: .85rem 1rem;
+	vertical-align: top;
+	border-top: 1px solid var(--v-hair);
+	text-align: left;
+}
+/* Body rows stay WHITE. Many tables use the block's "Stripes" style, which
+   paints zebra rows from core; this neutralises it so only the header is
+   tinted. */
+.v-content .wp-block-table.is-style-stripes tbody tr,
+.v-content .wp-block-table.is-style-stripes tbody tr:nth-child(odd) { background-color: var(--v-white); }
+/* The header row. Two cases, kept in separate rules so the :has() selector
+   degrading in an old engine cannot drop the plain <thead> rule with it:
+     1. a real <thead>, and
+     2. the first row of a header-less table (those are all <td>). */
+.v-content thead th {
+	background: var(--v-surface);
+	color: var(--v-ink);
+	font-weight: 700;
+}
+.v-content table:not(:has(thead)) > tbody > tr:first-child > :where(td, th) {
+	background: var(--v-surface);
+	color: var(--v-ink);
+	font-weight: 700;
+}
+/* No double hairline where the header meets the rounded top frame. */
+.v-content thead > tr:first-child > :where(th, td) { border-top: 0; }
+.v-content table:not(:has(thead)) > tbody > tr:first-child > :where(td, th) { border-top: 0; }
+
+/* Code */
+.v-content :where(code, pre) { font-family: var(--v-mono); }
+.v-content pre {
+	background: var(--v-ink);
+	color: #EAF3F1;
+	padding: 1rem 1.2rem;
+	border-radius: 12px;
+	overflow-x: auto;
+	font-size: .9rem;
+	line-height: 1.6;
+}
+.v-content :not(pre) > code {
+	background: var(--v-surface);
+	border: 1px solid var(--v-hair);
+	padding: .1em .4em;
+	border-radius: .3em;
+	font-size: .9em;
+}
+.v-content hr {
+	max-width: var(--sp-read);
+	margin: 2.75rem auto;
+	border: 0;
+	border-top: 1px solid var(--v-hair);
+}
+
+/* ---- tags + prev/next -------------------------------------------------- */
+.v-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .5rem;
+	max-width: var(--sp-read);
+	margin: 2rem auto 0;
+	padding: 0;
+	list-style: none;
+}
+.v-tags a {
+	display: inline-block;
+	padding: .3rem .75rem;
+	border: 1px solid var(--v-hair);
+	border-radius: 999px;
+	color: var(--v-muted);
+	font-size: .82rem;
+	font-weight: 600;
+	text-decoration: none;
+}
+.v-tags a:hover { color: var(--v-accent); border-color: color-mix(in srgb, var(--v-brand) 45%, var(--v-hair)); }
+
+.v-adjacent {
+	display: grid;
+	gap: 1rem;
+	max-width: var(--sp-read);
+	margin: clamp(2rem, 4vw, 3rem) auto 0;
+}
+@media (min-width: 700px) { .v-adjacent { grid-template-columns: 1fr 1fr; } }
+.v-adjacent a {
+	display: block;
+	padding: 1.1rem 1.25rem;
+	border: 1px solid var(--v-hair);
+	border-radius: 14px;
+	background: var(--v-white);
+	text-decoration: none;
+	transition: border-color .15s ease, transform .15s ease;
+}
+.v-adjacent a:hover { border-color: color-mix(in srgb, var(--v-brand) 40%, var(--v-hair)); transform: translateY(-2px); }
+.v-adjacent__label {
+	display: block;
+	margin-bottom: .35rem;
+	font-size: .7rem;
+	font-weight: 700;
+	letter-spacing: .12em;
+	text-transform: uppercase;
+	color: var(--v-muted);
+}
+.v-adjacent__title { font-family: var(--v-display); font-weight: 700; color: var(--v-ink); line-height: 1.3; }
+.v-adjacent--next { text-align: right; }
+
+/* 🔴 `margin-inline: auto` means two different things in the two layouts, and
+   the second one is destructive.
+   Below 1180px these are ordinary blocks inside a single column and the auto
+   margins centre them, which is what they want. Above 1180px they are GRID
+   ITEMS, and there auto margins disable stretch and shrink the box to fit its
+   contents: the tag row collapsed to the width of one tag and floated in the
+   middle of the column, and prev/next pulled in from the text edges.
+   The middle track is already exactly the reading measure, so there is nothing
+   left to centre against and the margins are simply dropped.
+
+   This block lives HERE, after the rules it corrects, and not up in the grid
+   section where it logically belongs. Both selectors have the same specificity,
+   so source order decides: placed earlier, `margin: ... auto` further down the
+   file quietly wins and the fix does nothing. Anything added to the article
+   that centres itself this way belongs in this list. */
+@media (min-width: 1180px) {
+	.v-tags,
+	.v-adjacent { margin-inline: 0; }
+}
+
+/* ---- related posts ----------------------------------------------------- */
+.v-related {
+	max-width: var(--v-wide);
+	margin: clamp(3rem, 6vw, 4.5rem) auto 0;
+	padding-inline: 1.5rem;
+}
+.v-related__title {
+	margin: 0 0 1.5rem;
+	font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+	text-align: center;
+}
+
+/* ---- scroll-to-top (created in single-post.js) ------------------------- */
+.v-totop {
+	position: fixed;
+	right: clamp(1rem, 3vw, 2rem);
+	bottom: clamp(1rem, 3vw, 2rem);
+	z-index: 90;
+	width: 44px; height: 44px;
+	display: grid;
+	place-items: center;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: var(--v-ink);
+	color: var(--v-white);
+	cursor: pointer;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(10px);
+	box-shadow: 0 10px 26px -8px rgba(7, 33, 31, .5);
+	transition: opacity .2s ease, transform .2s ease, background .15s ease;
+}
+.v-totop.is-visible { opacity: 1; visibility: visible; transform: none; }
+.v-totop:hover { background: var(--v-accent); transform: translateY(-3px); }
+.v-totop svg { width: 20px; height: 20px; }
+
+/* ---- reading-progress bar ---------------------------------------------- */
+.v-progress {
+	position: fixed;
+	top: 0; left: 0;
+	z-index: 101;
+	height: 3px;
+	width: 100%;
+	transform: scaleX(0);
+	transform-origin: 0 50%;
+	background: linear-gradient(90deg, var(--v-brand), var(--v-glow));
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.v-totop { transition: opacity .2s ease; }
+	.v-totop:hover, .v-adjacent a:hover, .v-share__link:hover { transform: none; }
+	.v-progress { transition: none; }
+}

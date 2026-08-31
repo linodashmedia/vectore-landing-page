@@ -1,0 +1,691 @@
+/*!
+Theme Name: Vectore Blog
+Theme URI: https://vectore.io/blog
+Description: The Vectore blog theme. Standalone (no parent theme): every template, token and script is in this directory and in Git. Design language ported from the LinoDash site, recoloured onto Vectore's teal-green palette.
+Author: Vectore
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.8
+Requires PHP: 8.1
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: vectore-blog
+Tags: blog, one-column, custom-colors, custom-menu, featured-images, block-styles
+*/
+
+/* ==========================================================================
+   THE PALETTE — one source, and this is it.
+   --------------------------------------------------------------------------
+   Teal green leads. Everything else is chosen to sit under it, not to compete.
+   Every value below was measured against WCAG in the real combination it is
+   used in, not estimated, and the ratio is written next to it. If you retune a
+   colour, re-measure the pairing before shipping it.
+
+   The trap this palette is built to avoid: teal at its most recognisable
+   (#0D9488) is only 3.74:1 on white. That is fine behind a heading, a border or
+   a wash, and it is NOT enough for a link or a button label. So the ramp splits
+   the job in two:
+
+     --v-brand   the teal people recognise. NON-TEXT ONLY: fills, rules, dots,
+                 washes, and display type at 24px+ where 3:1 is the bar.
+     --v-accent  the same hue pushed darker until it clears 4.5:1 on white.
+                 Every link, every small label, every button ground.
+     --v-glow    the same hue pushed lighter until it clears 4.5:1 on INK.
+                 Used only on the dark surfaces (header bar, footer, the
+                 newsletter card), where the other two go muddy.
+
+   The warm complement (coral / amber) is teal's opposite on the wheel and is
+   deliberately rationed: category pills, a "new" flag, the odd underline. It
+   never becomes a second brand colour.
+
+   🔴 Never put white text on the coral or the amber. Coral carries white at
+   2.9:1 and amber is worse. Both carry INK comfortably (5.81:1 and 8.26:1),
+   so warm chips are always dark text on a warm ground, never the reverse.
+   ========================================================================== */
+:root {
+	/* --- the teal ramp --------------------------------------------------- */
+	--v-brand:        #0D9488;   /* non-text only        · 3.74:1 on white   */
+	--v-accent:       #0A7C6E;   /* links, small text    · 5.10:1 on white ✅ */
+	--v-accent-deep:  #076E5F;   /* pressed / hover ink  · 6.17:1 on white ✅ */
+	--v-glow:         #2ED3A7;   /* on dark surfaces     · 8.82:1 on ink ✅   */
+
+	/* --- neutrals, all tinted toward the teal so nothing reads as grey ---- */
+	--v-ink:          #07211F;   /* header bar, footer, headings · 16.85:1 ✅ */
+	--v-text:         #2C3A38;   /* body copy                    · 11.87:1 ✅ */
+	--v-muted:        #5F7370;   /* meta, captions               ·  5.03:1 ✅ */
+	--v-hair:         #DDE7E4;   /* hairlines and card borders              */
+	--v-surface:      #F6FAF9;   /* the quietest raised surface             */
+	--v-white:        #ffffff;
+
+	/* --- the canvas wash -------------------------------------------------
+	   LinoDash floats its hero on a peach. Vectore floats it on the same idea
+	   in mint: a pale teal, and a second stop a shade deeper for the bubbles.
+	   Both are far enough from white that the fade at the bottom is visible,
+	   and pale enough that INK body copy still clears 15:1 on top of them. */
+	--v-mint:         #E4F5F0;
+	--v-mint-2:       #D3EDE6;
+
+	/* --- the rationed warm complement ------------------------------------ */
+	--v-coral:        #F2714B;   /* ink on coral · 5.81:1 ✅ · never white    */
+	--v-amber:        #F5A524;   /* ink on amber · 8.26:1 ✅ · never white    */
+
+	/* --- type ------------------------------------------------------------- */
+	--v-display: "Bricolage Grotesque", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+	--v-body:    "Figtree", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+	--v-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+	/* --- measure ----------------------------------------------------------- */
+	--v-read: 42rem;    /* ~672px reading column */
+	--v-hero: 50rem;    /* wider title band, so a headline is not squeezed */
+	--v-wide: 71rem;    /* archive grid + footer row */
+
+	/* --- the shared canvas texture ----------------------------------------
+	   The rounded-square grid, kept as a token so any view can sit on the same
+	   canvas without a second copy of the SVG drifting out of sync. Stroke is
+	   the ink, URL-encoded. */
+	--v-grid-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='76' height='76'%3E%3Crect x='1' y='1' width='70' height='70' rx='16' ry='16' fill='none' stroke='%2307211F' stroke-width='1'/%3E%3C/svg%3E");
+
+	/* --- the floating header ----------------------------------------------
+	   --v-header-clear is the SINGLE clearance token: the gap, the bar, some
+	   air, and the admin bar for logged-in editors. It drives scroll-padding
+	   on the scrollport (so no heading needs its own scroll-margin) and it
+	   positions the sticky rails. Retune the bar here and everything
+	   downstream follows. Do not reintroduce per-view offsets. */
+	--v-header-top-gap:  24px;
+	--v-header-side-gap: 28px;
+	--v-header-radius:   14px;
+	--v-header-bar-h:    60px;
+	--v-admin-bar:       0px;
+	--v-header-clear: calc(var(--v-admin-bar) + var(--v-header-top-gap) + var(--v-header-bar-h) + 12px);
+}
+
+/* Logged-in editors: WordPress fixes its admin bar over the top 32px, so the
+   stuck header starts below it rather than under it. Set on the ROOT (via :has,
+   because the class lives on <body>) so the clearance token above sees it too.
+   Under 600px WordPress stops fixing the bar and it scrolls away, so the offset
+   goes back to zero there. */
+html:has(body.admin-bar) { --v-admin-bar: 32px; }
+@media (max-width: 782px) { html:has(body.admin-bar) { --v-admin-bar: 46px; } }
+@media (max-width: 600px) { html:has(body.admin-bar) { --v-admin-bar: 0px; } }
+
+/* ==========================================================================
+   RESET + BASE
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd { margin: 0; }
+
+html {
+	-webkit-text-size-adjust: 100%;
+	/* The sticky bar owns the anchor landing offset globally, which is why no
+	   heading in this theme carries its own scroll-margin-top. */
+	scroll-padding-top: var(--v-header-clear);
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+body {
+	margin: 0;
+	background: var(--v-white);
+	color: var(--v-text);
+	font-family: var(--v-body);
+	font-size: 1.0625rem;
+	line-height: 1.7;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
+a { color: var(--v-accent); }
+:where(button, input, select, textarea) { font: inherit; color: inherit; }
+::selection { background: color-mix(in srgb, var(--v-brand) 28%, transparent); }
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--v-display);
+	font-weight: 700;
+	line-height: 1.15;
+	letter-spacing: -.02em;
+	color: var(--v-ink);
+	text-wrap: balance;
+}
+
+/* Focus: one visible ring everywhere, in the accent (5.10:1 on white), never
+   removed. Mouse users do not see it; keyboard users always do. */
+:focus-visible {
+	outline: 2px solid var(--v-accent);
+	outline-offset: 3px;
+	border-radius: 3px;
+}
+
+.v-skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	z-index: 200;
+	padding: .7rem 1.1rem;
+	background: var(--v-ink);
+	color: var(--v-white);
+	border-radius: 0 0 10px 0;
+	text-decoration: none;
+	font-weight: 600;
+}
+.v-skip-link:focus { left: 0; }
+
+.screen-reader-text {
+	position: absolute !important;
+	width: 1px; height: 1px;
+	margin: -1px; padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+.v-shell { min-height: 100vh; display: flex; flex-direction: column; }
+.v-main  { flex: 1 0 auto; position: relative; }
+
+/* ==========================================================================
+   THE FLOATING HEADER
+   --------------------------------------------------------------------------
+   A dark pill with a visible gap above it and the canvas showing to either
+   side, pinned while the page scrolls. The gap is PADDING on the element, not
+   margin, because the gap has to travel with the bar when it sticks: a margin
+   would collapse against the viewport and the bar would dock flush.
+
+   Two scrolled states, both transforms, so the header keeps its height in the
+   layout and nothing below it shifts:
+     .is-docked  past 24px  · closes the gap, flattens the top corners, which is
+                              what stops article text showing in the strip above
+     .is-hidden  scrolling down past 240px · slides it away; scrolling up more
+                              than 6px brings it back
+
+   🔴 With JavaScript off neither class is ever set, and the header is simply a
+   sticky pill with its gap. Never make anything depend on those classes.
+   ========================================================================== */
+.v-header {
+	position: sticky;
+	top: var(--v-admin-bar);
+	z-index: 100;
+	padding: var(--v-header-top-gap) var(--v-header-side-gap) 0;
+	background: transparent;   /* the gap reveals whatever canvas the view paints */
+	transition: transform .28s cubic-bezier(.2, .7, .2, 1), padding .28s cubic-bezier(.2, .7, .2, 1);
+}
+.v-header.is-docked { padding-top: 0; }
+.v-header.is-hidden { transform: translateY(calc(-100% - var(--v-admin-bar))); }
+
+.v-header__bar {
+	display: flex;
+	align-items: center;
+	gap: clamp(1rem, 3vw, 2rem);
+	width: 100%;
+	max-width: var(--v-wide);
+	min-height: var(--v-header-bar-h);
+	margin-inline: auto;
+	padding: .5rem clamp(.9rem, 2.2vw, 1.35rem);
+	border-radius: var(--v-header-radius);
+	background: var(--v-ink);
+	color: var(--v-white);
+	box-shadow: 0 18px 40px -28px rgba(7, 33, 31, .85);
+	transition: border-radius .28s cubic-bezier(.2, .7, .2, 1);
+}
+.v-header.is-docked .v-header__bar {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.v-header__brand {
+	display: inline-flex;
+	align-items: center;
+	gap: .55rem;
+	text-decoration: none;
+	color: var(--v-white);
+	font-family: var(--v-display);
+	font-weight: 700;
+	font-size: 1.12rem;
+	letter-spacing: -.02em;
+	flex: 0 0 auto;
+}
+.v-header__brand img { height: 26px; width: auto; }
+/* The one flash of teal on the bar. --v-glow is the only teal that survives on
+   ink (8.82:1); the brand teal would go muddy here. */
+.v-header__brand-dot {
+	width: 8px; height: 8px;
+	border-radius: 50%;
+	background: var(--v-glow);
+	box-shadow: 0 0 12px color-mix(in srgb, var(--v-glow) 70%, transparent);
+	flex: 0 0 auto;
+}
+
+.v-header__nav { margin-left: auto; }
+.v-header__menu {
+	display: flex;
+	align-items: center;
+	gap: clamp(.9rem, 2.4vw, 1.9rem);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.v-header__menu a {
+	color: color-mix(in srgb, var(--v-white) 88%, transparent);
+	font-size: .95rem;
+	font-weight: 500;
+	text-decoration: none;
+	transition: color .15s ease;
+}
+.v-header__menu a:hover,
+.v-header__menu .current-menu-item > a,
+.v-header__menu .current_page_item > a { color: var(--v-glow); }
+
+.v-header__cta {
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+	gap: .45rem;
+	padding: .6rem 1.05rem;
+	border-radius: 10px;
+	/* White on --v-accent is 5.10:1. White on the raw brand teal would be
+	   3.74:1, which this label (0.9rem, under the 18.66px large-text
+	   threshold) does not clear. Do not "brighten" this to the brand teal. */
+	background: var(--v-accent);
+	color: var(--v-white);
+	font-size: .9rem;
+	font-weight: 700;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: background .15s ease, transform .12s ease, box-shadow .15s ease;
+}
+.v-header__cta:hover {
+	background: var(--v-brand);
+	transform: translateY(-1px);
+	box-shadow: 0 10px 22px -12px color-mix(in srgb, var(--v-glow) 80%, transparent);
+}
+
+/* The CTA is in the markup TWICE on purpose: once inside the nav, so it is
+   reachable inside the mobile drawer, and once beside the nav for the desktop
+   bar. Exactly one is ever visible. This rule owns the desktop half of that
+   deal; the mobile half is in the max-width block below. Remove either and the
+   button renders twice on one of the two layouts. */
+.v-header__nav .v-header__cta { display: none; }
+
+/* Burger + drawer. The checkbox-free version: a button toggling one class, so
+   the menu still exists in the DOM for a crawler and for JS-off readers (who
+   get the links in the footer regardless). */
+.v-header__burger {
+	display: none;
+	margin-left: auto;
+	width: 42px; height: 42px;
+	padding: 0;
+	border: 1px solid rgba(255, 255, 255, .16);
+	border-radius: 10px;
+	background: transparent;
+	color: var(--v-white);
+	cursor: pointer;
+	place-items: center;
+}
+.v-header__burger svg { width: 20px; height: 20px; }
+
+@media (max-width: 860px) {
+	:root { --v-header-side-gap: 14px; }
+	.v-header__burger { display: grid; }
+	.v-header__nav {
+		display: none;
+		position: absolute;
+		left: var(--v-header-side-gap);
+		right: var(--v-header-side-gap);
+		top: calc(100% - .35rem);
+		margin: 0;
+		padding: 1rem 1.1rem;
+		border-radius: var(--v-header-radius);
+		background: var(--v-ink);
+		box-shadow: 0 24px 48px -24px rgba(7, 33, 31, .9);
+	}
+	.v-header { position: sticky; }
+	.v-header__inner { position: relative; }
+	.v-header__nav.is-open { display: block; }
+	.v-header__menu { flex-direction: column; align-items: stretch; gap: .2rem; }
+	.v-header__menu a { display: block; padding: .65rem .2rem; font-size: 1rem; }
+	.v-header__cta { display: none; }
+	.v-header__nav .v-header__cta { display: inline-flex; margin-top: .8rem; justify-content: center; }
+}
+
+/* ==========================================================================
+   TABLE OF CONTENTS — ONE component, two homes.
+   --------------------------------------------------------------------------
+   The look lives here (title, numbering, links, the reading-position state).
+   Each view owns only its CONTAINER, because the breakpoints differ on purpose.
+   Restyle the TOC here, not per view.
+
+   Default (narrow screens) is a self-contained boxed card, since there is no
+   sidebar for it to sit in.
+   ========================================================================== */
+.v-toc {
+	margin: 0 0 2.5rem;
+	padding: 1.1rem 1.25rem;
+	background: var(--v-surface);
+	border: 1px solid var(--v-hair);
+	border-radius: 14px;
+}
+.v-toc__title {
+	margin: 0 0 .7rem;
+	font-family: var(--v-body);
+	font-size: .72rem;
+	font-weight: 700;
+	letter-spacing: .14em;
+	text-transform: uppercase;
+	color: var(--v-muted);
+}
+.v-toc__list {
+	margin: 0; padding: 0;
+	list-style: none;
+	counter-reset: v-toc;
+	display: grid;
+	gap: .5rem;
+}
+.v-toc__list li { counter-increment: v-toc; }
+.v-toc__list a {
+	display: block;
+	font-size: .9rem;
+	line-height: 1.35;
+	color: var(--v-text);
+	text-decoration: none;
+	transition: color .15s ease;
+}
+.v-toc__list a::before {
+	content: counter(v-toc) ".";
+	margin-right: .4rem;
+	color: var(--v-muted);
+	font-variant-numeric: tabular-nums;   /* numbers keep a straight left edge */
+	transition: color .15s ease;
+}
+.v-toc__list a:hover { color: var(--v-accent); }
+/* Reading position, set by single-post.js. Colour PLUS weight, so the state
+   does not depend on colour alone. */
+.v-toc__list a.is-active,
+.v-toc__list a.is-active::before { color: var(--v-accent); }
+.v-toc__list a.is-active { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+	.v-toc__list a, .v-toc__list a::before { transition: none; }
+}
+
+/* ==========================================================================
+   THE FOOTER — dark band, halftone wordmark
+   --------------------------------------------------------------------------
+   The same ink as the header bar, carrying a fine dot texture, one row of
+   links, and an oversized VECTORE wordmark filled with the same halftone. The
+   wordmark is shown COMPLETE: every letter fully visible, never cropped at any
+   width. It is decorative (aria-hidden) but it is real text, so it stays crisp
+   at any zoom and any pixel density.
+
+   Tuning knobs:
+     --vf-dot        texture dot for the whole band. Keep it near-invisible; it
+                     must not compete with the wordmark's own grid.
+     --vf-mark-dot   the wordmark's dots. The only loud value here.
+     --vf-mark-size  wordmark size, in vw so it always spans the viewport.
+   ========================================================================== */
+.v-footer {
+	--vf-dot:       rgba(255, 255, 255, .04);
+	/* The reference band fills its wordmark with white at .22 alpha. This one
+	   is teal, and the glow teal carries roughly 0.66 of white's relative
+	   luminance, so the same alpha reads visibly fainter. .33 is .22 / 0.66:
+	   the same perceived weight, in the brand colour. */
+	--vf-mark-dot:  rgba(96, 233, 196, .33);
+	--vf-mark-size: 18vw;
+
+	position: relative;
+	overflow: hidden;       /* only so the nowrap wordmark can never force a
+	                           horizontal scrollbar */
+	margin-top: clamp(3rem, 7vw, 5.5rem);
+	border-top: 1px solid rgba(255, 255, 255, .06);
+	background-color: var(--v-ink);
+	color: #EAF3F1;
+	isolation: isolate;
+}
+
+/* Texture: a fine dot grid across the band plus a soft light wash at the top
+   edge, so it reads as a lit surface rather than a flat fill. */
+.v-footer::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	background-image:
+		radial-gradient(circle at center, var(--vf-dot) 1px, transparent 1.15px),
+		linear-gradient(to bottom, rgba(255, 255, 255, .05), transparent 22%);
+	background-size: 6px 6px, 100% 100%;
+}
+
+.v-footer__inner {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .85rem clamp(1.25rem, 3.2vw, 3.25rem);
+	width: 100%;
+	max-width: var(--v-wide);
+	margin-inline: auto;
+	padding: clamp(2rem, 4.5vw, 3.25rem) clamp(1.25rem, 5vw, 2rem) clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+/* Mono and muted: deliberately the quietest thing in the footer. System
+   monospace, so the design costs no extra webfont request. */
+.v-footer__copy {
+	margin: 0;
+	font-family: var(--v-mono);
+	font-size: .8125rem;
+	letter-spacing: .01em;
+	line-height: 1.4;
+	color: color-mix(in srgb, #EAF3F1 58%, transparent);
+}
+
+.v-footer__nav {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .6rem clamp(1rem, 2.6vw, 2.5rem);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.v-footer__nav a {
+	color: color-mix(in srgb, #EAF3F1 92%, transparent);
+	font-size: .95rem;
+	line-height: 1.4;
+	text-decoration: none;
+	transition: color .15s ease;
+}
+.v-footer__nav a:hover,
+.v-footer__nav a:focus-visible { color: var(--v-glow); }
+.v-footer__nav a:focus-visible { outline-color: var(--v-glow); outline-offset: 4px; }
+
+/* ---- the oversized wordmark --------------------------------------------
+   Sized in vw so it spans the viewport at every width, and shown COMPLETE:
+   every letter fully visible. line-height 1 plus the bottom padding give the
+   glyphs their own space, so nothing is clipped vertically by the band's
+   overflow:hidden (which is only there to stop the nowrap wordmark from ever
+   forcing a horizontal scrollbar).
+
+   Measured with the shipped display face at 320, 360, 390, 414, 768, 1024,
+   1280, 1440, 1920 and 2560: the word lands at 95 to 98 percent of the band.
+   That is deliberately close to the edges, and it does mean the fit depends on
+   the metrics of Bricolage Grotesque. During the font swap, or if the webfont
+   fails outright, a wider fallback will clip the last letter. That is accepted
+   rather than designed around: the wordmark is decorative and aria-hidden, the
+   footer is below the fold, and the alternatives (shrinking it until it no
+   longer spans, or rebuilding it as scaled SVG text) each cost more than the
+   failure does. If the display face ever changes, re-measure.
+
+   The vw terms run past the usual clamp ceilings on purpose: the wordmark is
+   sized in vw, so fixed rem caps would let the type keep growing on a wide
+   monitor while its breathing room stood still. */
+.v-footer__mark {
+	position: relative;
+	z-index: 1;
+	text-align: center;
+	padding: clamp(.75rem, 2.2vw, 3rem) clamp(.5rem, 2vw, 1.5rem) clamp(1.25rem, 3.6vw, 4.5rem);
+	user-select: none;
+}
+.v-footer__mark span {
+	display: block;
+	/* Trims the empty descender space the line box reserves below the baseline.
+	   The wordmark is all caps, so there is nothing down there to lose. This
+	   closes the gap under the letters WITHOUT cropping them. */
+	margin-bottom: -.11em;
+	font-family: var(--v-display);
+	/* 700, not 800: the theme loads the display face at 600/700 only, and asking
+	   for a weight that is not loaded makes the browser synthesise bold by
+	   smearing the glyphs, which is the single biggest thing working against a
+	   crisp halftone at this size. */
+	font-weight: 700;
+	font-size: var(--vf-mark-size);
+	line-height: 1;
+	letter-spacing: -.012em;
+	white-space: nowrap;
+	/* Solid faint fill is the fallback; the dot grid replaces it below wherever
+	   background-clip:text is supported, which is every current browser. */
+	color: color-mix(in srgb, var(--vf-mark-dot) 55%, transparent);
+	/* Crispness, two parts:
+	   1. The grid is sized in em, so dots-per-letter is identical at every
+	      viewport. A fixed px grid gives about five dot rows per glyph on a
+	      phone and the letterforms stop reading. The max() floors stop the dots
+	      shrinking below ~2px on small screens, where a sub-pixel dot renders
+	      as grey mush rather than as a dot.
+	   2. round() snaps the tile to whole pixels, so the pattern never lands on
+	      a fractional grid and shimmers. The plain em declaration above it is
+	      the fallback for engines without round(). */
+	background-image: radial-gradient(
+		circle at center,
+		var(--vf-mark-dot) max(1px, .0088em),
+		transparent max(1.15px, .0101em)
+	);
+	background-size: max(5px, .05em) max(5px, .05em);
+	background-size: max(5px, round(nearest, .05em, 1px)) max(5px, round(nearest, .05em, 1px));
+	background-position: center bottom;
+}
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+	.v-footer__mark span {
+		-webkit-background-clip: text;
+		        background-clip: text;
+		color: transparent;
+		-webkit-text-fill-color: transparent;
+	}
+}
+
+@media (max-width: 600px) {
+	.v-footer { --vf-mark-size: 19.5vw; }
+	.v-footer__inner { display: block; }
+	.v-footer__copy { margin-bottom: 1.1rem; }
+	.v-footer__nav { gap: .75rem 1.4rem; }
+}
+
+/* ==========================================================================
+   NEWSLETTER FORM — the markup is shared, the skin is per surface.
+   This block is the LIGHT skin. The dark skin (on the ink card) lives in
+   single.css alongside the card it belongs to.
+   ========================================================================== */
+.v-nl__form { display: flex; flex-direction: column; gap: .55rem; }
+.v-nl__input {
+	width: 100%;
+	height: 46px;
+	padding: 0 14px;
+	border: 1px solid var(--v-hair);
+	border-radius: 11px;
+	background: var(--v-white);
+	color: var(--v-ink);
+	font-size: .95rem;
+	outline: none;
+	transition: border-color .15s ease, box-shadow .15s ease;
+}
+.v-nl__input::placeholder { color: var(--v-muted); }
+.v-nl__input:focus {
+	border-color: var(--v-accent);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--v-accent) 20%, transparent);
+}
+.v-nl__btn {
+	width: 100%;
+	height: 46px;
+	border: 0;
+	border-radius: 11px;
+	background: var(--v-accent);       /* white on this is 5.10:1 ✅ */
+	color: var(--v-white);
+	font-size: .95rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background .15s ease, transform .12s ease, box-shadow .15s ease;
+}
+.v-nl__btn:hover {
+	background: var(--v-accent-deep);
+	transform: translateY(-1px);
+	box-shadow: 0 10px 22px -12px color-mix(in srgb, var(--v-brand) 75%, transparent);
+}
+.v-nl__btn[disabled] { opacity: .6; cursor: default; transform: none; box-shadow: none; }
+.v-nl__note   { margin: .7rem 2px 0; font-size: .78rem; line-height: 1.4; color: var(--v-muted); }
+.v-nl__status { margin: .6rem 2px 0; font-size: .85rem; display: none; }
+.v-nl__status[data-state="success"] { display: block; color: var(--v-accent-deep); font-weight: 600; }
+.v-nl__status[data-state="error"]   { display: block; color: #B3261E; }
+/* Honeypot. Off-screen rather than display:none, because some bots skip
+   hidden inputs but happily fill a positioned one. */
+.v-nl__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+	.v-header, .v-header__bar, .v-nl__btn, .v-header__cta { transition: none; }
+	.v-nl__btn:hover, .v-header__cta:hover { transform: none; }
+}
+
+/* ==========================================================================
+   THE CANVAS — the mint wash every view sits on.
+   --------------------------------------------------------------------------
+   Global, not per view, because EVERY template opens with .v-canvas: the blog
+   index, the archives, search, 404 and the reading view all float the header
+   pill on the same wash. Keeping one copy here is what stops the index and the
+   post drifting into two slightly different mints.
+   ========================================================================== */
+/* ---- one continuous mint canvas -------------------------------------
+ * The mint and its soft bubbles run from the very top edge (behind the
+ * floating header pill) down through the page head, then fade into white.
+ * The header and the head sit on it transparently, which is what makes the
+ * pill read as floating rather than as a bar with a coloured strip above it.
+ *
+ * ::before is inset from the top only and masked to transparent at its foot,
+ * so there is never a hard horizontal seam where the wash ends. */
+.v-canvas {
+	position: relative;
+	background: var(--v-white);
+	isolation: isolate;
+}
+.v-canvas > * { position: relative; z-index: 1; }
+.v-canvas::before {
+	content: "";
+	position: absolute;
+	inset: 0 0 auto 0;
+	height: clamp(26rem, 38vw, 32rem);
+	z-index: 0;
+	pointer-events: none;
+	background:
+		radial-gradient(42rem 42rem at 4% 6%,   var(--v-mint-2) 0%, transparent 46%),
+		radial-gradient(24rem 24rem at 96% -5%, var(--v-mint-2) 0%, transparent 44%),
+		radial-gradient(32rem 32rem at 82% 94%, color-mix(in srgb, var(--v-mint-2) 82%, #fff) 0%, transparent 46%),
+		radial-gradient(16rem 16rem at 20% 98%, var(--v-mint-2) 0%, transparent 50%),
+		radial-gradient(13rem 13rem at 60% 26%, color-mix(in srgb, var(--v-mint-2) 78%, #fff) 0%, transparent 52%),
+		var(--v-mint);
+	-webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+	        mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+}
+
+/* The rounded-square grid, laid over the mint at low opacity and faded out at
+   the same rate. It is the one place the shared --v-grid-tile token is used on
+   this view; the token lives in style.css so the texture cannot drift. */
+.v-canvas::after {
+	content: "";
+	position: absolute;
+	inset: 0 0 auto 0;
+	height: clamp(26rem, 38vw, 32rem);
+	z-index: 0;
+	pointer-events: none;
+	opacity: .045;
+	background-image: var(--v-grid-tile);
+	background-position: center -18px;
+	-webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
+	        mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
+}

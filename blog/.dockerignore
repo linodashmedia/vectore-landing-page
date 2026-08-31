@@ -1,0 +1,4 @@
+# The build context is THIS directory (the Railway service's Root Directory is
+# set to `blog`, see README.md), so these paths are relative to blog/.
+README.md
+*.md
