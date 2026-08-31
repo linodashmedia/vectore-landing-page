@@ -128,10 +128,6 @@ to WordPress. The blog service needs no public domain of its own.
   off (`DISALLOW_FILE_EDIT`). Change the theme in Git and redeploy. Anything
   typed into a built-in editor would be discarded on the next deploy, so the
   editor is removed rather than left as a trap.
-- **The theme owns its SEO** (canonical, meta, Open Graph, JSON-LD) because
-  there is no SEO plugin. If you ever add Rank Math or Yoast, set
-  `VECTORE_BLOG_SEO_OFF` in the environment rather than running both: two
-  canonicals or two `BlogPosting` blocks on a page is worse than neither.
 - **A post's date has one source**, the byline in `inc/template-tags.php`, and it
   is always the *modified* date. Do not add a second date element.
 - **The visible breadcrumb and the `BreadcrumbList` schema are built from the
@@ -139,6 +135,63 @@ to WordPress. The blog service needs no public domain of its own.
   is a test that proves it.
 - **Newsletter signups are forwarded to the landing page's `/api/waitlist`**, so
   there is one list. The blog keeps no list of its own.
+
+## SEO and AI answer engines
+
+The theme owns its own metadata; there is no SEO plugin. If one is ever
+installed, set `VECTORE_BLOG_SEO_OFF` in the environment rather than running
+both, because two canonicals or two `BlogPosting` blocks on a page is worse than
+neither.
+
+**What the theme emits** (`inc/seo.php`): a self-referential canonical on every
+view *including paged ones*, a `wp_robots` policy, full Open Graph and Twitter
+cards with image dimensions and alt text, and one JSON-LD `@graph` whose nodes
+reference each other by `@id` — Organization, WebSite with a SearchAction, Blog,
+Person, and then BlogPosting / WebPage / CollectionPage / ProfilePage depending
+on the view, plus a BreadcrumbList built from the same function that renders the
+visible trail.
+
+**The four things that actually decide whether an LLM can use a page**, in
+rough order of how much they matter:
+
+1. **Being allowed to crawl at all.** This is `robots.txt`, and it is served at
+   the *origin root* by the landing page, so the blog's rules live in
+   `public/robots.txt` and nowhere else. WordPress's own virtual
+   `/blog/robots.txt` is never fetched by anything. The allowlist covers GPTBot,
+   OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, Claude-User,
+   PerplexityBot, Google-Extended, Applebot-Extended, DuckAssistBot and
+   MistralAI-User; everything not named is blocked by the catch-all.
+   `test/robots.test.php` asserts that list stays intact.
+2. **Content that is in the HTML.** Every template server-renders its content.
+   The only JavaScript that touches the article builds the table of contents,
+   and it reads headings that are already there.
+3. **An unambiguous canonical, author and date.** One canonical per view, a
+   Person node with `sameAs` links, and a visible modified date that matches the
+   `dateModified` in the schema.
+4. **A machine-readable summary.** `/blog/llms.txt` (`inc/llms.php`) lists the
+   posts with their last-updated dates, the topics, the authors with their bios,
+   and pointers to the sitemap, RSS and REST feeds. It is generated from the
+   database and cached in a transient that is dropped whenever a post changes,
+   so it cannot go stale. The product's own `llms.txt` at the origin links to it
+   and it links back.
+
+**Deliberate choices worth not undoing:**
+
+- `max-snippet:-1` and `max-video-preview:-1`. Capping the snippet on a blog
+  whose purpose is to be quoted is working against yourself.
+- `isAccessibleForFree: true` on every post. An answer engine treats an unstated
+  access policy far more cautiously than a stated open one.
+- Search results and 404s are `noindex, follow`. They are **not** disallowed in
+  robots.txt, on purpose: a crawler can only act on a noindex if it is allowed
+  to fetch the page and read it.
+- Author archives are indexed **only when the author has a bio**. With one, the
+  page is a Person entity and an E-E-A-T signal. Without one it is a second copy
+  of the post list under a different URL. The same rule decides whether the
+  author card renders at the foot of a post.
+
+**After going live:** submit `https://vectore.io/blog/wp-sitemap.xml` in Search
+Console and Bing Webmaster Tools. WordPress generates and updates it; nothing
+here needs maintaining.
 
 ## Testing
 

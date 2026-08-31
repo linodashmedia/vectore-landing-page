@@ -26,6 +26,9 @@ step "PHP syntax" bash -c '
 	exit $bad'
 
 step "Theme templates render"      php test/render.test.php
+step "SEO and AI metadata"         php test/seo.test.php
+step "robots.txt policy"           php test/robots.test.php
+step "Health check path"           php test/healthz.test.php
 step "Stylesheets and tokens"      php test/css.test.php
 step "Palette contrast"            php test/palette.test.php
 step "Proxy: /blog passthrough"    node test/proxy.test.js

@@ -31,4 +31,5 @@ require_once VECTORE_BLOG_DIR . '/inc/setup.php';
 require_once VECTORE_BLOG_DIR . '/inc/assets.php';
 require_once VECTORE_BLOG_DIR . '/inc/template-tags.php';
 require_once VECTORE_BLOG_DIR . '/inc/seo.php';
+require_once VECTORE_BLOG_DIR . '/inc/llms.php';
 require_once VECTORE_BLOG_DIR . '/inc/newsletter.php';

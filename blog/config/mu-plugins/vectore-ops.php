@@ -15,30 +15,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * The path this install is served from, with no trailing slash: '/blog' in
+ * production, '' if it is ever moved to a domain root.
+ *
+ * @return string
+ */
+function vectore_ops_base_path() {
+	$path = (string) wp_parse_url( defined( 'WP_HOME' ) ? WP_HOME : home_url(), PHP_URL_PATH );
+	return rtrim( $path, '/' );
+}
+
+/**
  * Health check for Railway.
  *
  * Deliberately does NOT touch the database. A health endpoint that queries
  * MySQL turns a slow database into a failed deploy and a restart loop, which is
  * the opposite of what you want while the database is the thing struggling.
  * Railway only needs to know the PHP worker is answering.
+ *
+ * 🔴 The path is DERIVED from WP_HOME, not written out. The proxy passes the
+ * /blog prefix through untouched, so what actually arrives here is
+ * `/blog/healthz`, and an earlier version of this matched a bare `/healthz`.
+ * It never fired, WordPress served its 404 instead, Railway read the non-2xx as
+ * a failed health check, and every deploy would have been marked failed while
+ * the site itself was working perfectly. Deriving it means the check follows
+ * the install if it ever moves.
  */
 add_action( 'init', function () {
-	if ( isset( $_SERVER['REQUEST_URI'] ) && '/healthz' === strtok( $_SERVER['REQUEST_URI'], '?' ) ) {
+	if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
+		return;
+	}
+
+	$path = strtok( $_SERVER['REQUEST_URI'], '?' );
+
+	if ( vectore_ops_base_path() . '/healthz' === $path ) {
 		header( 'Content-Type: application/json' );
 		header( 'Cache-Control: no-store' );
+		status_header( 200 );
 		echo '{"ok":true}';
 		exit;
 	}
 }, 0 );
-
-/**
- * The blog is proxied, so WordPress must not advertise the container's own
- * hostname anywhere. WP_HOME and WP_SITEURL cover most of it; the REST and
- * feed URLs are built separately and need the same treatment.
- */
-add_filter( 'rest_url', function ( $url ) {
-	return str_replace( home_url(), untrailingslashit( WP_HOME ), $url );
-} );
 
 /**
  * Strip the WordPress version from asset URLs.
