@@ -245,3 +245,61 @@ function vectore_blog_share() {
 	</div>
 	<?php
 }
+
+/**
+ * The author card that closes a post.
+ *
+ * This is an SEO element as much as a design one. Authorship is one of the few
+ * signals an answer engine can use to decide how much weight to give a claim,
+ * and a byline with nothing behind it carries none of that. The card gives the
+ * person a face, a description and links out, and inc/seo.php emits the same
+ * facts as a Person node so the visible and machine-readable versions agree.
+ *
+ * Renders nothing when the author has no bio: an empty card is worse than no
+ * card, and a Person entity with no description is worse than no entity.
+ *
+ * @param int|null $user_id Defaults to the current post's author.
+ */
+function vectore_blog_author_card( $user_id = null ) {
+	$user_id = $user_id ?: (int) get_post_field( 'post_author', get_the_ID() );
+	$bio     = trim( (string) get_the_author_meta( 'description', $user_id ) );
+
+	if ( '' === $bio ) {
+		return;
+	}
+
+	$links = array();
+	foreach ( array( 'url' => __( 'Website', 'vectore-blog' ), 'twitter' => 'X', 'linkedin' => 'LinkedIn' ) as $field => $label ) {
+		$value = trim( (string) get_the_author_meta( $field, $user_id ) );
+		if ( '' !== $value && filter_var( $value, FILTER_VALIDATE_URL ) ) {
+			$links[ $label ] = $value;
+		}
+	}
+	?>
+	<aside class="v-author">
+		<div class="v-author__avatar">
+			<?php echo get_avatar( $user_id, 128, '', '', array( 'height' => 64, 'width' => 64 ) ); ?>
+		</div>
+		<div class="v-author__body">
+			<p class="v-author__label"><?php esc_html_e( 'Written by', 'vectore-blog' ); ?></p>
+			<h2 class="v-author__name">
+				<a href="<?php echo esc_url( get_author_posts_url( $user_id ) ); ?>" rel="author">
+					<?php echo esc_html( get_the_author_meta( 'display_name', $user_id ) ); ?>
+				</a>
+			</h2>
+			<p class="v-author__bio"><?php echo esc_html( $bio ); ?></p>
+			<?php if ( $links ) : ?>
+				<ul class="v-author__links">
+					<?php foreach ( $links as $label => $href ) : ?>
+						<li>
+							<a href="<?php echo esc_url( $href ); ?>" rel="me noopener" target="_blank">
+								<?php echo esc_html( $label ); ?>
+							</a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
+		</div>
+	</aside>
+	<?php
+}

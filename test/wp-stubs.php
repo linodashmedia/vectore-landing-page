@@ -84,19 +84,46 @@ function get_the_content() { return $GLOBALS['vt']['content']; }
 function get_the_excerpt( $p = null ) { return $GLOBALS['vt']['excerpt']; }
 function has_excerpt( $p = null ) { return true; }
 function get_post_field( $f, $p = null ) { return 'post_content' === $f ? $GLOBALS['vt']['content'] : 7; }
-/** True for the machine-readable formats the theme uses: 'c' and DATE_W3C. */
-function vt_is_iso( $f ) { return 'c' === $f || DATE_W3C === $f; }
-function get_the_date( $f = '' ) { return vt_is_iso( $f ) ? '2026-08-01T09:00:00+00:00' : 'August 1, 2026'; }
-function get_the_modified_date( $f = '' ) { return vt_is_iso( $f ) ? '2026-08-20T11:30:00+00:00' : 'August 20, 2026'; }
+/**
+ * Dates. Formatted from a real timestamp rather than returning canned strings,
+ * so an arbitrary format ('Y-m-d', say) behaves the way WordPress would instead
+ * of only the two formats the first test happened to use.
+ */
+const VT_PUBLISHED = 1785574800;   // 2026-08-01 09:00 UTC
+const VT_MODIFIED  = 1787225400;   // 2026-08-20 11:30 UTC
+function vt_date( $ts, $f ) {
+	if ( '' === $f ) { $f = 'F j, Y'; }
+	if ( 'c' === $f || DATE_W3C === $f ) { $f = DATE_W3C; }
+	return gmdate( $f, $ts );
+}
+function get_the_date( $f = '', $post = null ) { return vt_date( VT_PUBLISHED, $f ); }
+function get_the_modified_date( $f = '', $post = null ) { return vt_date( VT_MODIFIED, $f ); }
 function get_the_category( $p = null ) { return $GLOBALS['vt']['cats']; }
 function get_the_tags( $p = null ) { return $GLOBALS['vt']['tags']; }
 function wp_get_post_categories( $p ) { return array( 4 ); }
-function get_categories( $a = array() ) { return $GLOBALS['vt']['cats']; }
+function get_categories( $a = array() ) {
+	return array(
+		(object) array(
+			'term_id'     => 4,
+			'name'        => 'Community',
+			'slug'        => 'community',
+			'description' => 'Building rooms people come back to.',
+			'count'       => 6,
+		),
+	);
+}
 function get_category_link( $id ) { return 'https://vectore.io/blog/category/community/'; }
 function get_tag_link( $id ) { return 'https://vectore.io/blog/tag/retention/'; }
 function get_term_link( $t ) { return 'https://vectore.io/blog/category/community/'; }
 function get_author_posts_url( $id ) { return 'https://vectore.io/blog/author/james/'; }
-function get_the_author_meta( $f, $id = null ) { return 'James Njoya'; }
+$GLOBALS['vauthor'] = array(
+	'display_name' => 'James Njoya',
+	'description'  => 'James builds and writes about learning businesses. He has run cohort programmes since 2019.',
+	'url'          => 'https://example.com/james',
+	'twitter'      => 'https://x.com/example',
+	'linkedin'     => '',
+);
+function get_the_author_meta( $f, $id = null ) { return $GLOBALS['vauthor'][ $f ] ?? ''; }
 function get_avatar( $id, $s = 96, $d = '', $alt = '', $a = array() ) {
 	return '<img src="https://example.com/a.png" width="40" height="40" alt="">';
 }
@@ -119,14 +146,22 @@ function str_word_count_safe( $s ) { return str_word_count( $s ); }
 /* --- conditionals --------------------------------------------------------- */
 function is_home()      { return vt_view( 'home' ); }
 function is_front_page(){ return vt_view( 'home' ); }
-function is_singular( $t = '' ) { return vt_view( 'single' ) || vt_view( 'page' ); }
+function is_singular( $t = '' ) {
+	$is = vt_view( 'single' ) || vt_view( 'page' );
+	if ( ! $is || '' === $t ) { return $is; }
+	// 'post' matches the single-post view only. Getting this wrong made a static
+	// page emit a BlogPosting, which is exactly the sort of thing the SEO test
+	// is meant to catch, so the stub has to discriminate the way WordPress does.
+	$types = (array) $t;
+	return in_array( vt_view( 'single' ) ? 'post' : 'page', $types, true );
+}
 function is_single()    { return vt_view( 'single' ); }
 function is_page()      { return vt_view( 'page' ); }
-function is_archive()   { return vt_view( 'archive' ); }
+function is_archive()   { return vt_view( 'archive' ) || vt_view( 'author' ); }
 function is_category()  { return vt_view( 'archive' ); }
 function is_tag()       { return false; }
 function is_tax()       { return false; }
-function is_author()    { return false; }
+function is_author()    { return vt_view( 'author' ); }
 function is_search()    { return vt_view( 'search' ); }
 function is_paged()     { return false; }
 function is_attachment(){ return false; }
@@ -144,6 +179,8 @@ function get_bloginfo( $k = '' ) {
 		'description' => 'Notes on building a learning business people actually show up for.',
 		'charset'     => 'UTF-8',
 		'version'     => '6.8',
+		'language'    => 'en-US',
+		'rss2_url'    => 'https://vectore.io/blog/feed/',
 	)[ $k ] ?? '';
 }
 function bloginfo( $k = '' ) { echo esc_html( get_bloginfo( $k ) ); }
@@ -202,4 +239,71 @@ class WP_Query {
 	public function __construct( $args = array() ) { $this->n = $args['posts_per_page'] ?? 3; }
 	public function have_posts() { return $this->n > 0; }
 	public function the_post() { $this->n--; }
+}
+
+/* ==========================================================================
+   Stubs added for the SEO and llms.txt layers.
+   ========================================================================== */
+
+/** Paged state, set by the SEO test. */
+$GLOBALS['vpaged'] = 0;
+function get_query_var( $k, $d = '' ) {
+	if ( 'paged' === $k ) { return $GLOBALS['vpaged']; }
+	if ( 'page' === $k )  { return 0; }
+	return $GLOBALS['vqv'][ $k ] ?? $d;
+}
+$GLOBALS['vqv'] = array();
+
+function trailingslashit( $s ) { return rtrim( (string) $s, '/\\' ) . '/'; }
+function untrailingslashit( $s ) { return rtrim( (string) $s, '/\\' ); }
+function user_trailingslashit( $s, $t = '' ) { return trailingslashit( $s ); }
+
+function get_queried_object_id() { return 7; }
+function get_avatar_url( $id, $a = array() ) { return 'https://example.com/avatar-192.png'; }
+function get_post_meta( $id, $k, $single = false ) { return $GLOBALS['vmeta'][ $k ] ?? ''; }
+$GLOBALS['vmeta'] = array( '_wp_attachment_image_alt' => 'A cohort working together' );
+
+function get_previous_posts_page_link() { return $GLOBALS['vpaged'] > 1 ? home_url( '/page/' . ( $GLOBALS['vpaged'] - 1 ) . '/' ) : ''; }
+function get_next_posts_page_link()     { return home_url( '/page/' . ( max( 1, $GLOBALS['vpaged'] ) + 1 ) . '/' ); }
+
+class VT_Query_Global { public $max_num_pages = 4; }
+$GLOBALS['wp_query'] = new VT_Query_Global();
+
+function add_rewrite_rule( $r, $q, $p = 'bottom' ) {}
+function flush_rewrite_rules( $hard = true ) {}
+function status_header( $c ) {}
+
+$GLOBALS['vtransients'] = array();
+function get_transient( $k ) { return $GLOBALS['vtransients'][ $k ] ?? false; }
+function set_transient( $k, $v, $t = 0 ) { $GLOBALS['vtransients'][ $k ] = $v; return true; }
+function delete_transient( $k ) { unset( $GLOBALS['vtransients'][ $k ] ); return true; }
+if ( ! defined( 'DAY_IN_SECONDS' ) ) { define( 'DAY_IN_SECONDS', 86400 ); }
+
+function wp_trim_words( $text, $n = 55, $more = '...' ) {
+	$w = preg_split( '/\s+/', trim( wp_strip_all_tags( $text ) ) );
+	return count( $w ) <= $n ? implode( ' ', $w ) : implode( ' ', array_slice( $w, 0, $n ) ) . $more;
+}
+
+/**
+ * Two published posts, so the llms.txt builder has a list to render and the
+ * "updated" dates can be checked.
+ */
+function get_posts( $args = array() ) {
+	return array(
+		(object) array( 'ID' => 101, 'post_content' => $GLOBALS['vt']['content'], 'post_title' => $GLOBALS['vt']['title'] ),
+		(object) array( 'ID' => 102, 'post_content' => $GLOBALS['vt']['content'], 'post_title' => $GLOBALS['vt']['title'] ),
+	);
+}
+function get_users( $args = array() ) { return array( (object) array( 'ID' => 7 ) ); }
+
+/**
+ * Robots directives. The theme filters `wp_robots`; the harness records the
+ * filter so a test can run it without a real hook system.
+ */
+function vt_robots() {
+	$out = array( 'max-image-preview' => 'large' );
+	foreach ( $GLOBALS['vhooks'] as $h ) {
+		if ( 'filter' === $h[0] && 'wp_robots' === $h[1] ) { $out = call_user_func( $h[2], $out ); }
+	}
+	return $out;
 }

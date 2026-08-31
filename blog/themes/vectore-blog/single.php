@@ -85,6 +85,8 @@ while ( have_posts() ) :
 				</ul>
 			<?php endif; ?>
 
+			<?php vectore_blog_author_card(); ?>
+
 			<?php // Right rail on desktop; the same card reappears below as the mobile CTA. ?>
 			<aside class="v-rail v-rail--right">
 				<?php get_template_part( 'template-parts/newsletter-card', null, array( 'source' => 'blog_rail' ) ); ?>

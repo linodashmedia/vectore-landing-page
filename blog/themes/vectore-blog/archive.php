@@ -29,6 +29,9 @@ get_header();
 		</span>
 		<h1 class="v-head__title"><?php echo esc_html( get_the_archive_title() ); ?></h1>
 		<?php
+		// On an author archive the "description" IS the bio, and it is what
+		// makes the page a Person entity worth indexing rather than a second
+		// copy of the post list. inc/seo.php noindexes it when it is empty.
 		$description = get_the_archive_description();
 		if ( $description ) :
 			?>

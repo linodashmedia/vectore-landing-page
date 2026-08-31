@@ -6,6 +6,7 @@ Vectore brings courses, cohorts, coaching, workshops, events, quizzes, assessmen
 
 ## Key pages
 - [Home](https://vectore.app/): product overview, features, and the founding waitlist.
+- [Blog](https://vectore.io/blog): writing on courses, cohorts, coaching and community. Its own machine-readable index is at https://vectore.io/blog/llms.txt.
 - [Contact](https://vectore.app/contact): reach the Vectore team about the product, waitlist, support, or partnerships.
 - [Privacy Policy](https://vectore.app/privacy): how Vectore handles data.
 - [Terms of Service](https://vectore.app/terms): terms for using Vectore.
