@@ -156,12 +156,14 @@ rough order of how much they matter:
 
 1. **Being allowed to crawl at all.** This is `robots.txt`, and it is served at
    the *origin root* by the landing page, so the blog's rules live in
-   `public/robots.txt` and nowhere else. WordPress's own virtual
+   `robots.js` at the repository root and nowhere else. WordPress's own virtual
    `/blog/robots.txt` is never fetched by anything. The allowlist covers GPTBot,
    OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, Claude-User,
    PerplexityBot, Google-Extended, Applebot-Extended, DuckAssistBot and
    MistralAI-User; everything not named is blocked by the catch-all.
-   `test/robots.test.php` asserts that list stays intact.
+   `test/robots.test.js` asserts that list stays intact. The blog's sitemap is
+   only advertised on origins that actually serve `/blog`, so this repository's
+   two deployables never point a crawler at each other's 404s.
 2. **Content that is in the HTML.** Every template server-renders its content.
    The only JavaScript that touches the article builds the table of contents,
    and it reads headings that are already there.

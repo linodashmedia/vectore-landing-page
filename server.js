@@ -6,6 +6,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const { buildRobots } = require('./robots');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -148,6 +149,27 @@ if (BLOG_ORIGIN) {
 } else {
   console.log('[blog] BLOG_ORIGIN not set; /blog is not served by this instance');
 }
+
+// --- robots.txt, generated per host --------------------------------------
+// Registered BEFORE express.static deliberately: this route has to win, and
+// public/robots.txt was deleted so there is nothing for it to race with.
+// See robots.js for why this is generated rather than served from a file.
+app.get('/robots.txt', (req, res) => {
+  const { body, known } = buildRobots({
+    hostHeader: req.headers.host,
+    // Only advertise the blog's sitemap where the blog is actually served.
+    // Pointing a crawler at /blog/wp-sitemap.xml on an origin that 404s it
+    // wastes crawl budget and looks like a broken site.
+    blogEnabled: Boolean(BLOG_ORIGIN),
+  });
+
+  res.type('text/plain; charset=utf-8');
+  // Short cache: this is the file you most want to be able to change quickly
+  // when a crawler misbehaves. An unknown host is not cached at all, since the
+  // answer depends entirely on which host asked.
+  res.setHeader('Cache-Control', known ? 'public, max-age=3600' : 'no-store');
+  res.send(body);
+});
 
 // --- Static site ---
 // Long-cache immutable assets (images, fonts) for faster repeat loads / better
