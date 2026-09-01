@@ -147,11 +147,19 @@ replaced.
 npm test
 ```
 
-Runs everything that needs only PHP and Node: PHP syntax across the blog theme,
+Runs on every push and pull request via GitHub Actions
+(`.github/workflows/ci.yml`), and locally with the same command. Covers
+everything that needs only PHP and Node: PHP syntax across the blog theme,
 the theme's templates rendered against a WordPress stub, stylesheet and
 design-token integrity, palette contrast measured from the CSS, and the `/blog`
 proxy end to end. The browser-based layout checks are described in
 `blog/README.md`.
+
+To check a *deployed* blog rather than the source:
+
+```bash
+npm run smoke -- https://vectore.io/blog
+```
 
 ## Editing content
 Everything is in `public/index.html`. Copy, colors (`#E65100` orange / `#1E293B`
