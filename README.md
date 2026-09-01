@@ -82,6 +82,7 @@ Railway sets the `PORT` environment variable automatically; the server reads it.
 | `ADMIN_TOKEN` | If set, fetch all signups at `GET /api/waitlist?token=YOUR_TOKEN`.      |
 | `KIT_API_KEY` | Your Kit (kit.com / ConvertKit) API key. Set together with `KIT_FORM_ID` to auto-subscribe every signup to your email list. |
 | `KIT_FORM_ID` | Numeric ID of the Kit form/list new signups are added to.              |
+| `ROBOTS_HOSTS` | Comma-separated hostnames this origin serves, used by `robots.js`. Defaults to `vectore.io,www.vectore.io,vectore.app,www.vectore.app`. Any other host is served `Disallow: /`. |
 | `BLOG_ORIGIN` | The WordPress service's address, e.g. `http://blog.railway.internal:8080`. Set it and `/blog` is proxied to WordPress; unset, `/blog` 404s. |
 
 ### Connect your Kit (kit.com) email list
@@ -114,6 +115,31 @@ The page ships SEO-ready:
 **Domain:** the SEO files (canonical, og:url, `robots.txt` `Sitemap:`, and every
 `<loc>` in `sitemap.xml`) point to `https://vectore.app`. If your live domain
 differs, search `vectore.app` across `public/` and update it.
+
+## robots.txt
+
+Generated per request by `robots.js`, not served from a file, and registered
+ahead of the static middleware so the route wins.
+
+It is generated because this one service answers on more than one hostname, and
+a static file has a single `Sitemap:` line that can only name one of them. Two
+things follow that a file cannot do:
+
+- **The sitemap lines name the host that was actually asked**, so they are
+  correct on vectore.app and vectore.io at once, and on any domain added later.
+- **An unrecognised host is served `Disallow: /`.** A Railway service also
+  answers on its own generated `*.up.railway.app` domain, which serves a
+  complete crawlable copy of the site. Left open, it is duplicate content
+  competing with the real thing in the index.
+
+The Host header is attacker-controlled, so it is never printed back: it either
+matches a host in `ROBOTS_HOSTS` (or the built-in default list) or it is treated
+as unknown. The blog's sitemap is only advertised when `BLOG_ORIGIN` is set,
+since otherwise `/blog/wp-sitemap.xml` would 404.
+
+The crawl policy itself (the allowlist of search engines and AI answer engines,
+the disallowed paths, the catch-all) is unchanged from the static file this
+replaced.
 
 ## Testing
 
