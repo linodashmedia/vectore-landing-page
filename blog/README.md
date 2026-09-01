@@ -42,6 +42,15 @@ and the `pathRewrite` in `server.js`.
 
 ## Deploying it
 
+There is an interactive version of everything below at
+[`deploy/runbook.html`](deploy/runbook.html) — open it in a browser and it tracks
+which steps you have finished, copies each value to the clipboard, and generates
+the WordPress salts for you. GitHub will not render it; download it or open it
+from a clone.
+
+The steps below are the same, and this file stays the source of record: if the
+two ever disagree, this one is right.
+
 ### 1. MySQL
 
 Railway dashboard → **New → Database → Add MySQL**, in the project that already
