@@ -217,6 +217,22 @@ inside the 60px safe area the platforms crop into, or if the halftone wordmark
 runs up behind the tagline. `test/seo.test.php` separately asserts the PNG's real
 pixel dimensions match the `og:image:width`/`height` the theme declares.
 
+**After going live, check the deployment from the outside:**
+
+```bash
+npm run smoke -- https://vectore.io/blog
+```
+
+Everything else in `test/` runs against the source; this runs against the
+running site, because the container layer is the part that cannot be verified
+any other way. It checks the health endpoint, the theme actually being active,
+a real post permalink, the sitemap, `llms.txt`, `robots.txt`, the social card
+and wp-admin, and each failure names the likely cause rather than just the
+status code. It follows redirects with a hard cap, so the most likely
+deployment failure (WordPress bouncing between http and https because it
+misread `X-Forwarded-Proto`) is reported as a loop with its trace instead of
+hanging.
+
 **After going live:** submit `https://vectore.io/blog/wp-sitemap.xml` in Search
 Console and Bing Webmaster Tools. WordPress generates and updates it; nothing
 here needs maintaining.

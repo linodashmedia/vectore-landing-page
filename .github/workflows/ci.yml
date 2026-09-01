@@ -1,0 +1,53 @@
+# Runs the test suite on every push and pull request.
+#
+# The repository had no CI at all until now, which meant the 255 checks in
+# `npm test` only ran when someone remembered to run them. Everything they
+# cover is the kind of thing that fails silently in production: a canonical
+# that de-indexes pagination, a contrast pairing that drops below AA, a
+# health-check path that disagrees with railway.json.
+#
+# Deliberately NOT here: a deploy step. Railway deploys from GitHub on its own
+# once the service is connected, so an Actions deploy would either duplicate
+# that or race it.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A second push to the same branch makes the first run irrelevant.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      # PHP is preinstalled on the GitHub runners, so there is no setup action
+      # and no third-party dependency in the pipeline. The suite needs 8.1+ for
+      # str_contains and friends; the runner image ships 8.3.
+      - name: Show versions
+        run: |
+          node --version
+          php --version
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test
