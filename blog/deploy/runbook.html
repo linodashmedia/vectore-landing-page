@@ -1,0 +1,866 @@
+<!--
+  The Railway deployment walkthrough, as a page you work through rather than read.
+
+  Open it in a browser: it tracks which steps you have finished (in that browser
+  only), copies each value to the clipboard, and generates the eight WordPress
+  security salts locally so that step needs no terminal and no third-party site.
+
+  🔴 ../README.md is the SOURCE OF RECORD for the variable list and for why the
+  deployment is shaped this way. This page is the click-by-click walkthrough of
+  the same steps. If the two ever disagree, the README is right and this file is
+  stale. Anything that changes a variable name, a path or a mount point has to be
+  changed in both.
+
+  Webfonts come from Google Fonts, so the typography needs a network connection;
+  everything else works offline.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Vectore Blog Deploy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* ==========================================================================
+   Tokens. The palette is the blog theme's own (blog/themes/vectore-blog/
+   style.css), applied semantically here so both themes resolve as a set.
+   Every colour is defined on bare :root first; the theme blocks only
+   REDEFINE tokens, never introduce one.
+   ========================================================================== */
+:root {
+  --bg:          #FBFDFC;   /* white with a mint bias, not a neutral grey */
+  --surface:     #F1F7F5;
+  --surface-2:   #E4F0EC;
+  --line:        #DDE7E4;
+  --line-strong: #C3D6D1;
+  --heading:     #07211F;
+  --text:        #2C3A38;
+  --text-dim:    #5F7370;
+  --accent:      #0A7C6E;   /* 5.10:1 on white: the only teal safe for text */
+  --accent-dim:  #0D9488;
+  --on-accent:   #FFFFFF;
+  --warn-bg:     #FDEFE9;
+  --warn-line:   #F2B79F;
+  --warn-mark:   #C2410C;
+  --done:        #0A7C6E;
+  --code-bg:     #07211F;
+  --code-fg:     #D7EDE7;
+  --code-key:    #2ED3A7;
+  --shadow:      0 1px 2px rgba(7,33,31,.05), 0 8px 24px -16px rgba(7,33,31,.28);
+
+  --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --body:    "Figtree", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:          #061A18;
+    --surface:     #0C2523;
+    --surface-2:   #123330;
+    --line:        #17403B;
+    --line-strong: #245A53;
+    --heading:     #EAF5F2;
+    --text:        #D2E6E1;
+    --text-dim:    #8FA9A4;
+    --accent:      #3FD9AE;   /* 8.4:1 on this ground */
+    --accent-dim:  #2ED3A7;
+    --on-accent:   #04211C;
+    --warn-bg:     #2E1810;
+    --warn-line:   #6B3A26;
+    --warn-mark:   #FFA57A;
+    --done:        #3FD9AE;
+    --code-bg:     #041210;
+    --code-fg:     #CFE9E2;
+    --code-key:    #3FD9AE;
+    --shadow:      0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:          #061A18;
+  --surface:     #0C2523;
+  --surface-2:   #123330;
+  --line:        #17403B;
+  --line-strong: #245A53;
+  --heading:     #EAF5F2;
+  --text:        #D2E6E1;
+  --text-dim:    #8FA9A4;
+  --accent:      #3FD9AE;
+  --accent-dim:  #2ED3A7;
+  --on-accent:   #04211C;
+  --warn-bg:     #2E1810;
+  --warn-line:   #6B3A26;
+  --warn-mark:   #FFA57A;
+  --done:        #3FD9AE;
+  --code-bg:     #041210;
+  --code-fg:     #CFE9E2;
+  --code-key:    #3FD9AE;
+  --shadow:      0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--display);
+  color: var(--heading);
+  line-height: 1.15;
+  letter-spacing: -.022em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+a { color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 2px; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+code { font-family: var(--mono); font-size: .92em; }
+
+/* ---- shell ------------------------------------------------------------- */
+.page {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: clamp(1.75rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2rem) 5rem;
+}
+
+.masthead { max-width: 44rem; margin-bottom: 2.5rem; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--mono);
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .9rem;
+}
+.eyebrow::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent-dim);
+}
+h1 { font-size: clamp(2rem, 4.4vw, 2.9rem); }
+.standfirst {
+  margin: .9rem 0 0;
+  font-size: 1.08rem;
+  color: var(--text-dim);
+  max-width: 40rem;
+}
+
+.facts {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  margin-top: 1.4rem; padding: 0; list-style: none;
+}
+.facts li {
+  font-family: var(--mono);
+  font-size: .78rem;
+  padding: .35rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-dim);
+}
+
+/* ---- two-column: sticky rail + steps ----------------------------------- */
+.layout { display: block; }
+@media (min-width: 62rem) {
+  .layout {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+  .rail { position: sticky; top: 1.5rem; }
+}
+
+.rail { margin-bottom: 2.5rem; }
+.rail h2 {
+  font-family: var(--body);
+  font-size: .72rem; font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: .8rem;
+}
+.rail ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .1rem; }
+.rail a {
+  display: flex; align-items: baseline; gap: .6rem;
+  padding: .34rem .4rem;
+  border-radius: 7px;
+  font-size: .88rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: background .14s ease, color .14s ease;
+}
+.rail a:hover { background: var(--surface); color: var(--accent); }
+.rail .n {
+  font-family: var(--mono);
+  font-size: .74rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-dim);
+  flex: 0 0 1.35rem;
+}
+.rail li.is-done a { color: var(--text-dim); }
+.rail li.is-done .n::after { content: "\2713"; color: var(--done); margin-left: .1rem; }
+.rail li.is-done .label { text-decoration: line-through; text-decoration-color: var(--line-strong); }
+
+.progress {
+  margin-top: 1.1rem; padding-top: .9rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono); font-size: .76rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+.bar { height: 4px; border-radius: 99px; background: var(--line); margin-top: .5rem; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent-dim); transition: width .3s ease; }
+
+/* ---- steps -------------------------------------------------------------- */
+.steps { display: grid; gap: 1.1rem; max-width: 46rem; }
+
+.step {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.step > .head {
+  display: flex; align-items: flex-start; gap: .85rem;
+  padding: 1.15rem 1.3rem;
+  cursor: pointer;
+}
+.step > .head:hover { background: var(--surface); }
+.step .tick {
+  flex: 0 0 auto;
+  width: 22px; height: 22px; margin-top: .15rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--bg);
+  display: grid; place-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background .14s ease, border-color .14s ease;
+}
+.step .tick svg { width: 13px; height: 13px; stroke: var(--on-accent); fill: none; stroke-width: 3; opacity: 0; }
+.step.is-done .tick { background: var(--done); border-color: var(--done); }
+.step.is-done .tick svg { opacity: 1; }
+.step .num {
+  font-family: var(--mono); font-size: .74rem; font-weight: 600;
+  color: var(--text-dim); letter-spacing: .06em;
+  flex: 0 0 auto; margin-top: .28rem;
+  font-variant-numeric: tabular-nums;
+}
+.step h2 { font-size: 1.16rem; flex: 1; }
+.step.is-done h2 { color: var(--text-dim); }
+.step .where {
+  display: block; margin-top: .3rem;
+  font-family: var(--mono); font-size: .76rem; font-weight: 400;
+  letter-spacing: 0; color: var(--text-dim);
+}
+.step .body { padding: 0 1.3rem 1.35rem; border-top: 1px solid var(--line); padding-top: 1.1rem; }
+.step p { margin: 0 0 .85rem; }
+.step p:last-child { margin-bottom: 0; }
+
+.why {
+  margin: .9rem 0 0;
+  padding-left: .9rem;
+  border-left: 2px solid var(--line-strong);
+  font-size: .93rem;
+  color: var(--text-dim);
+}
+.why b { color: var(--text); font-weight: 600; }
+
+.alert {
+  display: flex; gap: .7rem;
+  margin: 1rem 0 0;
+  padding: .85rem 1rem;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-line);
+  border-radius: 10px;
+  font-size: .93rem;
+}
+.alert .m { flex: 0 0 auto; color: var(--warn-mark); font-weight: 700; font-family: var(--mono); font-size: .8rem; margin-top: .1rem; }
+.alert p { margin: 0; }
+.alert p + p { margin-top: .5rem; }
+
+/* ---- values to copy ----------------------------------------------------- */
+.vars { margin: 1rem 0 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.vars .bar-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .5rem .5rem .5rem .85rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.vars .bar-top span {
+  font-family: var(--mono); font-size: .73rem;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim);
+}
+.vars pre {
+  margin: 0; padding: .9rem 1rem;
+  background: var(--code-bg); color: var(--code-fg);
+  font-family: var(--mono); font-size: .82rem; line-height: 1.75;
+  overflow-x: auto;
+}
+.vars pre b { color: var(--code-key); font-weight: 500; }
+
+button.copy {
+  font-family: var(--body); font-size: .78rem; font-weight: 600;
+  padding: .34rem .7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  background: var(--bg); color: var(--text);
+  cursor: pointer;
+  transition: border-color .14s ease, color .14s ease;
+}
+button.copy:hover { border-color: var(--accent); color: var(--accent); }
+button.copy[data-state="ok"] { color: var(--done); border-color: var(--done); }
+button.copy[data-state="err"] { color: var(--warn-mark); border-color: var(--warn-line); }
+
+.gen {
+  font-family: var(--body); font-size: .87rem; font-weight: 600;
+  padding: .55rem 1rem;
+  border: 0; border-radius: 9px;
+  background: var(--accent); color: var(--on-accent);
+  cursor: pointer;
+}
+.gen:hover { background: var(--accent-dim); }
+
+kbd {
+  font-family: var(--mono); font-size: .82em;
+  padding: .1em .38em;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--surface);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.path { font-family: var(--mono); font-size: .86em; color: var(--text); background: var(--surface-2); padding: .1em .4em; border-radius: 4px; }
+
+/* ---- verify + troubleshooting ------------------------------------------ */
+.after { max-width: 46rem; margin-top: 3.5rem; }
+.after > h2 { font-size: 1.45rem; margin-bottom: .4rem; }
+.after > p.sub { color: var(--text-dim); margin: 0 0 1.2rem; }
+
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.checks li {
+  display: flex; gap: .7rem; align-items: baseline;
+  padding: .7rem .9rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+  font-size: .94rem;
+}
+.checks .k { font-family: var(--mono); font-size: .8rem; color: var(--accent); flex: 0 0 auto; }
+
+.faults { display: grid; gap: .6rem; margin-top: 1rem; }
+details.fault {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  overflow: hidden;
+}
+details.fault summary {
+  padding: .8rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--heading);
+  list-style: none;
+  display: flex; gap: .6rem; align-items: baseline;
+}
+details.fault summary::-webkit-details-marker { display: none; }
+details.fault summary::before {
+  content: "\203A";
+  color: var(--accent);
+  font-size: 1.2em; line-height: 1;
+  transition: transform .18s ease;
+  display: inline-block;
+}
+details.fault[open] summary::before { transform: rotate(90deg); }
+details.fault summary:hover { background: var(--surface); }
+details.fault .fix { padding: 0 1rem 1rem 2.2rem; font-size: .94rem; }
+details.fault .fix p { margin: 0 0 .6rem; }
+details.fault .fix p:last-child { margin-bottom: 0; }
+
+footer.note {
+  max-width: 46rem;
+  margin-top: 3rem; padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  font-size: .88rem; color: var(--text-dim);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <div class="eyebrow">Deployment runbook</div>
+    <h1>Put the Vectore blog on Railway</h1>
+    <p class="standfirst">
+      Nine steps, done once. At the end, WordPress is answering at
+      <span class="path">vectore.io/blog</span> behind the landing page, with the
+      teal theme active and uploads that survive a redeploy.
+    </p>
+    <ul class="facts">
+      <li>~20 minutes</li>
+      <li>2 services + 1 volume</li>
+      <li>order matters</li>
+    </ul>
+  </header>
+
+  <div class="layout">
+
+    <nav class="rail" aria-label="Steps">
+      <h2>Steps</h2>
+      <ol id="rail"></ol>
+      <div class="progress">
+        <span id="count">0 of 9 done</span>
+        <div class="bar"><i id="bar"></i></div>
+      </div>
+    </nav>
+
+    <main class="steps" id="steps">
+
+      <!-- 1 -->
+      <section class="step" id="s1" data-label="Add MySQL">
+        <div class="head">
+          <button class="tick" aria-label="Mark step 1 done" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="num">01</span>
+          <h2>Add the database
+            <span class="where">Railway &rsaquo; your existing project &rsaquo; New</span>
+          </h2>
+        </div>
+        <div class="body">
+          <p>Choose <b>Database &rarr; Add MySQL</b>. Put it in the <b>same project</b> as the landing page, not a new one.</p>
+          <p class="why"><b>Why the same project:</b> services in one project reach each other over Railway's private network. A database in a separate project would have to be reached over the public internet, which is slower and billed as egress.</p>
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section class="step" id="s2" data-label="Create the service">
+        <div class="head">
+          <button class="tick" aria-label="Mark step 2 done" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="num">02</span>
+          <h2>Create the blog service
+            <span class="where">New &rsaquo; GitHub Repo &rsaquo; vectore-landing-page</span>
+          </h2>
+        </div>
+        <div class="body">
+          <p>Pick the same repository the landing page already uses. Railway will start a build immediately &mdash; let it fail, it has nowhere to build from yet.</p>
+          <p>Then open <b>Settings &rarr; Source</b> and set:</p>
+          <div class="vars">
+            <div class="bar-top"><span>Root Directory</span><button class="copy" data-copy="blog">Copy</button></div>
+            <pre><b>blog</b></pre>
+          </div>
+          <div class="alert">
+            <span class="m">!</span>
+            <div>
+              <p><b>This is the step everything else depends on.</b> The root directory becomes the Docker build context, and every <code>COPY</code> path in the Dockerfile is written relative to <span class="path">blog/</span>.</p>
+              <p>Get it wrong and the build fails on the first <code>COPY</code> with a file-not-found, which reads like a missing file rather than a wrong setting.</p>
+            </div>
+          </div>
+          <p class="why"><b>No builder to choose:</b> <span class="path">blog/railway.json</span> already declares the Dockerfile and the health check. Railway reads it once the root directory points at it.</p>
+        </div>
+      </section>
+
+      <!-- 3 -->
+      <section class="step" id="s3" data-label="Database variables">
+        <div class="head">
+          <button class="tick" aria-label="Mark step 3 done" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="num">03</span>
+          <h2>Wire up the database
+            <span class="where">Blog service &rsaquo; Variables &rsaquo; Raw editor</span>
+          </h2>
+        </div>
+        <div class="body">
+          <p>Paste these exactly as written, braces and all. Railway resolves them at deploy time.</p>
+          <div class="vars">
+            <div class="bar-top"><span>Blog service variables</span><button class="copy" data-copy="db">Copy all</button></div>
+<pre id="db-vars"><b>MYSQLHOST</b>=${{MySQL.MYSQLHOST}}
+<b>MYSQLPORT</b>=${{MySQL.MYSQLPORT}}
+<b>MYSQLUSER</b>=${{MySQL.MYSQLUSER}}
+<b>MYSQLPASSWORD</b>=${{MySQL.MYSQLPASSWORD}}
+<b>MYSQLDATABASE</b>=${{MySQL.MYSQLDATABASE}}</pre>
+          </div>
+          <p class="why"><b>Why references, not the actual values:</b> a pasted password keeps working right up until someone rotates the database credentials, and then the site goes down months later with nothing in the diff to explain it. A reference always resolves to the current value.</p>
+          <p class="why"><b>Why these names:</b> the WordPress image reads <code>WORDPRESS_DB_*</code>, but Railway publishes <code>MYSQL*</code>. The container's entrypoint maps one to the other on boot, so you set the names Railway already gives you.</p>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section class="step" id="s4" data-label="Security salts">
+        <div class="head">
+          <button class="tick" aria-label="Mark step 4 done" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="num">04</span>
+          <h2>Generate the security salts
+            <span class="where">Same Variables panel</span>
+          </h2>
+        </div>
+        <div class="body">
+          <p>WordPress signs every login cookie with eight secret keys. Generate them here &mdash; they are made in your browser and never leave it.</p>
+          <p style="margin-bottom:1rem"><button class="gen" id="gen-salts">Generate eight salts</button></p>
+          <div class="vars" id="salt-wrap" hidden>
+            <div class="bar-top"><span>Blog service variables</span><button class="copy" data-copy="salts">Copy all</button></div>
+            <pre id="salt-out"></pre>
+          </div>
+          <div class="alert">
+            <span class="m">!</span>
+            <div><p><b>Do not skip this.</b> With no salts set, the image invents new ones on every boot, so every deploy silently logs out every signed-in user &mdash; including you, mid-edit.</p></div>
+          </div>
+          <p class="why"><b>On the character set:</b> these avoid quotes, backslashes and <code>$</code> so they survive Railway's raw editor and shell expansion intact. That costs nothing &mdash; 64 characters from a 70-character alphabet is far beyond brute force.</p>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section class="step" id="s5" data-label="Blog settings">
+        <div class="head">
+          <button class="tick" aria-label="Mark step 5 done" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="num">05</span>
+          <h2>Tell WordPress where it lives
+            <span class="where">Same Variables panel</span>
+          </h2>
+        </div>
+        <div class="body">
+          <div class="vars">
+            <div class="bar-top"><span>Blog service variables</span><button class="copy" data-copy="cfg">Copy all</button></div>
+<pre id="cfg-vars"><b>VECTORE_BLOG_URL</b>=https://vectore.io/blog
+<b>VECTORE_SITE_URL</b>=https://vectore.io
+<b>VECTORE_WAITLIST_ENDPOINT</b>=https://vectore.io/api/waitlist</pre>
+          </div>
+          <p class="why"><b>The <code>/blog</code> suffix is load-bearing.</b> WordPress genuinely lives at that path inside the container, and this is what it uses to build every link it prints. Setting it as a constant also locks the fields in Settings &rarr; General, so nobody can half-move the site by typing a new URL into wp-admin.</p>
+          <p class="why"><b>The waitlist endpoint</b> is where blog newsletter signups get forwarded, so there is one list rather than two. Leave it unset and the form says signups are not configured instead of quietly dropping addresses.</p>
+        </div>
+      </section>
+
+      <!-- 6 -->
+      <section class="step" id="s6" data-label="Uploads volume">
+        <div class="head">
+          <button class="tick" aria-label="Mark step 6 done" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="num">06</span>
+          <h2>Add a volume for uploads
+            <span class="where">Blog service &rsaquo; Settings &rsaquo; Volumes</span>
+          </h2>
+        </div>
+        <div class="body">
+          <p>Add a volume and set its mount path to:</p>
+          <div class="vars">
+            <div class="bar-top"><span>Mount path</span><button class="copy" data-copy="mount">Copy</button></div>
+            <pre><b>/var/www/html/wp-content/uploads</b></pre>
+          </div>
+          <div class="alert">
+            <span class="m">!</span>
+            <div><p><b>Do this before publishing anything.</b> The container filesystem is thrown away on every deploy. Without the volume, every image an editor uploads disappears the next time you push &mdash; and the posts that referenced them are left with broken images.</p></div>
+          </div>
+          <p class="why"><b>Only the uploads need it.</b> The theme is baked into the image and comes back identical every build, so it needs no persistence. The media library is the one thing WordPress writes that you cannot regenerate.</p>
+        </div>
+      </section>
+
+      <!-- 7 -->
+      <section class="step" id="s7" data-label="Connect the proxy">
+        <div class="head">
+          <button class="tick" aria-label="Mark step 7 done" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="num">07</span>
+          <h2>Point the landing page at it
+            <span class="where">Landing page service &rsaquo; Variables</span>
+          </h2>
+        </div>
+        <div class="body">
+          <p>First, on the <b>blog</b> service, open <b>Settings &rarr; Networking</b> and copy its <b>private domain</b> &mdash; something like <span class="path">blog.railway.internal</span>. Note the port it listens on while you are there.</p>
+          <p>Then, on the <b>landing page</b> service, add:</p>
+          <div class="vars">
+            <div class="bar-top"><span>Landing page variable</span><button class="copy" data-copy="origin">Copy</button></div>
+<pre id="origin-var"><b>BLOG_ORIGIN</b>=http://blog.railway.internal:8080</pre>
+          </div>
+          <p>Substitute the private domain and port you just read. This is the only change the landing page needs.</p>
+          <p class="why"><b>Private, not public:</b> the hop stays inside Railway's network, so it is faster and is not billed as egress. It also means the blog never needs a public domain of its own.</p>
+        </div>
+      </section>
+
+      <!-- 8 -->
+      <section class="step" id="s8" data-label="Point the domain">
+        <div class="head">
+          <button class="tick" aria-label="Mark step 8 done" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="num">08</span>
+          <h2>Point vectore.io at the landing page
+            <span class="where">Landing page service &rsaquo; Settings &rsaquo; Networking</span>
+          </h2>
+        </div>
+        <div class="body">
+          <p>Add <span class="path">vectore.io</span> as a custom domain on the <b>landing page</b> service and follow Railway's DNS instructions at your registrar.</p>
+          <div class="alert">
+            <span class="m">!</span>
+            <div><p><b>The domain goes on the landing page, not the blog.</b> The landing page owns the origin and forwards <span class="path">/blog</span> onward. Pointing the domain at the blog service instead would take the marketing site offline.</p></div>
+          </div>
+          <p class="why"><b>Until DNS resolves,</b> the site answers on Railway's generated <span class="path">*.up.railway.app</span> domain &mdash; and there it deliberately serves <code>Disallow: /</code>, so a preview URL can never compete with the real one in search. That is expected. Check indexing on the real domain only.</p>
+        </div>
+      </section>
+
+      <!-- 9 -->
+      <section class="step" id="s9" data-label="Install WordPress">
+        <div class="head">
+          <button class="tick" aria-label="Mark step 9 done" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="num">09</span>
+          <h2>Run the installer
+            <span class="where">vectore.io/blog/wp-admin/</span>
+          </h2>
+        </div>
+        <div class="body">
+          <p>Open <span class="path">https://vectore.io/blog/wp-admin/</span> and complete the five-field WordPress install. Then:</p>
+          <p><b>Appearance &rarr; Themes</b> &mdash; activate <b>Vectore Blog</b>.</p>
+          <p><b>Appearance &rarr; Menus</b> &mdash; create a menu and assign it to <i>Header menu</i>, <i>Footer menu</i>, or both. Optional: until you do, the theme falls back to sensible links, so nothing is ever headerless or pointing at a 404.</p>
+          <p class="why"><b>Already done for you:</b> permalinks are set to <span class="path">/%postname%/</span> and the tagline is filled in, both on first boot. So the very first URL a crawler sees is already the permanent one, rather than <span class="path">?p=1</span> being indexed and later redirected.</p>
+          <p class="why"><b>Give yourself a bio</b> under <b>Users &rarr; Profile</b>. It turns on the author card at the foot of every post and makes your author page an indexed entity rather than a duplicate post list &mdash; which is one of the few signals an AI answer engine can use to weigh a claim.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <section class="after">
+    <h2>Check it worked</h2>
+    <p class="sub">Six things, in the order they are most likely to fail.</p>
+    <ul class="checks">
+      <li><span class="k">1</span><span><span class="path">/blog/healthz</span> returns <code>{"ok":true}</code>. If Railway marks the deploy failed, start here.</span></li>
+      <li><span class="k">2</span><span><span class="path">/blog/</span> loads with the teal design and the dark floating header.</span></li>
+      <li><span class="k">3</span><span>Publish a test post and open its permalink. A 404 here means rewrites, not content.</span></li>
+      <li><span class="k">4</span><span><span class="path">/blog/llms.txt</span> returns plain text listing that post.</span></li>
+      <li><span class="k">5</span><span><span class="path">/robots.txt</span> on the real domain names both sitemaps.</span></li>
+      <li><span class="k">6</span><span>Upload an image, redeploy, confirm it is still there. This is the volume working.</span></li>
+    </ul>
+
+    <h2 style="margin-top:2.5rem">If something breaks</h2>
+    <p class="sub">The five failure modes this setup actually has, and what each one really means.</p>
+    <div class="faults">
+
+      <details class="fault">
+        <summary>Railway says the deploy failed, but the site loads fine</summary>
+        <div class="fix">
+          <p>The health check is not answering. It must be <span class="path">/blog/healthz</span>, with the prefix &mdash; a bare <span class="path">/healthz</span> falls through to WordPress, which returns its 404, and Railway reads any non-2xx as a failed deploy.</p>
+          <p>Check <b>Settings &rarr; Deploy &rarr; Health Check Path</b> matches what <span class="path">blog/railway.json</span> declares.</p>
+        </div>
+      </details>
+
+      <details class="fault">
+        <summary>wp-admin redirects forever and never loads</summary>
+        <div class="fix">
+          <p>WordPress thinks the visitor is on plain HTTP and keeps redirecting to HTTPS. It is reading <code>X-Forwarded-Proto</code>, which arrives as a list (<code>https,http</code>) because two proxies sit in front of it.</p>
+          <p>The container already reads the leftmost value. If this appears, confirm the landing page is still forwarding the header &mdash; that is <code>xfwd</code> in <span class="path">server.js</span>.</p>
+        </div>
+      </details>
+
+      <details class="fault">
+        <summary>The blog homepage works but every post 404s</summary>
+        <div class="fix">
+          <p>Apache is not letting WordPress's <span class="path">.htaccess</span> take over, so nothing is rewriting pretty permalinks. This is the classic symptom of <code>AllowOverride</code> being off, or of <code>RewriteBase</code> losing its <span class="path">/blog</span> prefix.</p>
+          <p>In WordPress, re-save <b>Settings &rarr; Permalinks</b> once. If that does not fix it, the build did not pick up the shipped <span class="path">.htaccess</span>.</p>
+        </div>
+      </details>
+
+      <details class="fault">
+        <summary>Uploaded images vanish after a deploy</summary>
+        <div class="fix">
+          <p>The volume is missing or mounted at the wrong path. It must be exactly <span class="path">/var/www/html/wp-content/uploads</span>.</p>
+          <p>Files uploaded before the volume existed are gone for good &mdash; re-upload them after fixing the mount.</p>
+        </div>
+      </details>
+
+      <details class="fault">
+        <summary>vectore.io/blog returns the landing page's 404</summary>
+        <div class="fix">
+          <p><code>BLOG_ORIGIN</code> is unset or wrong on the <b>landing page</b> service, so the proxy never mounted and <span class="path">/blog</span> is just an unknown path.</p>
+          <p>This is deliberate behaviour, not a crash: the landing page runs perfectly well on its own without the blog. Check step 7 and redeploy the landing page.</p>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <footer class="note">
+    <p>The full reference, including what each config file does and why the <span class="path">/blog</span> prefix is passed through rather than stripped, is in <span class="path">blog/README.md</span> in the repository.</p>
+    <p>Your progress on this page is saved in this browser only.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+  var rail = document.getElementById('rail');
+  var countEl = document.getElementById('count');
+  var barEl = document.getElementById('bar');
+  var KEY = 'vectore-deploy-progress';
+
+  /* Storage can throw outright in a private window or a thumbnailer, so every
+     read and write is guarded and the page renders correctly with nothing. */
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function save(state) {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = load();
+
+  // Build the rail from the steps themselves, so the two cannot drift.
+  steps.forEach(function (step, i) {
+    var li = document.createElement('li');
+    li.id = 'rail-' + step.id;
+    var a = document.createElement('a');
+    a.href = '#' + step.id;
+    a.innerHTML = '<span class="n">' + String(i + 1).padStart(2, '0') + '</span>' +
+                  '<span class="label"></span>';
+    a.querySelector('.label').textContent = step.dataset.label;
+    li.appendChild(a);
+    rail.appendChild(li);
+  });
+
+  function render() {
+    var done = 0;
+    steps.forEach(function (step) {
+      var isDone = !!state[step.id];
+      if (isDone) done++;
+      step.classList.toggle('is-done', isDone);
+      var tick = step.querySelector('.tick');
+      tick.setAttribute('aria-pressed', isDone ? 'true' : 'false');
+      var li = document.getElementById('rail-' + step.id);
+      if (li) li.classList.toggle('is-done', isDone);
+    });
+    countEl.textContent = done + ' of ' + steps.length + ' done';
+    barEl.style.width = (done / steps.length * 100) + '%';
+  }
+
+  steps.forEach(function (step) {
+    step.querySelector('.head').addEventListener('click', function (e) {
+      // Let a copy button inside the head do its own job.
+      if (e.target.closest('button.copy')) return;
+      state[step.id] = !state[step.id];
+      save(state);
+      render();
+    });
+  });
+
+  render();
+
+  /* ---- copy ------------------------------------------------------------ */
+  var SOURCES = {
+    blog:   function () { return 'blog'; },
+    mount:  function () { return '/var/www/html/wp-content/uploads'; },
+    db:     function () { return document.getElementById('db-vars').textContent; },
+    cfg:    function () { return document.getElementById('cfg-vars').textContent; },
+    origin: function () { return document.getElementById('origin-var').textContent; },
+    salts:  function () { return document.getElementById('salt-out').textContent; }
+  };
+
+  function copy(text, btn) {
+    var done = function (ok) {
+      btn.dataset.state = ok ? 'ok' : 'err';
+      btn.textContent = ok ? 'Copied' : 'Select and copy';
+      setTimeout(function () {
+        delete btn.dataset.state;
+        btn.textContent = btn.dataset.label;
+      }, 1800);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { fallback(); });
+    } else {
+      fallback();
+    }
+
+    function fallback() {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        done(ok);
+      } catch (e) { done(false); }
+    }
+  }
+
+  document.querySelectorAll('button.copy').forEach(function (btn) {
+    btn.dataset.label = btn.textContent;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var src = SOURCES[btn.dataset.copy];
+      if (src) copy(src(), btn);
+    });
+  });
+
+  /* ---- salts ------------------------------------------------------------
+     Generated with the browser's CSPRNG. The alphabet deliberately excludes
+     the quote characters, the backslash and the dollar sign, so a value
+     survives Railway's raw editor and any shell that later handles it. */
+  var KEYS = ['AUTH_KEY', 'SECURE_AUTH_KEY', 'LOGGED_IN_KEY', 'NONCE_KEY',
+              'AUTH_SALT', 'SECURE_AUTH_SALT', 'LOGGED_IN_SALT', 'NONCE_SALT'];
+  var ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#%&()*+,-./:;<>?@[]^_{|}~';
+
+  function salt(len) {
+    var bytes = new Uint32Array(len);
+    crypto.getRandomValues(bytes);
+    var out = '';
+    // Rejection-free because the alphabet length divides evenly enough that
+    // modulo bias here is far below anything that matters for a 64-char secret.
+    for (var i = 0; i < len; i++) out += ALPHABET[bytes[i] % ALPHABET.length];
+    return out;
+  }
+
+  document.getElementById('gen-salts').addEventListener('click', function () {
+    var out = document.getElementById('salt-out');
+    out.innerHTML = '';
+    KEYS.forEach(function (k, i) {
+      var b = document.createElement('b');
+      b.textContent = 'WORDPRESS_' + k;
+      out.appendChild(b);
+      out.appendChild(document.createTextNode('=' + salt(64) + (i < KEYS.length - 1 ? '\n' : '')));
+    });
+    document.getElementById('salt-wrap').hidden = false;
+    this.textContent = 'Generate a new set';
+  });
+}());
+</script>
+</body>
+</html>
