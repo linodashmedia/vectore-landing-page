@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+/*
+ * The blog's default social card, 1200x630.
+ *
+ * Built from the SAME tokens as the theme rather than painted by hand, so a
+ * palette change is one regeneration away from being reflected here instead of
+ * leaving a stale card in circulation. The values below are copied from
+ * blog/themes/vectore-blog/style.css and the render script asserts they still
+ * match, so the two cannot drift silently.
+ *
+ * It is the INK surface, not the mint one, on purpose. This card's job is to
+ * stand out in a feed that is mostly white, and the dark band with the halftone
+ * wordmark is the most recognisable thing the design has.
+ */
+:root {
+	--v-ink:    #07211F;
+	--v-glow:   #2ED3A7;
+	--v-brand:  #0D9488;
+	--v-white:  #ffffff;
+	--v-fog:    #EAF3F1;
+
+	--v-display: "Bricolage Grotesque", "Space Grotesk", system-ui, sans-serif;
+	--v-body:    "Figtree", system-ui, sans-serif;
+
+	--v-grid-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='76' height='76'%3E%3Crect x='1' y='1' width='70' height='70' rx='16' ry='16' fill='none' stroke='%232ED3A7' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { width: 1200px; height: 630px; }
+
+body {
+	position: relative;
+	overflow: hidden;
+	background: var(--v-ink);
+	color: var(--v-white);
+	font-family: var(--v-body);
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Texture: the footer's dot grid plus a lit top edge, same values as the site. */
+.tex {
+	position: absolute;
+	inset: 0;
+	background-image:
+		radial-gradient(circle at center, rgba(255,255,255,.045) 1px, transparent 1.15px),
+		linear-gradient(to bottom, rgba(255,255,255,.05), transparent 26%);
+	background-size: 6px 6px, 100% 100%;
+}
+
+/* The rounded-square canvas grid, faint, fading out to the left so it never
+   sits behind the headline. */
+.grid {
+	position: absolute;
+	inset: 0;
+	opacity: .10;
+	background-image: var(--v-grid-tile);
+	background-position: 18px -12px;
+	-webkit-mask-image: linear-gradient(105deg, transparent 34%, #000 100%);
+	        mask-image: linear-gradient(105deg, transparent 34%, #000 100%);
+}
+
+/* Teal light, off the right edge. Keeps the flat fill from reading as a slab. */
+.glow {
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(38rem 30rem at 104% 8%,  color-mix(in srgb, var(--v-glow) 20%, transparent) 0%, transparent 62%),
+		radial-gradient(26rem 22rem at 92% 96%,  color-mix(in srgb, var(--v-brand) 26%, transparent) 0%, transparent 66%);
+}
+
+/* The halftone wordmark, exactly the footer's treatment: real text filled
+   through a dot grid, cropped at the bottom edge by the card's overflow. */
+/* 🔴 Positioned by its TOP, deliberately.
+   With a bottom offset the strip it occupies depends on the font size, and it
+   ran up under the tagline: the halftone letters sat behind the text and the
+   two fought each other. This is the same trap the newsletter card's deep
+   bottom padding exists to avoid (see single.css). Anchoring the top pins the
+   band, and the card's overflow crops whatever hangs below. The render script
+   asserts it never touches the paragraph again. */
+.mark {
+	position: absolute;
+	left: 0; right: 0;
+	top: 486px;
+	text-align: center;
+	font-family: var(--v-display);
+	font-weight: 700;
+	/* Sized against the 144px band the layout leaves it, not for maximum span.
+	   At 232px the crop landed mid-cap-height and the word read as a smudge;
+	   at 200px the visible strip covers most of the capital, so it reads as
+	   VECTORE deliberately cut off rather than as texture. */
+	font-size: 200px;
+	line-height: 1;
+	letter-spacing: -.012em;
+	white-space: nowrap;
+	color: rgba(46, 211, 167, .14);
+	background-image: radial-gradient(
+		circle at center,
+		rgba(46, 211, 167, .40) max(1px, .0088em),
+		transparent max(1.15px, .0101em)
+	);
+	background-size: max(5px, round(nearest, .05em, 1px)) max(5px, round(nearest, .05em, 1px));
+}
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+	.mark {
+		-webkit-background-clip: text;
+		        background-clip: text;
+		color: transparent;
+		-webkit-text-fill-color: transparent;
+	}
+}
+
+/* Content sits inside a 64px safe area: LinkedIn and X both crop a 1200x630
+   card slightly, and anything closer to an edge than this can be shaved off. */
+.wrap {
+	position: relative;
+	height: 100%;
+	/* The deep bottom padding is the wordmark's strip. */
+	padding: 64px 72px 158px;
+	display: flex;
+	flex-direction: column;
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	font-family: var(--v-display);
+	font-weight: 700;
+	font-size: 31px;
+	letter-spacing: -.02em;
+}
+.brand .dot {
+	width: 13px; height: 13px;
+	border-radius: 50%;
+	background: var(--v-glow);
+	box-shadow: 0 0 22px rgba(46, 211, 167, .85);
+}
+
+.body { margin-top: auto; }
+
+.eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 11px;
+	padding: 9px 20px 9px 15px;
+	margin-bottom: 26px;
+	border: 1px solid color-mix(in srgb, var(--v-glow) 42%, transparent);
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--v-glow) 11%, transparent);
+	font-size: 17px;
+	font-weight: 700;
+	letter-spacing: .15em;
+	text-transform: uppercase;
+	/* The glow teal, which is the only teal that clears 4.5:1 on ink. */
+	color: var(--v-glow);
+}
+.eyebrow::before {
+	content: "";
+	width: 9px; height: 9px;
+	border-radius: 50%;
+	background: var(--v-glow);
+}
+
+h1 {
+	font-family: var(--v-display);
+	font-weight: 700;
+	font-size: 88px;
+	line-height: 1.03;
+	letter-spacing: -.032em;
+	max-width: 17ch;
+}
+
+p {
+	margin-top: 24px;
+	max-width: 30rem;
+	font-size: 27px;
+	line-height: 1.45;
+	/* ~11:1 on ink. */
+	color: color-mix(in srgb, var(--v-fog) 76%, transparent);
+}
+</style>
+</head>
+<body>
+	<div class="tex"></div>
+	<div class="grid"></div>
+	<div class="glow"></div>
+	<div class="mark" aria-hidden="true">VECTORE</div>
+
+	<div class="wrap">
+		<div class="brand"><span class="dot"></span><span>Vectore</span></div>
+		<div class="body">
+			<span class="eyebrow">The blog</span>
+			<h1>Build a community worth joining</h1>
+			<p>Notes on courses, cohorts, coaching, and the people around them.</p>
+		</div>
+	</div>
+</body>
+</html>

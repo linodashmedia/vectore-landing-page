@@ -191,6 +191,23 @@ rough order of how much they matter:
   of the post list under a different URL. The same rule decides whether the
   author card renders at the foot of a post.
 
+**The default social card** (`assets/img/og-default.png`) is the image used when
+a post has no featured image. It is generated from HTML built out of the theme's
+own tokens, not painted by hand, so a palette change is one command away from
+being reflected in it:
+
+```bash
+php test/preview.php                 # caches the webfonts, once
+node tools/og-card/render.mjs
+```
+
+The script refuses to run if the colours in `tools/og-card/card.html` have
+drifted from `style.css`, if the webfonts did not load (a card set in a fallback
+face looks subtly wrong forever and nobody re-checks a PNG), if anything lands
+inside the 60px safe area the platforms crop into, or if the halftone wordmark
+runs up behind the tagline. `test/seo.test.php` separately asserts the PNG's real
+pixel dimensions match the `og:image:width`/`height` the theme declares.
+
 **After going live:** submit `https://vectore.io/blog/wp-sitemap.xml` in Search
 Console and Bing Webmaster Tools. WordPress generates and updates it; nothing
 here needs maintaining.

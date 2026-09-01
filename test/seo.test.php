@@ -179,6 +179,36 @@ check( 'links back to the product llms.txt', str_contains( $llms, 'vectore.io/ll
 check( 'states the content is free to read', str_contains( $llms, 'no paywall' ) );
 check( 'contains no HTML', ! preg_match( '/<[a-z]/i', $llms ) );
 
+echo "\nthe default social card\n";
+/*
+ * The theme DECLARES og:image:width and og:image:height for the fallback card.
+ * Those numbers are written in seo.php and the pixels are in a PNG built by a
+ * separate tool, so nothing but this check stops them disagreeing. They did
+ * disagree once: the placeholder was 2400x1260 while the meta claimed
+ * 1200x630, which is the sort of thing a scraper notices and a person does not.
+ */
+$png = VECTORE_BLOG_DIR . '/assets/img/og-default.png';
+check( 'the card exists', file_exists( $png ) );
+
+$header = file_get_contents( $png, false, null, 0, 24 );
+check( 'it really is a PNG', "\x89PNG\r\n\x1a\n" === substr( $header, 0, 8 ) );
+
+$dims = unpack( 'Nwidth/Nheight', substr( $header, 16, 8 ) );
+check( 'it is 1200x630, the size every platform documents',
+	1200 === $dims['width'] && 630 === $dims['height'],
+	"{$dims['width']}x{$dims['height']}" );
+
+$GLOBALS['vview'] = 'home';   // no featured image, so the fallback is used
+$fallback = vectore_blog_social_image();
+check( 'the declared width matches the actual pixels', $fallback['width'] === $dims['width'],
+	"declared {$fallback['width']}, actual {$dims['width']}" );
+check( 'the declared height matches the actual pixels', $fallback['height'] === $dims['height'],
+	"declared {$fallback['height']}, actual {$dims['height']}" );
+
+// Social platforms are unhappy above a few MB and slow well before that.
+$kb = filesize( $png ) / 1024;
+check( 'it is under 400KB', $kb < 400, round( $kb ) . 'KB' );
+
 echo "\nthe kill switch\n";
 define( 'VECTORE_BLOG_SEO_OFF', true );
 $off = head_for( 'single' );
