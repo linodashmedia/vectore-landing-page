@@ -7,13 +7,13 @@
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xiku7i89on");</script>
 <title>Vectore | The community platform built for learning</title>
 <meta name="description" content="Bring courses, cohorts, coaching, workshops, and events into one platform, with community built into the experience from day one.">
-<meta name="theme-color" content="#FBF9F6">
+<meta name="theme-color" content="#F6F4EC">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
-<link rel="icon" href="/favicon.ico?v=3" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=3">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=3">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=3">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=5">
+<link rel="icon" href="/favicon.ico?v=5" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=5">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=5">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=5">
 <link rel="manifest" href="site.webmanifest">
 <!-- Open Graph -->
 <meta property="og:title" content="Vectore | The community platform built for learning">
@@ -47,532 +47,866 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..700&family=Space+Grotesk:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..700&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Sans:ital,wght@0,400..700;1,400..700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Sans:ital,wght@0,400..700;1,400..700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap"></noscript>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:#FBF9F6;color:#1E293B;font-family:'Figtree',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  ::selection{background:rgba(230,81,0,0.3);color:#fff}
-  a{color:inherit}
-  @keyframes vfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-  @keyframes vfloat2{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
-  /* opacity-only: animating transform here would clobber the inline
-     translateX(-50%) centering on the glows and push them off-screen. */
-  @keyframes vpulse{0%,100%{opacity:.5}50%{opacity:.85}}
-  @keyframes vrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-  /* scroll reveal */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){
-    .reveal{opacity:1 !important;transform:none !important;transition:none}
-    [style*="animation:"]{animation:none !important}
-  }
-  /* nav shadow on scroll */
-  .vnav{transition:box-shadow .3s ease, background .3s ease}
-  .vnav.scrolled{box-shadow:0 10px 34px rgba(15,23,42,0.12);background:rgba(255,255,255,0.96)}
-  /* primary button hover: smooth brighten + glow — no gradient-to-solid snap, no geometry shift */
-  button[type="submit"],a[href="#waitlist"]{transition:box-shadow .25s ease,filter .25s ease}
-  button[type="submit"]:hover,a[href="#waitlist"]:hover{filter:brightness(1.06);box-shadow:0 14px 34px rgba(230,81,0,0.45) !important}
-  button[type="submit"]:active,a[href="#waitlist"]:active{filter:brightness(0.97);transition-duration:.08s}
-  /* hero signup: combined field on desktop, stacks on mobile */
-  .vhero-form{display:flex;align-items:center;gap:8px;width:100%;max-width:560px;padding:7px 7px 7px 8px;border-radius:15px;border:1px solid rgba(15,23,42,0.18);background:#FFFFFF;box-shadow:0 4px 16px rgba(15,23,42,0.07)}
-  .vhero-form input{flex:1;min-width:0;padding:13px 12px;border:none;background:transparent;color:#1E293B;font-size:16px;font-family:'Figtree',sans-serif;outline:none}
-  .vhero-form button{flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 22px;border:none;border-radius:11px;background:linear-gradient(135deg,#E65100,#C44400);color:#FFFFFF;font-size:15.5px;font-weight:700;font-family:'Figtree',sans-serif;cursor:pointer;box-shadow:0 6px 20px rgba(230,81,0,0.35);white-space:nowrap}
-  @media (max-width:540px){
-    .vhero-form{flex-direction:column;padding:0;border:none;background:transparent;box-shadow:none;gap:12px}
-    .vhero-form input{width:100%;padding:16px 18px;border:1px solid rgba(15,23,42,0.18);background:#FFFFFF;border-radius:13px;box-shadow:0 2px 10px rgba(15,23,42,0.05)}
-    .vhero-form button{width:100%;padding:16px;border-radius:13px}
-  }
-  /* problem-hub particle flow overlay */
-  .phub-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
-  .phub-fx-m{display:none}
-  @media (max-width:640px){.phub-fx-d{display:none}.phub-fx-m{display:block}}
-  @media (prefers-reduced-motion:reduce){.phub-fx{display:none !important}}
-  /* interactive feature tabs (community + events) */
-  .vtabs{display:flex;flex-wrap:wrap;gap:10px}
-  .vtab{display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:10px 15px;border-radius:12px;background:rgba(15,23,42,0.04);border:1px solid rgba(15,23,42,0.1);font-family:'Figtree',sans-serif;font-size:14px;font-weight:600;color:#475569;transition:color .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease}
-  .vtab svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
-  .vtab:hover{border-color:rgba(230,81,0,0.4);color:#E65100}
-  .vtab.is-active{background:linear-gradient(135deg,#E65100,#C44400);border-color:transparent;color:#fff;box-shadow:0 10px 24px -8px rgba(230,81,0,0.6)}
-  .vtab-stack{position:relative}
-  .vtab-img{display:block;width:100%;height:auto;opacity:0;transition:opacity .35s ease}
-  .vtab-img:not(:first-child){position:absolute;inset:0}
-  .vtab-img.is-active{opacity:1}
-  /* FAQ accordion */
-  .vfaq{display:flex;flex-direction:column;gap:12px}
-  .vfaq details{background:#FFFFFF;border:1px solid rgba(15,23,42,0.1);border-radius:14px;box-shadow:0 2px 12px rgba(15,23,42,0.04)}
-  .vfaq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(15.5px,2vw,17.5px);color:#0F172A}
-  .vfaq summary::-webkit-details-marker{display:none}
-  .vfaq summary:hover,.vfaq details[open] summary{color:#E65100}
-  .vfaq-chev{flex-shrink:0;width:20px;height:20px;stroke:#E65100;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s ease}
-  .vfaq details[open] .vfaq-chev{transform:rotate(180deg)}
-  .vfaq-a{padding:0 22px 20px;font-size:15.5px;line-height:1.65;color:#334155}
-  /* fancy hero badge: pulsing dot + soft ring */
-  .vping{position:relative;width:8px;height:8px;flex-shrink:0}
-  .vping::before,.vping::after{content:"";position:absolute;inset:0;border-radius:50%;background:#E65100}
-  .vping::before{box-shadow:0 0 8px rgba(230,81,0,0.9)}
-  .vping::after{animation:vping 2s cubic-bezier(0,0,.2,1) infinite}
-  @keyframes vping{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(2.8);opacity:0}}
-  @media (prefers-reduced-motion:reduce){.vping::after{animation:none}}
-  /* subtle dot texture (no gradient wash, keeps the base background) */
-  .vrow > div:not(:has(.vmock)),.vtexture{background-image:radial-gradient(rgba(15,23,42,0.05) 1px,transparent 1.5px);background-size:20px 20px;background-position:-6px -6px}
-  .vrow > div:not(:has(.vmock)){border-radius:14px}
-  /* Feature rows alternate sides automatically: image on the right by default,
-     image on the left for every other row (2nd, 4th, 6th). Position-based so it
-     can never drift when rows are added or reordered. */
-  .vrow > div:has(.vmock){order:2}
-  .vrow > div:not(:has(.vmock)){order:1}
-  .vrow:nth-child(odd) > div:has(.vmock){order:1}
-  .vrow:nth-child(odd) > div:not(:has(.vmock)){order:2}
-  /* responsive: tablet */
-  @media (max-width: 900px){
-    .vrow{grid-template-columns:1fr !important;gap:32px !important;background:none !important}
-    .vcta{grid-template-columns:1fr !important}
-    .vcta-form{border-left:none !important;border-top:1px solid rgba(15,23,42,0.08) !important}
-    /* When stacked, the image always sits BELOW its text box, never above. */
-    .vrow > div:has(.vmock){order:2 !important}
-    .vrow > div:not(:has(.vmock)){order:1 !important}
-  }
-  /* responsive: phone */
-  @media (max-width: 600px){
-    .vnav{display:flex !important;justify-content:space-between !important;align-items:center;padding:10px 12px 10px 16px !important}
-    .vnav .vnav-spacer{display:none !important}
-    .vstats{grid-template-columns:1fr 1fr !important}
-    .vrow{padding-left:20px !important;padding-right:20px !important}
-    .vmock{max-width:100% !important}
-  }
-  @media (max-width: 380px){
-    .vstats{grid-template-columns:1fr !important}
-  }
+/* ══════════════════════════════════════════════════════════════════════════
+   VECTORE — design tokens
+
+   One chromatic voice (teal) set against warm bone paper. The warm/cool
+   tension is deliberate: a teal accent on a cool white ground reads as a
+   stock SaaS palette, but the same teal on bone reads as ink on paper. Every
+   neutral here carries a little warmth (hue ~80) so the page feels printed
+   rather than rendered.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root{
+  /* paper & ink — warm neutrals, generated in OKLCH so the steps are even */
+  --paper:#F6F4EC; --paper-2:#EFEBE2; --sand:#E5DFD3; --surface:#FFFFFF;
+  --ink:#17130C; --ink-2:#39352D; --ink-3:#635E58; --ink-4:#837E76; --ink-5:#B4B0AA;
+  --rule:rgba(23,19,12,.11); --rule-strong:rgba(23,19,12,.20);
+
+  /* teal — the only chromatic colour in the interface */
+  --t-950:#001C1B; --t-900:#002C2A; --t-800:#00433E; --t-700:#005F56;
+  --t-600:#007A6D; --t-500:#0B9583; --t-400:#2EB69E; --t-300:#67D5BB;
+  --t-200:#A9EBD7; --t-100:#D3F6EA; --t-50:#EAFBF5;
+
+  /* atmosphere only — these never touch a control, a label or a border */
+  --aur-teal:11,149,131; --aur-aqua:142,230,230; --aur-mint:173,243,215; --aur-citron:215,232,147;
+
+  /* dark surfaces */
+  --on-dark:#E7F0ED; --on-dark-2:#9DB3AE; --on-dark-3:#7C8988;
+  --dark-rule:rgba(169,235,215,.15); --dark-rule-strong:rgba(169,235,215,.26);
+
+  /* measure */
+  --gutter:clamp(20px,4.2vw,44px);
+  --maxw:1240px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
+  --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+
+  /* radii deliberately do NOT share one value — controls are crisp (6px),
+     panels are soft (16px), chips are almost square (3px). A single radius
+     applied to everything is what flattens a page into a template. */
+  --r-chip:3px; --r-ctl:6px; --r-mid:10px; --r-panel:16px;
+
+  --ease:cubic-bezier(.22,.61,.24,1);
+
+  --sans:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --serif:'Instrument Serif','Iowan Old Style',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+/* ── reset ─────────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+[id]{scroll-margin-top:84px}
+/* clip, not hidden: `overflow-x:hidden` on the root silently kills every
+   position:sticky descendant, and the FAQ rail depends on one. */
+body{
+  background:var(--paper);color:var(--ink-3);
+  font-family:var(--sans);font-size:16.5px;line-height:1.62;
+  font-weight:400;overflow-x:clip;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  font-variant-ligatures:common-ligatures;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+::selection{background:var(--t-200);color:var(--t-950)}
+:focus-visible{outline:2px solid var(--t-500);outline-offset:3px;border-radius:2px}
+
+/* ── type scale ────────────────────────────────────────────────────────────
+   Tracking tightens as size grows — display type at default tracking looks
+   loose and amateur, body type at display tracking looks cramped. */
+h1,h2,h3,h4{color:var(--ink);font-weight:600;text-wrap:balance}
+.display{font-size:clamp(37px,5.5vw,67px);line-height:1.0;letter-spacing:-.034em}
+.h2{font-size:clamp(29px,3.85vw,48px);line-height:1.04;letter-spacing:-.03em}
+.h3{font-size:clamp(21px,2.15vw,28px);line-height:1.14;letter-spacing:-.022em}
+.h4{font-size:19px;line-height:1.25;letter-spacing:-.014em}
+.lead{font-size:clamp(17px,1.5vw,20px);line-height:1.5;letter-spacing:-.008em;color:var(--ink-3);text-wrap:pretty}
+.body{font-size:16.5px;line-height:1.62;color:var(--ink-3);text-wrap:pretty}
+.small{font-size:14px;line-height:1.55;color:var(--ink-3)}
+
+/* the editorial voice: one phrase per page-level headline drops into the
+   serif italic. Used three times on the page and never more — it is a
+   punctuation mark, not a style. */
+.say{font-family:var(--serif);font-weight:400;font-style:italic;
+     letter-spacing:-.012em;color:var(--t-700)}
+
+/* mono micro-labels: indices, units, frame captions */
+.mono{font-family:var(--mono);font-weight:500;font-size:11px;
+      letter-spacing:.15em;text-transform:uppercase;color:var(--ink-4);
+      font-feature-settings:"tnum" 1}
+
+/* ── layout ────────────────────────────────────────────────────────────── */
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.band{position:relative}
+.band-dark{position:relative;background:var(--t-950);color:var(--on-dark-2);isolation:isolate}
+.band-dark h1,.band-dark h2,.band-dark h3,.band-dark h4{color:var(--on-dark)}
+.band-dark .say{color:var(--t-300)}
+.band-dark .mono{color:var(--t-300)}
+.band-dark .lead,.band-dark .body{color:var(--on-dark-2)}
+
+/* ── atmosphere ────────────────────────────────────────────────────────────
+   Not a blurred blob centred behind the headline. This is a light *source*:
+   it sits high and to the right, behind the product shot, and falls off
+   towards the type so the headline keeps a clean bone ground to sit on.
+   Colour runs aqua -> teal with a citron rim at the hottest point, and a
+   grain plate over the whole thing. The grain is the part that matters --
+   it breaks the perfect mathematical smoothness that reads as synthetic. */
+.aura{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.aura::before{
+  content:"";position:absolute;left:50%;top:var(--aura-top,-34%);
+  width:min(1560px,158vw);aspect-ratio:1.42;transform:translateX(-50%);
+  background:
+    radial-gradient(24% 28% at 84% 10%,rgba(var(--aur-citron),.30),transparent 72%),
+    radial-gradient(46% 54% at 73% 19%,rgba(var(--aur-aqua),.62),transparent 68%),
+    radial-gradient(40% 48% at 93% 42%,rgba(var(--aur-teal),.26),transparent 72%),
+    radial-gradient(44% 52% at 50% 7%,rgba(var(--aur-mint),.46),transparent 72%),
+    radial-gradient(32% 38% at 21% 31%,rgba(var(--aur-teal),.12),transparent 74%);
+  animation:drift 34s var(--ease) infinite alternate;
+}
+.aura::after{
+  content:"";position:absolute;inset:0;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+  background-size:160px 160px;
+}
+.band-dark .aura::before{
+  background:
+    radial-gradient(42% 48% at 20% 34%,rgba(var(--aur-teal),.50),transparent 72%),
+    radial-gradient(38% 44% at 62% 18%,rgba(var(--aur-aqua),.20),transparent 70%),
+    radial-gradient(34% 42% at 84% 62%,rgba(var(--aur-mint),.16),transparent 72%);
+  mix-blend-mode:screen;
+}
+.band-dark .aura::after{opacity:.42;mix-blend-mode:soft-light}
+@keyframes drift{
+  0%  {transform:translateX(-50%) translate3d(0,0,0)      scale(1)}
+  50% {transform:translateX(-50%) translate3d(-2.2%,1.6%,0) scale(1.06)}
+  100%{transform:translateX(-50%) translate3d(2.4%,-1.2%,0) scale(1.03)}
+}
+
+/* the engineered counterweight: a six-column hairline grid drawn over the
+   soft field. Structure against atmosphere is the whole trick. */
+.rules{position:absolute;inset:0 var(--gutter);pointer-events:none;z-index:1;
+  box-shadow:inset -1px 0 0 var(--rule);
+  background-image:repeating-linear-gradient(90deg,var(--rule) 0 1px,transparent 1px calc(100%/6));
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 16%,#000 68%,transparent);
+          mask-image:linear-gradient(180deg,transparent,#000 16%,#000 68%,transparent);
+}
+.band-dark .rules{box-shadow:inset -1px 0 0 var(--dark-rule);
+  background-image:repeating-linear-gradient(90deg,var(--dark-rule) 0 1px,transparent 1px calc(100%/6))}
+
+/* ── navigation ────────────────────────────────────────────────────────────
+   A hairline bar, not a floating rounded pill. The pill is the single most
+   recognisable machine-made nav on the web right now. */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;
+     background:transparent;transition:background .3s var(--ease),border-color .3s var(--ease)}
+.nav::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+            background:var(--rule);opacity:0;transition:opacity .3s var(--ease)}
+.nav.scrolled{background:rgba(246,244,236,.82);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4)}
+.nav.scrolled::after{opacity:1}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);
+        height:66px}
+.nav-logo img{height:26px;width:auto}
+/* scroll position as a 2px teal rule along the top edge */
+.progress{position:absolute;top:0;left:0;height:2px;width:0;background:var(--t-500);
+          transform-origin:0 50%;transition:width .12s linear}
+
+/* ── controls ──────────────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:12px 20px;border:none;border-radius:var(--r-ctl);cursor:pointer;
+  font-size:14.5px;font-weight:600;letter-spacing:-.006em;white-space:nowrap;
+  background:var(--t-700);color:#fff;
+  box-shadow:0 1px 2px rgba(0,40,36,.26),inset 0 1px 0 rgba(255,255,255,.13);
+  transition:background .2s var(--ease),transform .16s var(--ease),box-shadow .2s var(--ease)}
+.btn:hover{background:var(--t-600);transform:translateY(-1px);
+           box-shadow:0 4px 12px -3px rgba(0,60,54,.34),inset 0 1px 0 rgba(255,255,255,.16)}
+.btn:active{transform:translateY(0);box-shadow:0 1px 2px rgba(0,40,36,.3)}
+.btn:disabled{opacity:.62;cursor:default;transform:none}
+.btn .arw{transition:transform .2s var(--ease)}
+.btn:hover .arw{transform:translateX(3px)}
+.band-dark .btn{background:var(--t-400);color:var(--t-950);
+                box-shadow:0 1px 2px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.28)}
+.band-dark .btn:hover{background:var(--t-300)}
+
+/* underline that wipes in from the left, rather than a colour change */
+.ulink{position:relative;color:var(--ink-3);transition:color .2s var(--ease)}
+.ulink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;
+  background:currentColor;transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .28s var(--ease)}
+.ulink:hover{color:var(--ink)}
+.ulink:hover::after{transform:scaleX(1)}
+.band-dark .ulink{color:var(--on-dark-2)}
+.band-dark .ulink:hover{color:var(--on-dark)}
+
+/* ── waitlist forms ────────────────────────────────────────────────────── */
+.field{display:flex;align-items:center;gap:6px;width:100%;max-width:520px;
+  padding:6px 6px 6px 8px;border:1px solid var(--rule-strong);border-radius:9px;
+  background:var(--surface);
+  box-shadow:0 1px 2px rgba(23,19,12,.05),0 8px 22px -16px rgba(23,19,12,.4);
+  transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
+.field:focus-within{border-color:var(--t-500);
+  box-shadow:0 0 0 3px rgba(11,149,131,.13),0 1px 2px rgba(23,19,12,.05)}
+.field input{flex:1;min-width:0;padding:11px 10px;border:none;background:none;
+  font-size:16px;color:var(--ink);outline:none}
+.field input::placeholder{color:var(--ink-3)}
+.field .btn{padding:12px 18px}
+.err{font-size:13.5px;font-weight:600;color:#9A3412}
+.band-dark .err{color:#FCA5A5}
+
+/* ── reveal ────────────────────────────────────────────────────────────────
+   12px, not 30px. Large entrance travel is the motion equivalent of a
+   gradient headline: it announces itself instead of doing its job. */
+.reveal{opacity:0;transform:translateY(12px);
+  transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.07s}
+.reveal[data-d="2"]{transition-delay:.14s}
+.reveal[data-d="3"]{transition-delay:.21s}
+
+/* ── the product frame ─────────────────────────────────────────────────────
+   Chrome is three monochrome dots, not the red/amber/green traffic lights.
+   Those three colours in that order are instant visual boilerplate. */
+.frame{position:relative;border:1px solid rgba(23,19,12,.13);border-radius:var(--r-panel);
+  background:var(--surface);overflow:hidden;
+  box-shadow:0 1px 1px rgba(23,19,12,.04),0 24px 48px -28px rgba(23,19,12,.34),
+             0 60px 120px -60px rgba(23,19,12,.3)}
+.frame-bar{display:flex;align-items:center;gap:6px;padding:11px 14px;
+  border-bottom:1px solid var(--rule);background:linear-gradient(180deg,#fff,#FBFAF6)}
+.frame-bar i{width:6px;height:6px;border-radius:50%;background:var(--ink-5);opacity:.7}
+.frame-bar i:first-child{background:var(--t-400);opacity:1}
+.frame img{display:block;width:100%;height:auto}
+.band-dark .frame{border-color:rgba(255,255,255,.14);
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.2)}
+
+/* ── feature tabs ──────────────────────────────────────────────────────────
+   Text tabs on a shared hairline with a teal indicator, instead of a row of
+   filled pills. Pills make every option shout; a rule makes them a set.
+
+   The rule is painted by the group, but once per wrapped row rather than
+   once underneath the whole thing -- a single bottom border leaves the active
+   indicator floating in mid-air as soon as the tabs run onto a second line.
+   Tabs are a fixed height so the repeat lands exactly on each row's baseline. */
+.tabs{--tab-h:40px;display:flex;flex-wrap:wrap;gap:0;margin-top:var(--s5);
+  background-image:repeating-linear-gradient(180deg,
+    transparent 0 calc(var(--tab-h) - 1px),var(--rule) calc(var(--tab-h) - 1px) var(--tab-h))}
+.tab{position:relative;display:inline-flex;align-items:center;gap:7px;
+  height:var(--tab-h);padding:0 12px;border:none;background:none;cursor:pointer;
+  font-size:13.5px;font-weight:500;letter-spacing:-.004em;color:var(--ink-3);
+  transition:color .2s var(--ease)}
+.tab svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.6;
+  opacity:.85;transition:opacity .2s var(--ease)}
+.tab::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:var(--t-600);transform:scaleX(0);transform-origin:50% 50%;
+  transition:transform .3s var(--ease)}
+.tab:hover{color:var(--ink)}
+.tab.is-active{color:var(--ink);font-weight:600}
+.tab.is-active svg{opacity:1;color:var(--t-600)}
+.tab.is-active::after{transform:scaleX(1)}
+.stack{position:relative}
+.stack img{display:block;width:100%;height:auto;opacity:0;transition:opacity .4s var(--ease)}
+.stack img:not(:first-child){position:absolute;inset:0}
+.stack img.is-active{opacity:1}
+
+/* ── hero ──────────────────────────────────────────────────────────────── */
+.hero{position:relative;overflow:hidden;padding-block:clamp(112px,15vh,168px) clamp(56px,8vh,96px)}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(44px,6vw,72px);align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:6px 13px 6px 10px;
+  border:1px solid rgba(0,95,86,.24);border-radius:100px;background:rgba(255,255,255,.7);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  font-size:12.5px;font-weight:500;letter-spacing:-.002em;color:var(--t-800)}
+.ping{position:relative;width:7px;height:7px;flex:none}
+.ping::before,.ping::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--t-500)}
+.ping::after{animation:ping 2.6s var(--ease) infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.5}70%,100%{transform:scale(2.9);opacity:0}}
+.hero h1{margin:var(--s6) 0 var(--s5);max-width:16ch}
+.hero .lead{max-width:46ch}
+.hero-cta{margin-top:var(--s7);display:flex;flex-direction:column;gap:var(--s3)}
+.hero-note{font-size:13.5px;color:var(--ink-3);max-width:42ch}
+.hero-stage{position:relative}
+.hero-stage::before{content:"";position:absolute;inset:-9% -6% -14%;z-index:-1;
+  background:radial-gradient(58% 58% at 50% 46%,rgba(var(--aur-teal),.22),transparent 70%);
+  filter:blur(28px);pointer-events:none}
+.hero-stage .frame{transform-origin:0 50%}
+
+/* ── the fragmentation band ────────────────────────────────────────────── */
+.split{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s5)}
+.hub{position:relative;margin-top:clamp(40px,6vw,72px);border-radius:var(--r-panel);
+  overflow:hidden;border:1px solid rgba(255,255,255,.12);line-height:0;
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.75)}
+.hub-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.hub-fx-m{display:none}
+
+/* ── feature matrix ────────────────────────────────────────────────────────
+   A left index rail carries 01–07 down the page and a single continuous
+   hairline. It is the device that makes this read as a document with a
+   structure rather than seven interchangeable feature cards. */
+.matrix{position:relative;padding-block:clamp(64px,9vh,110px)}
+.matrix-head{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s5);
+  padding-bottom:clamp(40px,6vw,64px)}
+.matrix-head h2{max-width:17ch}
+.matrix-head .lead{max-width:42ch}
+.rows{border-top:1px solid var(--rule-strong)}
+.row{position:relative;display:grid;grid-template-columns:minmax(0,1fr);
+  gap:clamp(32px,4.4vw,60px);align-items:center;
+  padding-block:clamp(48px,6.5vw,84px);border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:1px solid var(--rule-strong)}
+.row-idx{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.14em;
+  color:var(--ink-4);font-feature-settings:"tnum" 1}
+.row h3{margin-bottom:var(--s4);max-width:19ch}
+.row .body{max-width:44ch}
+.row-stage{position:relative}
+
+/* ── waitlist band ─────────────────────────────────────────────────────── */
+.cta{position:relative;overflow:hidden;padding-block:clamp(64px,9vh,116px)}
+.cta-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr);
+  gap:clamp(36px,5vw,72px);align-items:center}
+.cta h2{max-width:14ch}
+.cta .lead{max-width:44ch;margin-top:var(--s5)}
+.perks{list-style:none;margin-top:var(--s7);display:flex;flex-direction:column;gap:var(--s3)}
+.perks li{display:flex;align-items:flex-start;gap:12px;font-size:15.5px;color:var(--on-dark)}
+.perks svg{flex:none;width:15px;height:15px;margin-top:5px;stroke:var(--t-300);
+  fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.panel{padding:clamp(26px,3.2vw,38px);border:1px solid var(--dark-rule-strong);
+  border-radius:var(--r-panel);background:rgba(255,255,255,.045);
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.panel label{display:block;font-size:12.5px;font-weight:600;color:var(--on-dark-2);margin-bottom:7px}
+.panel input{width:100%;padding:13px 14px;border:1px solid var(--dark-rule-strong);
+  border-radius:var(--r-ctl);background:rgba(0,0,0,.22);color:var(--on-dark);
+  font-size:15.5px;outline:none;transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
+.panel input::placeholder{color:var(--on-dark-3)}
+.panel input:focus{border-color:var(--t-400);box-shadow:0 0 0 3px rgba(46,182,158,.16)}
+.panel .btn{width:100%;margin-top:var(--s4);padding:14px}
+.panel .fine{font-size:12px;color:var(--on-dark-3);text-align:center;margin-top:var(--s4)}
+
+/* ── FAQ ───────────────────────────────────────────────────────────────────
+   Hairline rows, not a stack of rounded cards with soft shadows. The card
+   stack is the default shape an accordion takes when nobody decided. */
+.faq{position:relative;padding-block:clamp(64px,9vh,110px)}
+.faq-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(32px,4vw,64px)}
+.faq-rail h2{font-family:var(--serif);font-weight:400;font-style:italic;
+  font-size:clamp(30px,3.6vw,44px);line-height:1.05;letter-spacing:-.02em}
+.faq-rail p{margin-top:var(--s4);max-width:32ch}
+.qs{border-top:1px solid var(--rule-strong)}
+.qs details{border-bottom:1px solid var(--rule)}
+.qs summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;
+  justify-content:space-between;gap:var(--s5);padding:var(--s5) 0;
+  font-size:17.5px;font-weight:600;line-height:1.35;letter-spacing:-.016em;color:var(--ink);
+  transition:color .2s var(--ease)}
+.qs summary::-webkit-details-marker{display:none}
+.qs summary:hover{color:var(--t-700)}
+/* the marker is two 1px rules — a drawn plus, not a downloaded chevron */
+.sign{position:relative;flex:none;width:13px;height:13px;margin-top:7px}
+.sign::before,.sign::after{content:"";position:absolute;background:var(--t-600);
+  transition:transform .3s var(--ease),opacity .3s var(--ease)}
+.sign::before{left:0;right:0;top:6px;height:1.5px}
+.sign::after{top:0;bottom:0;left:6px;width:1.5px}
+.qs details[open] .sign::after{transform:scaleY(0);opacity:0}
+.qs .ans{padding:0 0 var(--s6);max-width:62ch;font-size:16px;line-height:1.66;color:var(--ink-3)}
+
+/* ── footer ────────────────────────────────────────────────────────────── */
+.foot{position:relative;background:var(--t-950);color:var(--on-dark-2);
+      padding-block:clamp(48px,6vw,72px) var(--s7)}
+.foot-top{display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:var(--s5);padding-bottom:var(--s6);border-bottom:1px solid var(--dark-rule)}
+.foot-nav{display:flex;flex-wrap:wrap;gap:var(--s6);font-size:14px}
+.foot-bot{display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:var(--s3);padding-top:var(--s5);font-size:12.5px;color:var(--on-dark-3)}
+.foot img{height:22px;width:auto}
+
+/* ══ breakpoints ═══════════════════════════════════════════════════════════
+   The page is built narrow-first and only earns its asymmetry once there is
+   room for it. ══════════════════════════════════════════════════════════ */
+@media (min-width:760px){
+  .split{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+         gap:clamp(32px,5vw,72px);align-items:end}
+  .matrix-head{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+               gap:clamp(32px,5vw,72px);align-items:end}
+  .faq-grid{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr)}
+  .faq-rail{position:sticky;top:104px;align-self:start}
+  .cta-grid{grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr)}
+}
+@media (min-width:1000px){
+  .hero-grid{grid-template-columns:minmax(0,.93fr) minmax(0,1.07fr);align-items:center}
+  /* the shot runs past the right edge of the measure — the page continues
+     off-screen, which is the cheapest way to suggest there is more product
+     than fits on a marketing page */
+  .hero-stage .frame{width:calc(100% + 15vw)}
+  .row{grid-template-columns:62px minmax(0,.94fr) minmax(0,1.1fr);
+       grid-template-areas:"idx copy stage"}
+  .row.rev{grid-template-columns:62px minmax(0,1.1fr) minmax(0,.94fr);
+           grid-template-areas:"idx stage copy"}
+  .row-idx{grid-area:idx;align-self:start;padding-top:6px}
+  .row-copy{grid-area:copy}
+  .row-stage{grid-area:stage}
+  /* one continuous hairline closing the index rail, the length of the matrix */
+  .rows{position:relative}
+  .rows::before{content:"";position:absolute;top:0;bottom:0;left:46px;width:1px;
+    background:var(--rule);pointer-events:none}
+  /* the lead row gets more air and a larger heading than the six below it:
+     an even rhythm down seven identical rows is what makes a page read as
+     generated rather than edited */
+  .row--lead{padding-block:clamp(64px,7.5vw,104px)}
+  .row--lead h3{font-size:clamp(26px,2.7vw,34px)}
+  .row--lead .body{max-width:46ch}
+}
+@media (max-width:999px){
+  .row-idx{display:block;margin-bottom:var(--s4)}
+  .row-stage{order:2}
+  .row-copy{order:1}
+  .hero-stage{margin-top:var(--s5)}
+}
+@media (max-width:640px){
+  .hub-fx-d{display:none}
+  .hub-fx-m{display:block}
+  .field{flex-direction:column;padding:0;border:none;background:none;box-shadow:none;gap:10px}
+  .field:focus-within{box-shadow:none}
+  .field input{width:100%;padding:15px 16px;border:1px solid var(--rule-strong);
+    border-radius:var(--r-ctl);background:var(--surface)}
+  .field .btn{width:100%;padding:15px}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+    -webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);
+            mask-image:linear-gradient(90deg,#000 86%,transparent)}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:none;padding:0 12px;font-size:13.5px}
+  .tab svg{display:none}
+  .nav-in{height:58px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1!important;transform:none!important;transition:none}
+  .aura::before,.ping::after{animation:none}
+  *{transition-duration:.01ms!important}
+}
+/* visually hidden, still announced */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 </style>
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
-<div style="position:relative;width:100%;min-height:100vh;background:radial-gradient(1200px 700px at 70% -10%, rgba(230,81,0,0.10), transparent 60%), radial-gradient(900px 600px at 10% 8%, rgba(251,140,0,0.07), transparent 55%), #FBF9F6">
 
-  <!-- ===== NAV ===== -->
-  <nav style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;padding:16px clamp(16px,4vw,32px)">
-    <div class="vnav" style="width:100%;max-width:1180px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:11px 12px 11px 20px;border-radius:16px;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border:1px solid rgba(15,23,42,0.08);box-shadow:0 6px 24px rgba(15,23,42,0.07)">
-      <a href="#" aria-label="Vectore home" style="display:flex;align-items:center;text-decoration:none">
-        <img src="assets/vectore-logo.svg" alt="Vectore" width="112" height="28" style="height:28px;width:auto;display:block">
-      </a>
-      <div class="vnav-spacer" style="display:flex;align-items:center;justify-content:center;gap:30px"></div>
-      <div style="display:flex;align-items:center;justify-content:flex-end">
-        <a href="#waitlist" style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:11px;background:linear-gradient(135deg,#E65100,#C44400);color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:700;box-shadow:0 0 24px rgba(230,81,0,0.35)">Claim your spot</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ===== HERO ===== -->
-  <section style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(120px,16vh,180px) clamp(20px,5vw,40px) 40px;text-align:center">
-    <div style="position:absolute;top:6%;left:50%;transform:translateX(-50%);width:680px;height:520px;max-width:90vw;background:radial-gradient(circle,rgba(230,81,0,0.18),transparent 65%);filter:blur(30px);pointer-events:none;animation:vpulse 8s ease-in-out infinite"></div>
-    <div style="position:relative;display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 13px;border-radius:999px;border:1px solid rgba(230,81,0,0.28);background:linear-gradient(180deg,rgba(255,255,255,0.92),rgba(255,246,240,0.86));box-shadow:inset 0 1px 0 rgba(255,255,255,0.9),0 10px 26px -12px rgba(230,81,0,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:13px;font-weight:600;color:#E65100;margin-bottom:30px">
-      <span class="vping"></span>
-      Founding spots now open · Private beta
-    </div>
-    <h1 style="position:relative;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(33px,5.4vw,52px);line-height:1.1;letter-spacing:-0.02em;max-width:22ch;margin:0 auto 26px">Every way you teach, <span style="background:linear-gradient(120deg,#E65100,#FB8C00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">better with a community.</span></h1>
-    <p style="position:relative;font-size:clamp(17px,2vw,21px);line-height:1.55;color:#334155;max-width:60ch;margin:0 auto 38px">Bring courses, cohorts, coaching, workshops, and events into one platform, with community built into the experience from day one.</p>
-    <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:14px">
-      <form class="waitlist-form vhero-form" data-source="hero">
-        <input type="email" name="email" required autocomplete="email" placeholder="Enter your email">
-        <button type="submit">Claim your founding spot <span style="font-size:17px">→</span></button>
-      </form>
-      <p class="waitlist-error" hidden style="font-size:14px;color:#C44400;font-weight:600"></p>
-      <p style="font-size:14px;color:#64748B;max-width:44ch">Founding members get lifetime lowest pricing and early access when we launch.</p>
-    </div>
-
-    <!-- HERO DASHBOARD -->
-    <div class="reveal" style="position:relative;margin-top:70px;animation:vfloat 9s ease-in-out infinite">
-      <div style="position:absolute;top:-40px;bottom:-40px;left:0;right:0;background:radial-gradient(circle at 50% 40%,rgba(230,81,0,0.16),transparent 65%);filter:blur(44px);pointer-events:none"></div>
-      <div style="position:relative;border-radius:20px;border:1px solid rgba(15,23,42,0.12);box-shadow:0 50px 140px rgba(15,23,42,0.16);overflow:hidden;line-height:0">
-        <img src="assets/hero-community.webp" width="1820" height="1012" alt="The Vectore community platform showing a member feed: a spaces sidebar with Getting started, Announcements, and Product support, a pinned post titled The Fastest Way to Build a Membership, and a right rail with your spaces, upcoming events, and quick links" loading="eager" fetchpriority="high" decoding="async" style="display:block;width:100%;height:auto">
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PROBLEM ===== -->
-  <section id="problem" style="position:relative;max-width:1080px;margin:0 auto;padding:clamp(80px,12vh,140px) clamp(20px,5vw,40px)">
-    <div class="reveal" style="text-align:center;max-width:62ch;margin:0 auto 60px">
-      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(27px,4vw,40px);line-height:1.1;letter-spacing:-0.025em;margin-bottom:22px">Learning shouldn't feel fragmented.</h2>
-      <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:#334155">People learn better together. Yet most online platforms are built for solo learners. Anything social gets bolted on, and your learning ecosystem is spread across different tools. Vectore brings it all into one platform, with community as the core engine behind everything you teach.</p>
-    </div>
-
-    <div class="reveal" style="position:relative;max-width:1120px;margin:0 auto">
-      <div style="position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(15,23,42,0.08);box-shadow:0 30px 70px -44px rgba(15,23,42,0.35);line-height:0">
-        <picture>
-          <source media="(max-width:640px)" srcset="assets/problem-hub-mobile.webp?v=4" width="560" height="880">
-          <img src="assets/problem-hub.webp?v=4" alt="Vectore replaces a scattered stack of six disconnected tools with one system that natively powers courses, cohorts, coaching, community, events, challenges, payments, scheduling, automations, and detailed analytics" width="1120" height="560" loading="lazy" style="display:block;width:100%;height:auto">
-        </picture>
-        <svg class="phub-fx phub-fx-d" viewBox="0 0 1120 560" preserveAspectRatio="none" aria-hidden="true">
-          <defs><filter id="pglow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-          <g fill="#E8642A" filter="url(#pglow)">
-            <circle r="3.4"><animateMotion dur="1.9s" begin="0s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.45"><animateMotion dur="1.9s" begin="0.05s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.05s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.63"><animateMotion dur="1.9s" begin="0.10s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.10s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.4"><animateMotion dur="1.9s" begin="0.95s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.95s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.45"><animateMotion dur="1.9s" begin="1.00s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.00s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.63"><animateMotion dur="1.9s" begin="1.05s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.05s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.4"><animateMotion dur="1.9s" begin="0.32s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.32s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.45"><animateMotion dur="1.9s" begin="0.37s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.37s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.63"><animateMotion dur="1.9s" begin="0.42s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.42s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.4"><animateMotion dur="1.9s" begin="1.27s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.27s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.45"><animateMotion dur="1.9s" begin="1.32s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.32s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.63"><animateMotion dur="1.9s" begin="1.37s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.37s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.4"><animateMotion dur="1.9s" begin="0.63s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.63s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.45"><animateMotion dur="1.9s" begin="0.68s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.68s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.63"><animateMotion dur="1.9s" begin="0.73s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.73s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.4"><animateMotion dur="1.9s" begin="1.58s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.58s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.45"><animateMotion dur="1.9s" begin="1.63s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.63s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.63"><animateMotion dur="1.9s" begin="1.68s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.68s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-          </g>
-          <g fill="#FF8A3D" filter="url(#pglow)">
-            <circle r="3.2"><animateMotion dur="1.45s" begin="0.1s" repeatCount="indefinite" path="M580,280 C632,280 660,152 706,152"/><animate attributeName="opacity" dur="1.45s" begin="0.1s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.30"><animateMotion dur="1.45s" begin="0.15s" repeatCount="indefinite" path="M580,280 C632,280 660,152 706,152"/><animate attributeName="opacity" dur="1.45s" begin="0.15s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.54"><animateMotion dur="1.45s" begin="0.20s" repeatCount="indefinite" path="M580,280 C632,280 660,152 706,152"/><animate attributeName="opacity" dur="1.45s" begin="0.20s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.2"><animateMotion dur="1.45s" begin="0.5s" repeatCount="indefinite" path="M580,280 C632,280 664,216 706,216"/><animate attributeName="opacity" dur="1.45s" begin="0.5s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.30"><animateMotion dur="1.45s" begin="0.55s" repeatCount="indefinite" path="M580,280 C632,280 664,216 706,216"/><animate attributeName="opacity" dur="1.45s" begin="0.55s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.54"><animateMotion dur="1.45s" begin="0.60s" repeatCount="indefinite" path="M580,280 C632,280 664,216 706,216"/><animate attributeName="opacity" dur="1.45s" begin="0.60s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.2"><animateMotion dur="1.45s" begin="0.25s" repeatCount="indefinite" path="M580,280 L706,280"/><animate attributeName="opacity" dur="1.45s" begin="0.25s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.30"><animateMotion dur="1.45s" begin="0.30s" repeatCount="indefinite" path="M580,280 L706,280"/><animate attributeName="opacity" dur="1.45s" begin="0.30s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.54"><animateMotion dur="1.45s" begin="0.35s" repeatCount="indefinite" path="M580,280 L706,280"/><animate attributeName="opacity" dur="1.45s" begin="0.35s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.2"><animateMotion dur="1.45s" begin="0.65s" repeatCount="indefinite" path="M580,280 C632,280 664,344 706,344"/><animate attributeName="opacity" dur="1.45s" begin="0.65s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.30"><animateMotion dur="1.45s" begin="0.70s" repeatCount="indefinite" path="M580,280 C632,280 664,344 706,344"/><animate attributeName="opacity" dur="1.45s" begin="0.70s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.54"><animateMotion dur="1.45s" begin="0.75s" repeatCount="indefinite" path="M580,280 C632,280 664,344 706,344"/><animate attributeName="opacity" dur="1.45s" begin="0.75s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.2"><animateMotion dur="1.45s" begin="0.35s" repeatCount="indefinite" path="M580,280 C632,280 660,408 706,408"/><animate attributeName="opacity" dur="1.45s" begin="0.35s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.30"><animateMotion dur="1.45s" begin="0.40s" repeatCount="indefinite" path="M580,280 C632,280 660,408 706,408"/><animate attributeName="opacity" dur="1.45s" begin="0.40s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.54"><animateMotion dur="1.45s" begin="0.45s" repeatCount="indefinite" path="M580,280 C632,280 660,408 706,408"/><animate attributeName="opacity" dur="1.45s" begin="0.45s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.8"><animateMotion dur="0.9s" begin="0.55s" repeatCount="indefinite" path="M878,152 L906,152"/><animate attributeName="opacity" dur="0.9s" begin="0.55s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.02"><animateMotion dur="0.9s" begin="0.60s" repeatCount="indefinite" path="M878,152 L906,152"/><animate attributeName="opacity" dur="0.9s" begin="0.60s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.34"><animateMotion dur="0.9s" begin="0.65s" repeatCount="indefinite" path="M878,152 L906,152"/><animate attributeName="opacity" dur="0.9s" begin="0.65s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.8"><animateMotion dur="0.9s" begin="0.95s" repeatCount="indefinite" path="M878,216 L906,216"/><animate attributeName="opacity" dur="0.9s" begin="0.95s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.02"><animateMotion dur="0.9s" begin="1.00s" repeatCount="indefinite" path="M878,216 L906,216"/><animate attributeName="opacity" dur="0.9s" begin="1.00s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.34"><animateMotion dur="0.9s" begin="1.05s" repeatCount="indefinite" path="M878,216 L906,216"/><animate attributeName="opacity" dur="0.9s" begin="1.05s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.8"><animateMotion dur="0.9s" begin="0.7s" repeatCount="indefinite" path="M878,280 L906,280"/><animate attributeName="opacity" dur="0.9s" begin="0.7s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.02"><animateMotion dur="0.9s" begin="0.75s" repeatCount="indefinite" path="M878,280 L906,280"/><animate attributeName="opacity" dur="0.9s" begin="0.75s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.34"><animateMotion dur="0.9s" begin="0.80s" repeatCount="indefinite" path="M878,280 L906,280"/><animate attributeName="opacity" dur="0.9s" begin="0.80s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.8"><animateMotion dur="0.9s" begin="1.1s" repeatCount="indefinite" path="M878,344 L906,344"/><animate attributeName="opacity" dur="0.9s" begin="1.1s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.02"><animateMotion dur="0.9s" begin="1.15s" repeatCount="indefinite" path="M878,344 L906,344"/><animate attributeName="opacity" dur="0.9s" begin="1.15s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.34"><animateMotion dur="0.9s" begin="1.20s" repeatCount="indefinite" path="M878,344 L906,344"/><animate attributeName="opacity" dur="0.9s" begin="1.20s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.8"><animateMotion dur="0.9s" begin="0.8s" repeatCount="indefinite" path="M878,408 L906,408"/><animate attributeName="opacity" dur="0.9s" begin="0.8s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.02"><animateMotion dur="0.9s" begin="0.85s" repeatCount="indefinite" path="M878,408 L906,408"/><animate attributeName="opacity" dur="0.9s" begin="0.85s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.34"><animateMotion dur="0.9s" begin="0.90s" repeatCount="indefinite" path="M878,408 L906,408"/><animate attributeName="opacity" dur="0.9s" begin="0.90s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-          </g>
-        </svg>
-        <svg class="phub-fx phub-fx-m" viewBox="0 0 560 880" preserveAspectRatio="none" aria-hidden="true">
-          <defs><filter id="pglowm" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-          <g fill="#E8642A" filter="url(#pglowm)">
-            <circle r="4"><animateMotion dur="1.9s" begin="0s" repeatCount="indefinite" path="M158,120 C158,186 214,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.88"><animateMotion dur="1.9s" begin="0.05s" repeatCount="indefinite" path="M158,120 C158,186 214,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.05s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.92"><animateMotion dur="1.9s" begin="0.10s" repeatCount="indefinite" path="M158,120 C158,186 214,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.10s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="4"><animateMotion dur="1.9s" begin="0.45s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.45s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.88"><animateMotion dur="1.9s" begin="0.50s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.50s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.92"><animateMotion dur="1.9s" begin="0.55s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.55s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="4"><animateMotion dur="1.9s" begin="1.4s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="1.4s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.88"><animateMotion dur="1.9s" begin="1.45s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="1.45s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.92"><animateMotion dur="1.9s" begin="1.50s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="1.50s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="4"><animateMotion dur="1.9s" begin="0.9s" repeatCount="indefinite" path="M402,120 C402,186 346,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.9s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.88"><animateMotion dur="1.9s" begin="0.95s" repeatCount="indefinite" path="M402,120 C402,186 346,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.95s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.92"><animateMotion dur="1.9s" begin="1.00s" repeatCount="indefinite" path="M402,120 C402,186 346,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="1.00s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-          </g>
-          <g fill="#FF8A3D" filter="url(#pglowm)">
-            <circle r="3.8"><animateMotion dur="1.4s" begin="0.2s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="0.2s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.74"><animateMotion dur="1.4s" begin="0.25s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="0.25s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.82"><animateMotion dur="1.4s" begin="0.30s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="0.30s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.8"><animateMotion dur="1.4s" begin="0.95s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="0.95s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.74"><animateMotion dur="1.4s" begin="1.00s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="1.00s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.82"><animateMotion dur="1.4s" begin="1.05s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="1.05s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="3.8"><animateMotion dur="1.4s" begin="1.65s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="1.65s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="2.74"><animateMotion dur="1.4s" begin="1.70s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="1.70s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
-            <circle r="1.82"><animateMotion dur="1.4s" begin="1.75s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="1.75s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
-          </g>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FEATURE GRID (bordered) ===== -->
-  <div style="max-width:1180px;margin:0 auto;border:1px solid rgba(15,23,42,0.22)">
-  <section id="features" class="reveal vtexture" style="position:relative;padding:clamp(40px,8vh,90px) clamp(20px,5vw,40px) clamp(36px,5vh,56px);text-align:center;border-bottom:1px solid rgba(15,23,42,0.22)">
-    <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(27px,4vw,40px);line-height:1.1;letter-spacing:-0.025em;max-width:20ch;margin:0 auto 20px">The complete platform for learning communities</h2>
-    <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:#334155;max-width:56ch;margin:0 auto">Vectore empowers you with all the tools you need to build a thriving community around your education business.</p>
-  </section>
-
-  <!-- ROW 1 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
-    <div>
-      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Bring learning and community together</h3>
-      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Choose how you want to teach: self-paced courses, group coaching, cohort-based programs, or online workshops. Then build a community experience around all of it.</p>
-      <div class="vtabs" data-group="learn" role="tablist">
-        <button type="button" class="vtab is-active" data-target="courses"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Courses</button>
-        <button type="button" class="vtab" data-target="cohorts"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>Cohorts</button>
-        <button type="button" class="vtab" data-target="coaching"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Coaching</button>
-        <button type="button" class="vtab" data-target="workshops"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>Workshops</button>
-      </div>
-    </div>
-    <div style="position:relative">
-      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 60% 40%,rgba(230,81,0,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
-      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
-        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
-          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-        </div>
-        <div class="vtab-stack" data-group="learn">
-          <img decoding="async" class="vtab-img is-active" loading="lazy" data-tab="courses" width="760" height="560" src="assets/learn-courses.webp" alt="A self-paced course curriculum with modules and drip scheduling" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="cohorts" width="760" height="560" data-src="assets/learn-cohorts.webp" alt="A cohort program with a week-by-week live schedule" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="coaching" width="760" height="560" data-src="assets/learn-coaching.webp" alt="A 1:1 coaching offer with session packages" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="workshops" width="760" height="560" data-src="assets/learn-workshops.webp" alt="A live workshop with replay, workbook, and registrations" style="display:block;width:100%;height:auto">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROW: Measure learning -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
-    <div style="position:relative">
-      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 45% 45%,rgba(22,163,74,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
-      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
-        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
-          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-        </div>
-        <div class="vtab-stack" data-group="assess">
-          <img decoding="async" class="vtab-img is-active" loading="lazy" data-tab="quizzes" width="760" height="560" src="assets/assess-quizzes.webp" alt="Vectore quiz tool: an auto-graded multiple-choice knowledge check with the correct answer marked and a live score" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="assessments" width="760" height="560" data-src="assets/assess-assessments.webp" loading="lazy" alt="Vectore assessment tool: a student assignment graded against a rubric with per-criterion scores and instructor feedback" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="surveys" width="760" height="560" data-src="assets/assess-surveys.webp" loading="lazy" alt="Vectore survey tool: a course feedback survey with a confidence rating, a recommendation score, and an open comment" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="progress" width="760" height="560" data-src="assets/assess-progress.webp" loading="lazy" alt="Vectore progress report: a program performance dashboard showing completion rate, average quiz score, and each learner tagged on track, stuck, at risk, or completed" style="display:block;width:100%;height:auto">
-        </div>
-      </div>
-    </div>
-    <div>
-      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">See who's actually learning</h3>
-      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Quiz your students, grade their assignments, and send surveys to hear what they think. See how they're consuming your materials and understand who's on track, and who's stuck.</p>
-      <div class="vtabs" data-group="assess" role="tablist">
-        <button type="button" class="vtab is-active" data-target="quizzes"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Quizzes</button>
-        <button type="button" class="vtab" data-target="assessments"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>Assessments</button>
-        <button type="button" class="vtab" data-target="surveys"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 3.3a.5.5 0 0 1 .9 0l2.2 4.5 4.9.7a.5.5 0 0 1 .3.9l-3.6 3.5.8 4.9a.5.5 0 0 1-.7.5L12 16.9l-4.4 2.3a.5.5 0 0 1-.7-.5l.8-4.9-3.5-3.5a.5.5 0 0 1 .3-.9l4.9-.7z"/></svg>Surveys</button>
-        <button type="button" class="vtab" data-target="progress"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Progress</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROW 2 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
-    <div style="position:relative">
-      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 40% 40%,rgba(251,140,0,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
-      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
-        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
-          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-        </div>
-        <div class="vtab-stack" data-group="community">
-          <img decoding="async" class="vtab-img is-active" loading="lazy" data-tab="discussions" width="760" height="560" src="assets/community-discussions.webp" alt="A member's post with reactions and replies" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="challenges" width="760" height="560" data-src="assets/community-challenges.webp" alt="A 30-day build challenge with streak and rank" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="gamification" width="760" height="560" data-src="assets/community-gamification.webp" alt="Level, XP progress, and earned badges" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="matching" width="760" height="560" data-src="assets/community-matching.webp" alt="A weekly member match with shared interests" style="display:block;width:100%;height:auto">
-        </div>
-      </div>
-    </div>
-    <div>
-      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Build a community that people actually participate in</h3>
-      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Keep members engaged with discussion posts, chats, challenges, gamification, and member matching: interactive experiences that give people more ways to connect, contribute, and learn from one another.</p>
-      <div class="vtabs" data-group="community" role="tablist">
-        <button type="button" class="vtab is-active" data-target="discussions"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Discussions</button>
-        <button type="button" class="vtab" data-target="challenges"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Challenges</button>
-        <button type="button" class="vtab" data-target="gamification"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>Gamification</button>
-        <button type="button" class="vtab" data-target="matching"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Member matching</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROW 3 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
-    <div>
-      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Run events and coaching in one place</h3>
-      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Host workshops, office hours, coaching sessions, live events, and cohort meetings from one platform, without juggling separate scheduling, booking, calendar, or event software.</p>
-      <div class="vtabs" data-group="events" role="tablist">
-        <button type="button" class="vtab is-active" data-target="live"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>Live event</button>
-        <button type="button" class="vtab" data-target="coaching"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Coaching</button>
-        <button type="button" class="vtab" data-target="scheduling"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>Scheduling</button>
-      </div>
-    </div>
-    <div style="position:relative">
-      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 50% 40%,rgba(129,140,248,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
-      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
-        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
-          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-        </div>
-        <div class="vtab-stack" data-group="events">
-          <img decoding="async" class="vtab-img is-active" loading="lazy" data-tab="live" width="820" height="600" src="assets/event-live.webp" alt="Creating a live event with date, time, and platform" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="coaching" width="820" height="600" data-src="assets/event-coaching.webp" alt="A coaching session with duration, price, and open time slots" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="scheduling" width="820" height="600" data-src="assets/event-scheduling.webp" alt="Setting weekly availability for bookings" style="display:block;width:100%;height:auto">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROW 4 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
-    <div style="position:relative">
-      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 40% 40%,rgba(230,81,0,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
-      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
-        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
-          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-        </div>
-        <div class="vtab-stack" data-group="auto">
-          <img decoding="async" class="vtab-img is-active" loading="lazy" data-tab="onboarding" width="760" height="560" src="assets/auto-onboarding.webp" alt="Onboarding workflow: member joins, grant access, send welcome" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="access" width="760" height="560" data-src="assets/auto-access.webp" alt="Access-control workflow: on purchase, grant Pro and add to lounge" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="recurring" width="760" height="560" data-src="assets/auto-recurring.webp" alt="Recurring workflow: every Monday post a weekly digest" style="display:block;width:100%;height:auto">
-        </div>
-      </div>
-    </div>
-    <div>
-      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Automate the busywork</h3>
-      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Reduce manual work with workflows for onboarding, engagement, member management, access control, and recurring tasks. Spend less time managing systems and more time supporting members.</p>
-      <div class="vtabs" data-group="auto" role="tablist">
-        <button type="button" class="vtab is-active" data-target="onboarding"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>Onboarding</button>
-        <button type="button" class="vtab" data-target="access"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Access control</button>
-        <button type="button" class="vtab" data-target="recurring"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v6h6"/><path d="M3 8a9 9 0 1 0 3-5.3L3 8"/></svg>Recurring tasks</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROW 5 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;border-bottom:1px solid rgba(15,23,42,0.22);background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
-    <div>
-      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Know exactly what's working</h3>
-      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Track participation, program performance, member activity, and revenue from a single dashboard. Get the insights you need to improve your programs and community.</p>
-      <div class="vtabs" data-group="insights" role="tablist">
-        <button type="button" class="vtab is-active" data-target="participation"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Participation</button>
-        <button type="button" class="vtab" data-target="performance"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Performance</button>
-        <button type="button" class="vtab" data-target="revenue"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Revenue</button>
-      </div>
-    </div>
-    <div style="position:relative">
-      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 50% 40%,rgba(251,140,0,0.14),transparent 65%);filter:blur(26px);pointer-events:none"></div>
-      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
-        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
-          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-        </div>
-        <div class="vtab-stack" data-group="insights">
-          <img decoding="async" class="vtab-img is-active" loading="lazy" data-tab="participation" width="820" height="620" src="assets/an-participation.webp" alt="Participation and engagement trending up" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="performance" width="820" height="620" data-src="assets/an-performance.webp" alt="Program completion rates by course and cohort" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="revenue" width="820" height="620" data-src="assets/an-revenue.webp" alt="Monthly recurring revenue and top sellers" style="display:block;width:100%;height:auto">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROW 6 -->
-  <section class="vrow reveal" style="position:relative;padding:clamp(40px,7vh,80px) clamp(20px,5vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;background:linear-gradient(rgba(15,23,42,0.22),rgba(15,23,42,0.22)) center/1px 100% no-repeat">
-    <div style="position:relative">
-      <div style="position:absolute;inset:-20px;background:radial-gradient(circle at 50% 40%,rgba(230,81,0,0.16),transparent 65%);filter:blur(26px);pointer-events:none"></div>
-      <div class="vmock" style="position:relative;max-width:480px;margin:0 auto;border-radius:16px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 34px 70px rgba(15,23,42,0.16);overflow:hidden">
-        <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(15,23,42,0.06);background:linear-gradient(180deg,#FFFFFF,#FBFAF8)">
-          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-        </div>
-        <div class="vtab-stack" data-group="earnings">
-          <img decoding="async" class="vtab-img is-active" loading="lazy" data-tab="fees" width="780" height="600" src="assets/rev-fees.webp" alt="0% transaction fees and this month's payout breakdown" style="display:block;width:100%;height:auto">
-          <img decoding="async" class="vtab-img" data-tab="payouts" width="780" height="600" data-src="assets/rev-payouts.webp" alt="Next instant payout and recent payout history" style="display:block;width:100%;height:auto">
-        </div>
-      </div>
-    </div>
-    <div>
-      <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(22px,3vw,31px);line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px">Keep more of your revenue</h3>
-      <p style="font-size:17px;line-height:1.6;color:#334155;margin-bottom:24px">Vectore charges zero transaction fees on your product sales. You keep 100% of every payment, so what you make is what you take home.</p>
-      <div class="vtabs" data-group="earnings" role="tablist">
-        <button type="button" class="vtab is-active" data-target="fees"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>0% fees</button>
-        <button type="button" class="vtab" data-target="payouts"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>Instant payouts</button>
-      </div>
-    </div>
-  </section>
+<!-- ════ NAV ════════════════════════════════════════════════════════════ -->
+<header class="nav">
+  <div class="progress" id="progress"></div>
+  <div class="wrap nav-in">
+    <a href="#" class="nav-logo" aria-label="Vectore home">
+      <img src="assets/vectore-logo.svg?v=5" alt="Vectore" width="112" height="26">
+    </a>
+    <a href="#waitlist" class="btn">Claim your spot</a>
   </div>
+</header>
 
-  <!-- ===== WAITLIST CTA ===== -->
-  <section id="waitlist" style="position:relative;padding:clamp(60px,10vh,120px) clamp(20px,5vw,40px)">
-    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(15,23,42,0.075) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,0.075) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 86%,transparent)"></div>
-    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:600px;max-width:95vw;background:radial-gradient(circle,rgba(230,81,0,0.13),transparent 65%);filter:blur(40px);pointer-events:none;animation:vpulse 9s ease-in-out infinite"></div>
-    <div class="reveal" style="position:relative;max-width:1080px;margin:0 auto;border-radius:26px;border:1px solid rgba(15,23,42,0.1);background:#FFFFFF;box-shadow:0 40px 120px rgba(15,23,42,0.12);overflow:hidden">
-      <div class="vcta" style="display:grid;grid-template-columns:1fr 1fr">
-        <div style="padding:clamp(34px,5vw,56px)">
-          <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(27px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px">Get notified when we launch</h2>
-          <p style="font-size:16px;line-height:1.6;color:#334155;margin-bottom:28px">We're building this with creators, coaches, and educators who are tired of stitching their teaching across five tools and watching students fall through the gaps.</p>
-          <div style="display:flex;flex-direction:column;gap:14px">
-            <div style="display:flex;align-items:flex-start;gap:12px"><span style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;margin-top:1px;box-shadow:0 2px 6px rgba(230,81,0,0.3)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span style="font-size:15.5px;color:#1E293B">Founding-member pricing, locked in for life</span></div>
-            <div style="display:flex;align-items:flex-start;gap:12px"><span style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;margin-top:1px;box-shadow:0 2px 6px rgba(230,81,0,0.3)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span style="font-size:15.5px;color:#1E293B">Early access before we launch</span></div>
-            <div style="display:flex;align-items:flex-start;gap:12px"><span style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;margin-top:1px;box-shadow:0 2px 6px rgba(230,81,0,0.3)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span style="font-size:15.5px;color:#1E293B">A real say in what we build next</span></div>
-            <div style="display:flex;align-items:flex-start;gap:12px"><span style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#E65100,#C44400);display:flex;align-items:center;justify-content:center;margin-top:1px;box-shadow:0 2px 6px rgba(230,81,0,0.3)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span style="font-size:15.5px;color:#1E293B">Priority support</span></div>
-          </div>
+<main>
+
+<!-- ════ HERO ═══════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="aura" aria-hidden="true"></div>
+  <div class="wrap" style="position:absolute;inset:0;z-index:1" aria-hidden="true"><div class="rules"></div></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="ping"></span>Founding spots now open · Private beta</span>
+        <h1 class="display">Every way you teach, <span class="say">better with a community.</span></h1>
+        <p class="lead">Bring courses, cohorts, coaching, workshops, and events into one platform, with community built into the experience from day one.</p>
+        <div class="hero-cta" data-form-scope>
+          <form class="waitlist-form field" data-source="hero">
+            <label class="sr-only" for="hero-email">Email address</label>
+            <input id="hero-email" type="email" name="email" required autocomplete="email" placeholder="Enter your email">
+            <button type="submit" class="btn">Claim your founding spot <svg class="arw" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
+          </form>
+          <p class="waitlist-error err" hidden></p>
+          <p class="hero-note">Founding members get lifetime lowest pricing and early access when we launch.</p>
         </div>
-        <div class="vcta-form" style="padding:clamp(34px,5vw,56px);border-left:1px solid rgba(15,23,42,0.07);background:rgba(230,81,0,0.03);display:flex;flex-direction:column;justify-content:center">
-          <div class="waitlist-formwrap">
-            <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:23px;margin-bottom:8px">Claim your founding spot</h3>
-            <p style="font-size:14.5px;color:#64748B;margin-bottom:24px">Join the waitlist. We won't spam you.</p>
-            <form class="waitlist-form" data-source="cta">
-              <label for="cta-email" style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:8px">Email address</label>
-              <input id="cta-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com" style="width:100%;padding:15px 16px;border-radius:12px;border:1px solid rgba(15,23,42,0.12);background:rgba(15,23,42,0.05);color:#1E293B;font-size:15.5px;font-family:'Figtree',sans-serif;outline:none;margin-bottom:6px">
-              <p class="waitlist-error" hidden style="font-size:13px;color:#C44400;font-weight:600;margin-bottom:8px"></p>
-              <button type="submit" style="width:100%;margin-top:8px;padding:16px;border:none;border-radius:12px;background:linear-gradient(135deg,#E65100,#C44400);color:#FFFFFF;font-size:16px;font-weight:700;font-family:'Figtree',sans-serif;cursor:pointer;box-shadow:0 10px 36px rgba(230,81,0,0.35)">Claim Your Founding Spot →</button>
-            </form>
-            <p style="font-size:12.5px;color:#475569;text-align:center;margin-top:14px">Lifetime lowest pricing · Early access · Priority support</p>
-          </div>
+      </div>
+
+      <div class="hero-stage reveal" data-d="1">
+        <div class="frame">
+          <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+          <img src="assets/hero-community.webp?v=5" width="1820" height="1012" alt="The Vectore community platform showing a member feed: a spaces sidebar with Getting started, Announcements, and Product support, a pinned post titled The Fastest Way to Build a Membership, and a right rail with your spaces, upcoming events, and quick links" loading="eager" fetchpriority="high" decoding="async">
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== FAQ ===== -->
-  <section id="faq" class="reveal" style="position:relative;padding:clamp(48px,8vh,96px) clamp(20px,5vw,40px)">
-    <div style="max-width:760px;margin:0 auto">
-      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(27px,4vw,40px);line-height:1.1;letter-spacing:-0.025em;text-align:center;margin-bottom:14px">Still wondering?</h2>
-      <p style="font-size:clamp(16px,1.8vw,18px);line-height:1.6;color:#334155;text-align:center;max-width:52ch;margin:0 auto 40px">The honest answers to what people ask us before they sign up.</p>
-      <div class="vfaq">
+<!-- ════ FRAGMENTATION ══════════════════════════════════════════════════ -->
+<section id="problem" class="band-dark" style="padding-block:clamp(72px,10vh,128px)">
+  <div class="aura" style="--aura-top:-52%" aria-hidden="true"></div>
+  <div class="wrap" style="position:absolute;inset:0;z-index:1" aria-hidden="true"><div class="rules"></div></div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="split reveal">
+      <h2 class="h2">Learning shouldn't feel <span class="say">fragmented.</span></h2>
+      <p class="lead">People learn better together. Yet most online platforms are built for solo learners. Anything social gets bolted on, and your learning ecosystem is spread across different tools. Vectore brings it all into one platform, with community as the core engine behind everything you teach.</p>
+    </div>
+    <div class="hub reveal" data-d="1">
+      <picture>
+        <source media="(max-width:640px)" srcset="assets/problem-hub-mobile.webp?v=5" width="560" height="880">
+        <img src="assets/problem-hub.webp?v=5" alt="Vectore replaces a scattered stack of six disconnected tools with one system that natively powers courses, cohorts, coaching, community, events, challenges, payments, scheduling, automations, and detailed analytics" width="1120" height="560" loading="lazy">
+      </picture>
+      <svg class="hub-fx hub-fx-d" viewBox="0 0 1120 560" preserveAspectRatio="none" aria-hidden="true">
+      <defs><filter id="pglow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <g fill="#0B9583" filter="url(#pglow)">
+      <circle r="3.4"><animateMotion dur="1.9s" begin="0s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.45"><animateMotion dur="1.9s" begin="0.05s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.05s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.63"><animateMotion dur="1.9s" begin="0.10s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.10s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.4"><animateMotion dur="1.9s" begin="0.95s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.95s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.45"><animateMotion dur="1.9s" begin="1.00s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.00s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.63"><animateMotion dur="1.9s" begin="1.05s" repeatCount="indefinite" path="M178,214 C204,214 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.05s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.4"><animateMotion dur="1.9s" begin="0.32s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.32s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.45"><animateMotion dur="1.9s" begin="0.37s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.37s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.63"><animateMotion dur="1.9s" begin="0.42s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.42s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.4"><animateMotion dur="1.9s" begin="1.27s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.27s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.45"><animateMotion dur="1.9s" begin="1.32s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.32s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.63"><animateMotion dur="1.9s" begin="1.37s" repeatCount="indefinite" path="M178,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.37s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.4"><animateMotion dur="1.9s" begin="0.63s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.63s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.45"><animateMotion dur="1.9s" begin="0.68s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.68s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.63"><animateMotion dur="1.9s" begin="0.73s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="0.73s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.4"><animateMotion dur="1.9s" begin="1.58s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.58s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.45"><animateMotion dur="1.9s" begin="1.63s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.63s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.63"><animateMotion dur="1.9s" begin="1.68s" repeatCount="indefinite" path="M178,346 C204,346 214,280 236,280 L440,280"/><animate attributeName="opacity" dur="1.9s" begin="1.68s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      </g>
+      <g fill="#2EB69E" filter="url(#pglow)">
+      <circle r="3.2"><animateMotion dur="1.45s" begin="0.1s" repeatCount="indefinite" path="M580,280 C632,280 660,152 706,152"/><animate attributeName="opacity" dur="1.45s" begin="0.1s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.30"><animateMotion dur="1.45s" begin="0.15s" repeatCount="indefinite" path="M580,280 C632,280 660,152 706,152"/><animate attributeName="opacity" dur="1.45s" begin="0.15s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.54"><animateMotion dur="1.45s" begin="0.20s" repeatCount="indefinite" path="M580,280 C632,280 660,152 706,152"/><animate attributeName="opacity" dur="1.45s" begin="0.20s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.2"><animateMotion dur="1.45s" begin="0.5s" repeatCount="indefinite" path="M580,280 C632,280 664,216 706,216"/><animate attributeName="opacity" dur="1.45s" begin="0.5s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.30"><animateMotion dur="1.45s" begin="0.55s" repeatCount="indefinite" path="M580,280 C632,280 664,216 706,216"/><animate attributeName="opacity" dur="1.45s" begin="0.55s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.54"><animateMotion dur="1.45s" begin="0.60s" repeatCount="indefinite" path="M580,280 C632,280 664,216 706,216"/><animate attributeName="opacity" dur="1.45s" begin="0.60s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.2"><animateMotion dur="1.45s" begin="0.25s" repeatCount="indefinite" path="M580,280 L706,280"/><animate attributeName="opacity" dur="1.45s" begin="0.25s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.30"><animateMotion dur="1.45s" begin="0.30s" repeatCount="indefinite" path="M580,280 L706,280"/><animate attributeName="opacity" dur="1.45s" begin="0.30s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.54"><animateMotion dur="1.45s" begin="0.35s" repeatCount="indefinite" path="M580,280 L706,280"/><animate attributeName="opacity" dur="1.45s" begin="0.35s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.2"><animateMotion dur="1.45s" begin="0.65s" repeatCount="indefinite" path="M580,280 C632,280 664,344 706,344"/><animate attributeName="opacity" dur="1.45s" begin="0.65s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.30"><animateMotion dur="1.45s" begin="0.70s" repeatCount="indefinite" path="M580,280 C632,280 664,344 706,344"/><animate attributeName="opacity" dur="1.45s" begin="0.70s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.54"><animateMotion dur="1.45s" begin="0.75s" repeatCount="indefinite" path="M580,280 C632,280 664,344 706,344"/><animate attributeName="opacity" dur="1.45s" begin="0.75s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.2"><animateMotion dur="1.45s" begin="0.35s" repeatCount="indefinite" path="M580,280 C632,280 660,408 706,408"/><animate attributeName="opacity" dur="1.45s" begin="0.35s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.30"><animateMotion dur="1.45s" begin="0.40s" repeatCount="indefinite" path="M580,280 C632,280 660,408 706,408"/><animate attributeName="opacity" dur="1.45s" begin="0.40s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.54"><animateMotion dur="1.45s" begin="0.45s" repeatCount="indefinite" path="M580,280 C632,280 660,408 706,408"/><animate attributeName="opacity" dur="1.45s" begin="0.45s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.8"><animateMotion dur="0.9s" begin="0.55s" repeatCount="indefinite" path="M878,152 L906,152"/><animate attributeName="opacity" dur="0.9s" begin="0.55s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.02"><animateMotion dur="0.9s" begin="0.60s" repeatCount="indefinite" path="M878,152 L906,152"/><animate attributeName="opacity" dur="0.9s" begin="0.60s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.34"><animateMotion dur="0.9s" begin="0.65s" repeatCount="indefinite" path="M878,152 L906,152"/><animate attributeName="opacity" dur="0.9s" begin="0.65s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.8"><animateMotion dur="0.9s" begin="0.95s" repeatCount="indefinite" path="M878,216 L906,216"/><animate attributeName="opacity" dur="0.9s" begin="0.95s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.02"><animateMotion dur="0.9s" begin="1.00s" repeatCount="indefinite" path="M878,216 L906,216"/><animate attributeName="opacity" dur="0.9s" begin="1.00s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.34"><animateMotion dur="0.9s" begin="1.05s" repeatCount="indefinite" path="M878,216 L906,216"/><animate attributeName="opacity" dur="0.9s" begin="1.05s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.8"><animateMotion dur="0.9s" begin="0.7s" repeatCount="indefinite" path="M878,280 L906,280"/><animate attributeName="opacity" dur="0.9s" begin="0.7s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.02"><animateMotion dur="0.9s" begin="0.75s" repeatCount="indefinite" path="M878,280 L906,280"/><animate attributeName="opacity" dur="0.9s" begin="0.75s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.34"><animateMotion dur="0.9s" begin="0.80s" repeatCount="indefinite" path="M878,280 L906,280"/><animate attributeName="opacity" dur="0.9s" begin="0.80s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.8"><animateMotion dur="0.9s" begin="1.1s" repeatCount="indefinite" path="M878,344 L906,344"/><animate attributeName="opacity" dur="0.9s" begin="1.1s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.02"><animateMotion dur="0.9s" begin="1.15s" repeatCount="indefinite" path="M878,344 L906,344"/><animate attributeName="opacity" dur="0.9s" begin="1.15s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.34"><animateMotion dur="0.9s" begin="1.20s" repeatCount="indefinite" path="M878,344 L906,344"/><animate attributeName="opacity" dur="0.9s" begin="1.20s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.8"><animateMotion dur="0.9s" begin="0.8s" repeatCount="indefinite" path="M878,408 L906,408"/><animate attributeName="opacity" dur="0.9s" begin="0.8s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.02"><animateMotion dur="0.9s" begin="0.85s" repeatCount="indefinite" path="M878,408 L906,408"/><animate attributeName="opacity" dur="0.9s" begin="0.85s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.34"><animateMotion dur="0.9s" begin="0.90s" repeatCount="indefinite" path="M878,408 L906,408"/><animate attributeName="opacity" dur="0.9s" begin="0.90s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      </g>
+      </svg>
+      <svg class="hub-fx hub-fx-m" viewBox="0 0 560 880" preserveAspectRatio="none" aria-hidden="true">
+      <defs><filter id="pglowm" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <g fill="#0B9583" filter="url(#pglowm)">
+      <circle r="4"><animateMotion dur="1.9s" begin="0s" repeatCount="indefinite" path="M158,120 C158,186 214,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.88"><animateMotion dur="1.9s" begin="0.05s" repeatCount="indefinite" path="M158,120 C158,186 214,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.05s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.92"><animateMotion dur="1.9s" begin="0.10s" repeatCount="indefinite" path="M158,120 C158,186 214,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.10s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="4"><animateMotion dur="1.9s" begin="0.45s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.45s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.88"><animateMotion dur="1.9s" begin="0.50s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.50s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.92"><animateMotion dur="1.9s" begin="0.55s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.55s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="4"><animateMotion dur="1.9s" begin="1.4s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="1.4s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.88"><animateMotion dur="1.9s" begin="1.45s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="1.45s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.92"><animateMotion dur="1.9s" begin="1.50s" repeatCount="indefinite" path="M280,120 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="1.50s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="4"><animateMotion dur="1.9s" begin="0.9s" repeatCount="indefinite" path="M402,120 C402,186 346,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.9s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.88"><animateMotion dur="1.9s" begin="0.95s" repeatCount="indefinite" path="M402,120 C402,186 346,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="0.95s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.92"><animateMotion dur="1.9s" begin="1.00s" repeatCount="indefinite" path="M402,120 C402,186 346,206 280,206 L280,224"/><animate attributeName="opacity" dur="1.9s" begin="1.00s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      </g>
+      <g fill="#2EB69E" filter="url(#pglowm)">
+      <circle r="3.8"><animateMotion dur="1.4s" begin="0.2s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="0.2s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.74"><animateMotion dur="1.4s" begin="0.25s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="0.25s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.82"><animateMotion dur="1.4s" begin="0.30s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="0.30s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.8"><animateMotion dur="1.4s" begin="0.95s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="0.95s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.74"><animateMotion dur="1.4s" begin="1.00s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="1.00s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.82"><animateMotion dur="1.4s" begin="1.05s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="1.05s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="3.8"><animateMotion dur="1.4s" begin="1.65s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="1.65s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="2.74"><animateMotion dur="1.4s" begin="1.70s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="1.70s" repeatCount="indefinite" values="0;0.5;0.45;0" keyTimes="0;0.1;0.86;1"/></circle>
+      <circle r="1.82"><animateMotion dur="1.4s" begin="1.75s" repeatCount="indefinite" path="M280,374 L280,452"/><animate attributeName="opacity" dur="1.4s" begin="1.75s" repeatCount="indefinite" values="0;0.26;0.22;0" keyTimes="0;0.1;0.86;1"/></circle>
+      </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FEATURE MATRIX ═════════════════════════════════════════════════ -->
+<section id="features" class="matrix">
+  <div class="wrap">
+    <div class="matrix-head reveal">
+      <h2 class="h2">The complete platform for learning communities</h2>
+      <p class="lead">Vectore empowers you with all the tools you need to build a thriving community around your education business.</p>
+    </div>
+    <div class="rows">
+
+      <!-- 01 Bring learning and community together -->
+      <section class="row reveal row--lead">
+        <div class="row-idx" aria-hidden="true">01</div>
+        <div class="row-copy">
+          <h3 class="h3">Bring learning and community together</h3>
+          <p class="body">Choose how you want to teach: self-paced courses, group coaching, cohort-based programs, or online workshops. Then build a community experience around all of it.</p>
+          <div class="tabs" data-group="learn" role="tablist">
+            <button type="button" class="tab is-active" data-target="courses"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Courses</button>
+            <button type="button" class="tab" data-target="cohorts"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>Cohorts</button>
+            <button type="button" class="tab" data-target="coaching"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Coaching</button>
+            <button type="button" class="tab" data-target="workshops"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>Workshops</button>
+          </div>
+        </div>
+        <div class="row-stage">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="stack" data-group="learn">
+              <img decoding="async" class="is-active" data-tab="courses" width="760" height="560" src="assets/learn-courses.webp?v=5" alt="A self-paced course curriculum with modules and drip scheduling">
+              <img decoding="async" loading="lazy" data-tab="cohorts" width="760" height="560" data-src="assets/learn-cohorts.webp?v=5" alt="A cohort program with a week-by-week live schedule">
+              <img decoding="async" loading="lazy" data-tab="coaching" width="760" height="560" data-src="assets/learn-coaching.webp?v=5" alt="A 1:1 coaching offer with session packages">
+              <img decoding="async" loading="lazy" data-tab="workshops" width="760" height="560" data-src="assets/learn-workshops.webp?v=5" alt="A live workshop with replay, workbook, and registrations">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 See who's actually learning -->
+      <section class="row reveal rev">
+        <div class="row-idx" aria-hidden="true">02</div>
+        <div class="row-copy">
+          <h3 class="h3">See who's actually learning</h3>
+          <p class="body">Quiz your students, grade their assignments, and send surveys to hear what they think. See how they're consuming your materials and understand who's on track, and who's stuck.</p>
+          <div class="tabs" data-group="assess" role="tablist">
+            <button type="button" class="tab is-active" data-target="quizzes"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Quizzes</button>
+            <button type="button" class="tab" data-target="assessments"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>Assessments</button>
+            <button type="button" class="tab" data-target="surveys"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.5 3.3a.5.5 0 0 1 .9 0l2.2 4.5 4.9.7a.5.5 0 0 1 .3.9l-3.6 3.5.8 4.9a.5.5 0 0 1-.7.5L12 16.9l-4.4 2.3a.5.5 0 0 1-.7-.5l.8-4.9-3.5-3.5a.5.5 0 0 1 .3-.9l4.9-.7z"/></svg>Surveys</button>
+            <button type="button" class="tab" data-target="progress"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Progress</button>
+          </div>
+        </div>
+        <div class="row-stage">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="stack" data-group="assess">
+              <img decoding="async" class="is-active" data-tab="quizzes" width="760" height="560" src="assets/assess-quizzes.webp?v=5" alt="Vectore quiz tool: an auto-graded multiple-choice knowledge check with the correct answer marked and a live score">
+              <img decoding="async" loading="lazy" data-tab="assessments" width="760" height="560" data-src="assets/assess-assessments.webp?v=5" alt="Vectore assessment tool: a student assignment graded against a rubric with per-criterion scores and instructor feedback">
+              <img decoding="async" loading="lazy" data-tab="surveys" width="760" height="560" data-src="assets/assess-surveys.webp?v=5" alt="Vectore survey tool: a course feedback survey with a confidence rating, a recommendation score, and an open comment">
+              <img decoding="async" loading="lazy" data-tab="progress" width="760" height="560" data-src="assets/assess-progress.webp?v=5" alt="Vectore progress report: a program performance dashboard showing completion rate, average quiz score, and each learner tagged on track, stuck, at risk, or completed">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 Build a community that people actually participate in -->
+      <section class="row reveal">
+        <div class="row-idx" aria-hidden="true">03</div>
+        <div class="row-copy">
+          <h3 class="h3">Build a community that people actually participate in</h3>
+          <p class="body">Keep members engaged with discussion posts, chats, challenges, gamification, and member matching: interactive experiences that give people more ways to connect, contribute, and learn from one another.</p>
+          <div class="tabs" data-group="community" role="tablist">
+            <button type="button" class="tab is-active" data-target="discussions"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Discussions</button>
+            <button type="button" class="tab" data-target="challenges"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Challenges</button>
+            <button type="button" class="tab" data-target="gamification"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>Gamification</button>
+            <button type="button" class="tab" data-target="matching"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Member matching</button>
+          </div>
+        </div>
+        <div class="row-stage">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="stack" data-group="community">
+              <img decoding="async" class="is-active" data-tab="discussions" width="760" height="560" src="assets/community-discussions.webp?v=5" alt="A member's post with reactions and replies">
+              <img decoding="async" loading="lazy" data-tab="challenges" width="760" height="560" data-src="assets/community-challenges.webp?v=5" alt="A 30-day build challenge with streak and rank">
+              <img decoding="async" loading="lazy" data-tab="gamification" width="760" height="560" data-src="assets/community-gamification.webp?v=5" alt="Level, XP progress, and earned badges">
+              <img decoding="async" loading="lazy" data-tab="matching" width="760" height="560" data-src="assets/community-matching.webp?v=5" alt="A weekly member match with shared interests">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 Run events and coaching in one place -->
+      <section class="row reveal rev">
+        <div class="row-idx" aria-hidden="true">04</div>
+        <div class="row-copy">
+          <h3 class="h3">Run events and coaching in one place</h3>
+          <p class="body">Host workshops, office hours, coaching sessions, live events, and cohort meetings from one platform, without juggling separate scheduling, booking, calendar, or event software.</p>
+          <div class="tabs" data-group="events" role="tablist">
+            <button type="button" class="tab is-active" data-target="live"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>Live event</button>
+            <button type="button" class="tab" data-target="coaching"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Coaching</button>
+            <button type="button" class="tab" data-target="scheduling"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>Scheduling</button>
+          </div>
+        </div>
+        <div class="row-stage">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="stack" data-group="events">
+              <img decoding="async" class="is-active" data-tab="live" width="820" height="600" src="assets/event-live.webp?v=5" alt="Creating a live event with date, time, and platform">
+              <img decoding="async" loading="lazy" data-tab="coaching" width="820" height="600" data-src="assets/event-coaching.webp?v=5" alt="A coaching session with duration, price, and open time slots">
+              <img decoding="async" loading="lazy" data-tab="scheduling" width="820" height="600" data-src="assets/event-scheduling.webp?v=5" alt="Setting weekly availability for bookings">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 Automate the busywork -->
+      <section class="row reveal">
+        <div class="row-idx" aria-hidden="true">05</div>
+        <div class="row-copy">
+          <h3 class="h3">Automate the busywork</h3>
+          <p class="body">Reduce manual work with workflows for onboarding, engagement, member management, access control, and recurring tasks. Spend less time managing systems and more time supporting members.</p>
+          <div class="tabs" data-group="auto" role="tablist">
+            <button type="button" class="tab is-active" data-target="onboarding"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>Onboarding</button>
+            <button type="button" class="tab" data-target="access"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Access control</button>
+            <button type="button" class="tab" data-target="recurring"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v6h6"/><path d="M3 8a9 9 0 1 0 3-5.3L3 8"/></svg>Recurring tasks</button>
+          </div>
+        </div>
+        <div class="row-stage">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="stack" data-group="auto">
+              <img decoding="async" class="is-active" data-tab="onboarding" width="760" height="560" src="assets/auto-onboarding.webp?v=5" alt="Onboarding workflow: member joins, grant access, send welcome">
+              <img decoding="async" loading="lazy" data-tab="access" width="760" height="560" data-src="assets/auto-access.webp?v=5" alt="Access-control workflow: on purchase, grant Pro and add to lounge">
+              <img decoding="async" loading="lazy" data-tab="recurring" width="760" height="560" data-src="assets/auto-recurring.webp?v=5" alt="Recurring workflow: every Monday post a weekly digest">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 Know exactly what's working -->
+      <section class="row reveal rev">
+        <div class="row-idx" aria-hidden="true">06</div>
+        <div class="row-copy">
+          <h3 class="h3">Know exactly what's working</h3>
+          <p class="body">Track participation, program performance, member activity, and revenue from a single dashboard. Get the insights you need to improve your programs and community.</p>
+          <div class="tabs" data-group="insights" role="tablist">
+            <button type="button" class="tab is-active" data-target="participation"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Participation</button>
+            <button type="button" class="tab" data-target="performance"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Performance</button>
+            <button type="button" class="tab" data-target="revenue"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Revenue</button>
+          </div>
+        </div>
+        <div class="row-stage">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="stack" data-group="insights">
+              <img decoding="async" class="is-active" data-tab="participation" width="820" height="620" src="assets/an-participation.webp?v=5" alt="Participation and engagement trending up">
+              <img decoding="async" loading="lazy" data-tab="performance" width="820" height="620" data-src="assets/an-performance.webp?v=5" alt="Program completion rates by course and cohort">
+              <img decoding="async" loading="lazy" data-tab="revenue" width="820" height="620" data-src="assets/an-revenue.webp?v=5" alt="Monthly recurring revenue and top sellers">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 Keep more of your revenue -->
+      <section class="row reveal">
+        <div class="row-idx" aria-hidden="true">07</div>
+        <div class="row-copy">
+          <h3 class="h3">Keep more of your revenue</h3>
+          <p class="body">Vectore charges zero transaction fees on your product sales. You keep 100% of every payment, so what you make is what you take home.</p>
+          <div class="tabs" data-group="earnings" role="tablist">
+            <button type="button" class="tab is-active" data-target="fees"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>0% fees</button>
+            <button type="button" class="tab" data-target="payouts"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>Instant payouts</button>
+          </div>
+        </div>
+        <div class="row-stage">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="stack" data-group="earnings">
+              <img decoding="async" class="is-active" data-tab="fees" width="780" height="600" src="assets/rev-fees.webp?v=5" alt="0% transaction fees and this month's payout breakdown">
+              <img decoding="async" loading="lazy" data-tab="payouts" width="780" height="600" data-src="assets/rev-payouts.webp?v=5" alt="Next instant payout and recent payout history">
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- ════ WAITLIST ═══════════════════════════════════════════════════════ -->
+<section id="waitlist" class="band-dark cta">
+  <div class="aura" style="--aura-top:-46%" aria-hidden="true"></div>
+  <div class="wrap" style="position:absolute;inset:0;z-index:1" aria-hidden="true"><div class="rules"></div></div>
+  <div class="wrap">
+    <div class="cta-grid">
+      <div class="reveal">
+        <h2 class="h2">Get notified when we launch</h2>
+        <p class="lead">We're building this with creators, coaches, and educators who are tired of stitching their teaching across five tools and watching students fall through the gaps.</p>
+        <ul class="perks">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Founding-member pricing, locked in for life</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Early access before we launch</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>A real say in what we build next</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
+        </ul>
+      </div>
+
+      <div class="panel reveal" data-d="1" data-form-scope>
+        <h3 class="h4">Claim your founding spot</h3>
+        <p class="small" style="margin:6px 0 22px;color:var(--on-dark-2)">Join the waitlist. We won't spam you.</p>
+        <form class="waitlist-form" data-source="cta">
+          <label for="cta-email">Email address</label>
+          <input id="cta-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com">
+          <p class="waitlist-error err" hidden style="margin-top:10px"></p>
+          <button type="submit" class="btn">Claim Your Founding Spot <svg class="arw" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
+        </form>
+        <p class="fine">Lifetime lowest pricing · Early access · Priority support</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FAQ ════════════════════════════════════════════════════════════ -->
+<section id="faq" class="faq">
+  <div class="wrap">
+    <div class="faq-grid">
+      <div class="faq-rail reveal">
+        <h2>Still wondering?</h2>
+        <p class="body">The honest answers to what people ask us before they sign up.</p>
+      </div>
+      <div class="qs reveal" data-d="1">
         <details open>
-          <summary>So what is Vectore, really?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="vfaq-a">It's where you run the whole business: your courses, your coaching, your events, and the people around them, all under one roof. Most tools staple a forum onto a video player and call it community. We started from the opposite end. Your members talking to each other is the heartbeat, and the teaching tools are built around it.</div>
+          <summary>So what is Vectore, really?<span class="sign" aria-hidden="true"></span></summary>
+          <div class="ans">It's where you run the whole business: your courses, your coaching, your events, and the people around them, all under one roof. Most tools staple a forum onto a video player and call it community. We started from the opposite end. Your members talking to each other is the heartbeat, and the teaching tools are built around it.</div>
         </details>
         <details>
-          <summary>Are you going to take a cut of my sales?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="vfaq-a">No. Sell a $100 program and $100 lands with you. We make our money from subscriptions, not by dipping into what your students pay. The only cut is the standard processing fee your payment provider (Stripe or Paystack) charges, and that never touches us.</div>
+          <summary>Are you going to take a cut of my sales?<span class="sign" aria-hidden="true"></span></summary>
+          <div class="ans">No. Sell a $100 program and $100 lands with you. We make our money from subscriptions, not by dipping into what your students pay. The only cut is the standard processing fee your payment provider (Stripe or Paystack) charges, and that never touches us.</div>
         </details>
         <details>
-          <summary>What's this going to cost me?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="vfaq-a">We're still nailing down public prices, and the people who join now get the best rate we'll ever put out, held for as long as they stick around. The waitlist itself is free: an email, no card, nothing to cancel. You'll know the exact numbers long before anyone asks you to pay.</div>
+          <summary>What's this going to cost me?<span class="sign" aria-hidden="true"></span></summary>
+          <div class="ans">We're still nailing down public prices, and the people who join now get the best rate we'll ever put out, held for as long as they stick around. The waitlist itself is free: an email, no card, nothing to cancel. You'll know the exact numbers long before anyone asks you to pay.</div>
         </details>
         <details>
-          <summary>What can I actually build and sell here?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="vfaq-a">Just about any shape of teaching. A self-paced course you drip out, a cohort with real start and end dates, coaching one-on-one or in a group, a live workshop, a ticketed event. Bolt on quizzes, assignments, and surveys and you'll finally know who's actually doing the work, not just who bought.</div>
+          <summary>What can I actually build and sell here?<span class="sign" aria-hidden="true"></span></summary>
+          <div class="ans">Just about any shape of teaching. A self-paced course you drip out, a cohort with real start and end dates, coaching one-on-one or in a group, a live workshop, a ticketed event. Bolt on quizzes, assignments, and surveys and you'll finally know who's actually doing the work, not just who bought.</div>
         </details>
         <details>
-          <summary>Can I finally drop the other five tools?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="vfaq-a">For most creators, yes. The scattered kit (a course host here, a community app there, a booking link, a checkout, an email tool, a spreadsheet for the numbers) collapses into one home. Fewer passwords, fewer invoices, and things that finally speak to each other. Attached to one favorite app? Integrations are coming.</div>
+          <summary>Can I finally drop the other five tools?<span class="sign" aria-hidden="true"></span></summary>
+          <div class="ans">For most creators, yes. The scattered kit (a course host here, a community app there, a booking link, a checkout, an email tool, a spreadsheet for the numbers) collapses into one home. Fewer passwords, fewer invoices, and things that finally speak to each other. Attached to one favorite app? Integrations are coming.</div>
         </details>
         <details>
-          <summary>When can I get in, and why join early?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="vfaq-a">We're in private beta and letting people in a batch at a time. Put your name down and you're near the front of the queue. Early folks aren't just first through the door: your price is frozen, the roadmap bends toward what you tell us you're missing, and there's a real human on the other end when you hit a wall.</div>
+          <summary>When can I get in, and why join early?<span class="sign" aria-hidden="true"></span></summary>
+          <div class="ans">We're in private beta and letting people in a batch at a time. Put your name down and you're near the front of the queue. Early folks aren't just first through the door: your price is frozen, the roadmap bends toward what you tell us you're missing, and there's a real human on the other end when you hit a wall.</div>
         </details>
         <details>
-          <summary>If I leave one day, do I lose everything?<svg class="vfaq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="vfaq-a">Your work stays yours, full stop. The lessons you make, the audience you grow, and the revenue you earn belong to you, not to us. Walk away whenever you like and take your members and content with you. No lock-in, no holding your list hostage.</div>
+          <summary>If I leave one day, do I lose everything?<span class="sign" aria-hidden="true"></span></summary>
+          <div class="ans">Your work stays yours, full stop. The lessons you make, the audience you grow, and the revenue you earn belong to you, not to us. Walk away whenever you like and take your members and content with you. No lock-in, no holding your list hostage.</div>
         </details>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer style="max-width:1080px;margin:0 auto;padding:clamp(40px,6vh,72px) clamp(20px,5vw,40px) 48px;border-top:1px solid rgba(15,23,42,0.08)">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:22px;margin-bottom:22px">
-        <div style="display:flex;align-items:center">
-          <img src="assets/vectore-logo.svg" alt="Vectore" width="96" height="24" style="height:24px;width:auto;display:block">
-        </div>
-        <nav aria-label="Footer" style="display:flex;flex-wrap:wrap;gap:28px">
-          <a href="/privacy" style="font-size:14px;font-weight:500;color:#475569;text-decoration:none">Privacy Policy</a>
-          <a href="/contact" style="font-size:14px;font-weight:500;color:#475569;text-decoration:none">Contact</a>
-          <a href="/terms" style="font-size:14px;font-weight:500;color:#475569;text-decoration:none">Terms of Service</a>
-        </nav>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:20px;border-top:1px solid rgba(15,23,42,0.06)">
-        <span style="font-size:13px;color:#94A3B8">© <span id="year">2026</span> Vectore. All rights reserved.</span>
-        <span style="font-size:13px;color:#94A3B8">The community platform built for learning</span>
-      </div>
-    </footer>
+</main>
 
-</div>
+<!-- ════ FOOTER ═════════════════════════════════════════════════════════ -->
+<footer class="foot">
+  <div class="wrap" style="position:absolute;inset:0;z-index:0;opacity:.55" aria-hidden="true"><div class="rules"></div></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <div class="foot-top">
+      <img src="assets/vectore-logo-light.svg?v=5" alt="Vectore" width="96" height="22">
+      <nav class="foot-nav" aria-label="Footer">
+        <a class="ulink" href="/privacy">Privacy Policy</a>
+        <a class="ulink" href="/contact">Contact</a>
+        <a class="ulink" href="/terms">Terms of Service</a>
+      </nav>
+    </div>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Vectore. All rights reserved.</span>
+      <span>The community platform built for learning</span>
+    </div>
+  </div>
+</footer>
 
 <script>
 (function(){
@@ -590,15 +924,28 @@
 
   // ---- dynamic copyright year ----
   var yEl = document.getElementById('year'); if(yEl){ yEl.textContent = new Date().getFullYear(); }
-  // ---- nav shadow on scroll ----
-  var nav = document.querySelector('.vnav');
-  function onScroll(){ if(nav) nav.classList.toggle('scrolled', window.scrollY > 8); }
-  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // ---- nav: hairline + blur once the hero has moved, plus a scroll rule ----
+  var nav = document.querySelector('.nav');
+  var bar = document.getElementById('progress');
+  var ticking = false;
+  function paintScroll(){
+    ticking = false;
+    if(nav) nav.classList.toggle('scrolled', window.scrollY > 8);
+    if(bar){
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + '%';
+    }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(paintScroll); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  paintScroll();
 
   // ---- scroll reveal ----
   var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'}) : null;
+  }, {threshold:0.08, rootMargin:'0px 0px -6% 0px'}) : null;
   document.querySelectorAll('.reveal').forEach(function(el){
     if(io){ io.observe(el); } else { el.classList.add('in'); }
   });
@@ -623,7 +970,9 @@
 
     form.addEventListener('submit', function(ev){
       ev.preventDefault();
-      var scope = form.closest('.vcta-form') || form.parentElement;
+      // the error line lives next to the form, which may be a sibling (hero)
+      // or a wrapper (waitlist panel) — [data-form-scope] marks whichever it is
+      var scope = form.closest('[data-form-scope]') || form.parentElement;
       var input = form.querySelector('input[name="email"]');
       var errEl = scope.querySelector('.waitlist-error');
       var btn = form.querySelector('button[type="submit"]');
@@ -659,7 +1008,7 @@
       }
 
       var original = btn ? btn.innerHTML : '';
-      if(btn){ btn.disabled = true; btn.style.opacity = '0.75'; btn.innerHTML = 'Joining…'; }
+      if(btn){ btn.disabled = true; btn.innerHTML = 'Joining…'; }
 
       function remember(){
         emails.push(emailKey); lsSet(LS_EMAILS, emails);
@@ -668,7 +1017,7 @@
       function succeed(){ remember(); window.location.href = '/thank-you'; }
       function failWith(msg){
         if(errEl){ errEl.textContent = msg || 'Something went wrong. Please try again.'; show(errEl); }
-        if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = original; }
+        if(btn){ btn.disabled = false; btn.innerHTML = original; }
       }
 
       // Send the subscriber to Kit (kit.com) via the public form endpoint.
@@ -684,22 +1033,22 @@
     });
   });
 
-  // ---- interactive feature tabs (community + events) ----
+  // ---- interactive feature tabs ----
   // Clicking a tab crossfades the framed mockup to that feature's view.
   // Inactive tab mockups are deferred (data-src) and only fetched when a tab is
   // hovered, focused, or clicked. Cuts ~16 image requests off the initial load.
   function loadTabImg(img){ var s = img && img.getAttribute('data-src'); if(s){ img.src = s; img.removeAttribute('data-src'); } }
-  document.querySelectorAll('.vtabs').forEach(function(group){
+  document.querySelectorAll('.tabs').forEach(function(group){
     var name = group.getAttribute('data-group');
-    var stack = document.querySelector('.vtab-stack[data-group="' + name + '"]');
+    var stack = document.querySelector('.stack[data-group="' + name + '"]');
     if(!stack) return;
-    var imgs = stack.querySelectorAll('.vtab-img');
-    var tabs = group.querySelectorAll('.vtab');
+    var imgs = stack.querySelectorAll('img');
+    var tabs = group.querySelectorAll('.tab');
     function imgFor(target){ for(var i=0;i<imgs.length;i++){ if(imgs[i].getAttribute('data-tab') === target) return imgs[i]; } return null; }
 
     // ---- ARIA tabs: tablist -> tab -> tabpanel, kept well-formed for AT + AI agents ----
     var panelId = 'vpanel-' + name;
-    var heading = group.closest('section') && group.closest('section').querySelector('h3');
+    var heading = group.closest('.row') && group.closest('.row').querySelector('h3');
     if(heading){ group.setAttribute('aria-label', heading.textContent.trim()); }
     stack.setAttribute('role', 'tabpanel');
     stack.setAttribute('id', panelId);
@@ -710,7 +1059,6 @@
       tab.id = 'vtab-' + name + '-' + tab.getAttribute('data-target');
       tab.setAttribute('aria-controls', panelId);
       tab.setAttribute('aria-selected', active ? 'true' : 'false');
-      var svg = tab.querySelector('svg'); if(svg){ svg.setAttribute('aria-hidden', 'true'); }
       if(active){ stack.setAttribute('aria-labelledby', tab.id); }
     });
 
@@ -721,11 +1069,19 @@
       imgs.forEach(function(img){ img.classList.toggle('is-active', img.getAttribute('data-tab') === target); });
       stack.setAttribute('aria-labelledby', tab.id);
     }
-    tabs.forEach(function(tab){
+    tabs.forEach(function(tab, i){
       var preload = function(){ loadTabImg(imgFor(tab.getAttribute('data-target'))); };
       tab.addEventListener('mouseenter', preload);
       tab.addEventListener('focus', preload);
       tab.addEventListener('click', function(){ activate(tab); });
+      // arrow keys move between tabs, as a tablist is expected to
+      tab.addEventListener('keydown', function(e){
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if(!d) return;
+        e.preventDefault();
+        var next = tabs[(i + d + tabs.length) % tabs.length];
+        next.focus(); activate(next);
+      });
     });
   });
 })();

@@ -9,6 +9,8 @@
 #     npm i -D playwright && npx playwright install chromium
 #     php test/preview.php
 #     node test/browser/layout.mjs && node test/browser/wordmark.mjs
+# The landing page's own runtime checks need no preview build:
+#     node test/browser/landing.mjs
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
